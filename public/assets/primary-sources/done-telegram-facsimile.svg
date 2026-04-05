@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520">
+  <rect width="900" height="520" fill="#f4e8d4"/>
+  <rect x="24" y="24" width="852" height="472" fill="none" stroke="#2a1810" stroke-width="3"/>
+  <text x="450" y="78" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="28" fill="#2a1810">WESTERN UNION TELEGRAPH CO.</text>
+  <line x1="60" y1="96" x2="840" y2="96" stroke="#2a1810" stroke-width="1"/>
+  <text x="72" y="140" font-family="Georgia, 'Times New Roman', serif" font-size="20" fill="#3d2a1f">MAY 10, 1869 — PROMONTORY SUMMIT, U.T.</text>
+  <text x="72" y="190" font-family="Georgia, 'Times New Roman', serif" font-size="20" fill="#3d2a1f">TO: ASSOCIATED OFFICES</text>
+  <text x="72" y="300" font-family="Georgia, 'Times New Roman', serif" font-size="56" font-weight="700" fill="#1a0f08" letter-spacing="8">DONE</text>
+  <text x="72" y="420" font-family="Georgia, 'Times New Roman', serif" font-size="16" fill="#5c4033" font-style="italic">Classroom facsimile; wording follows the attested one-word bulletin.</text>
+</svg>
