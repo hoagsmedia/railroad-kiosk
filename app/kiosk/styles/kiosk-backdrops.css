@@ -1,0 +1,236 @@
+/* ---- Kiosk root & themed backdrops (data-screen on .kioskRoot) ---- */
+.kioskRoot {
+  position: relative;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.bgAtmosphere {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bgTextureLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bgTextureImg {
+  position: absolute;
+  inset: -8%;
+  width: 116%;
+  height: 116%;
+  max-width: none;
+  object-fit: cover;
+  opacity: 0.22;
+  filter: sepia(0.35) contrast(1.02) saturate(0.85) blur(42px);
+  will-change: transform;
+}
+
+.bgReadabilityVeil {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* 1 — Vision: Sierra survey & instrument cool */
+.kioskRoot[data-screen='1'] .bgAtmosphere {
+  background:
+    radial-gradient(
+      ellipse 70% 55% at 20% 25%,
+      rgba(90, 120, 110, 0.18),
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse 90% 70% at 50% 110%,
+      var(--kiosk-gold-a06),
+      transparent 55%
+    ),
+    linear-gradient(168deg, #0c100e 0%, #152220 42%, #0e0f0d 100%);
+}
+
+.kioskRoot[data-screen='1'] .bgTextureImg {
+  opacity: 0.2;
+}
+
+.kioskRoot[data-screen='1'] .bgReadabilityVeil {
+  background: linear-gradient(
+    165deg,
+    rgba(8, 14, 12, 0.5) 0%,
+    rgba(10, 12, 10, 0.4) 45%,
+    rgba(6, 5, 4, 0.58) 100%
+  );
+}
+
+/* 2 — Decision: Union blue & legislative warmth */
+.kioskRoot[data-screen='2'] .bgAtmosphere {
+  background:
+    radial-gradient(
+      ellipse 90% 70% at 50% 110%,
+      var(--kiosk-gold-a07),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 55% 45% at 12% 18%,
+      rgba(72, 112, 142, 0.32),
+      transparent 58%
+    ),
+    linear-gradient(168deg, #100e0c 0%, #1a2834 42%, #12100e 100%);
+}
+
+.kioskRoot[data-screen='2'] .bgTextureImg {
+  opacity: 0.2;
+}
+
+.kioskRoot[data-screen='2'] .bgReadabilityVeil {
+  background: linear-gradient(
+    165deg,
+    rgba(8, 14, 20, 0.52) 0%,
+    rgba(12, 10, 8, 0.38) 45%,
+    rgba(6, 5, 4, 0.62) 100%
+  );
+}
+
+/* 3 — Labor: granite & cold Sierra air */
+.kioskRoot[data-screen='3'] .bgAtmosphere {
+  background:
+    radial-gradient(
+      ellipse 70% 50% at 80% 20%,
+      rgba(140, 160, 178, 0.12),
+      transparent 55%
+    ),
+    linear-gradient(185deg, #0e1012 0%, #1a2228 50%, #0c0e10 100%);
+}
+
+.kioskRoot[data-screen='3'] .bgTextureImg {
+  opacity: 0.24;
+  filter: sepia(0.15) contrast(1.05) saturate(0.75) blur(40px);
+}
+
+.kioskRoot[data-screen='3'] .bgReadabilityVeil {
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 12, 14, 0.5),
+    rgba(8, 9, 10, 0.42) 40%,
+    rgba(5, 6, 7, 0.58) 100%
+  );
+}
+
+/* 4 — Engineering: blueprint steel & lamp glow */
+.kioskRoot[data-screen='4'] .bgAtmosphere {
+  background:
+    radial-gradient(
+      circle at 30% 85%,
+      rgba(90, 130, 160, 0.18),
+      transparent 45%
+    ),
+    linear-gradient(195deg, #0a0f14 0%, #152028 48%, #0a0c0f 100%);
+}
+
+.kioskRoot[data-screen='4'] .bgTextureImg {
+  opacity: 0.2;
+  filter: sepia(0.2) contrast(1.08) saturate(0.8) blur(44px);
+}
+
+.kioskRoot[data-screen='4'] .bgReadabilityVeil {
+  background: linear-gradient(
+    165deg,
+    rgba(6, 10, 14, 0.48) 0%,
+    rgba(8, 10, 12, 0.36) 50%,
+    rgba(4, 6, 8, 0.55) 100%
+  );
+}
+
+/* 5 — Utah & the line: contract labor, map corridor */
+.kioskRoot[data-screen='5'] .bgAtmosphere {
+  background:
+    radial-gradient(
+      ellipse 80% 60% at 70% 30%,
+      rgba(120, 98, 62, 0.14),
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse 50% 40% at 20% 80%,
+      rgba(72, 92, 72, 0.12),
+      transparent 55%
+    ),
+    linear-gradient(175deg, #14110d 0%, #1c1812 45%, #100e0b 100%);
+}
+
+.kioskRoot[data-screen='5'] .bgTextureImg {
+  opacity: 0.22;
+}
+
+.kioskRoot[data-screen='5'] .bgReadabilityVeil {
+  background: linear-gradient(
+    to bottom,
+    rgba(12, 10, 8, 0.5),
+    rgba(14, 11, 8, 0.38) 50%,
+    rgba(8, 6, 5, 0.58) 100%
+  );
+}
+
+/* 6 — Event: brass celebration, Promontory sun */
+.kioskRoot[data-screen='6'] .bgAtmosphere {
+  background:
+    radial-gradient(
+      ellipse 65% 55% at 50% 15%,
+      rgba(240, 200, 120, 0.14),
+      transparent 52%
+    ),
+    radial-gradient(
+      ellipse 90% 80% at 50% 120%,
+      var(--kiosk-gold-a10),
+      transparent 55%
+    ),
+    linear-gradient(180deg, #16130f 0%, #1f1a14 55%, #120f0c 100%);
+}
+
+.kioskRoot[data-screen='6'] .bgTextureImg {
+  opacity: 0.26;
+  filter: sepia(0.4) contrast(1.05) saturate(0.9) blur(36px);
+}
+
+.kioskRoot[data-screen='6'] .bgReadabilityVeil {
+  background: linear-gradient(
+    165deg,
+    rgba(14, 11, 8, 0.42) 0%,
+    rgba(12, 10, 7, 0.34) 45%,
+    rgba(8, 6, 4, 0.52) 100%
+  );
+}
+
+/* 7 — Consequences: night wire & faint phosphor */
+.kioskRoot[data-screen='7'] .bgAtmosphere {
+  background:
+    radial-gradient(
+      circle at 85% 25%,
+      rgba(60, 120, 110, 0.1),
+      transparent 40%
+    ),
+    linear-gradient(190deg, #050608 0%, #0c1014 40%, #060708 100%);
+}
+
+.kioskRoot[data-screen='7'] .bgTextureImg {
+  opacity: 0.18;
+  filter: sepia(0.25) contrast(1.02) saturate(0.7) blur(48px);
+}
+
+.kioskRoot[data-screen='7'] .bgReadabilityVeil {
+  background: linear-gradient(
+    to bottom,
+    rgba(4, 6, 8, 0.62) 0%,
+    rgba(5, 7, 9, 0.48) 50%,
+    rgba(2, 3, 4, 0.72) 100%
+  );
+}
+

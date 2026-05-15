@@ -12,10 +12,14 @@ import {
 
 type Props = {
   leaderId: EngineeringLeaderId
-  /** Section `<h2>`; defaults to “Leadership spotlight”. */
-  sectionHeading?: string
-  /** When true, constrain the card width for a single-column layout (Cause / Labor). */
+  /** When true, constrain the card width for a single-column layout. */
   singleColumn?: boolean
+  /**
+   * `laborHorizontal`: portrait left, name / title / years right (Labor screen).
+   */
+  presentation?: 'default' | 'laborHorizontal'
+  /** When false, Labor card uses light motion (parent may still stagger entrance). */
+  reduceMotion?: boolean | null
 }
 
 function EngineeringFieldLogModal({
@@ -29,7 +33,9 @@ function EngineeringFieldLogModal({
 }) {
   const titleId = useId()
   const panelRef = useRef<HTMLDivElement>(null)
-  const src = leader?.fieldLogSource ?? HART_BLOOMER_SOURCE
+  const primarySrc = leader?.fieldLogOmitPrimarySource
+    ? null
+    : (leader?.fieldLogSource ?? HART_BLOOMER_SOURCE)
 
   useEffect(() => {
     if (!open) return
@@ -49,7 +55,7 @@ function EngineeringFieldLogModal({
     <AnimatePresence>
       {open && leader && (
         <motion.div
-          className={styles.modalBackdrop}
+          className={`${styles.modalBackdrop} ${styles.engineeringFieldLogBackdrop}`}
           role="presentation"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -80,46 +86,74 @@ function EngineeringFieldLogModal({
             <h2 id={titleId} className={styles.engineeringFieldLogTitle}>
               {leader.name}{' '}
               <span className={styles.engineeringFieldLogEpithet}>
-                — {leader.epithet}
+                · {leader.epithet}
               </span>
             </h2>
             <section
               className={styles.engineeringFieldLogSection}
               aria-label="Challenge">
               <h3 className={styles.engineeringFieldLogH3}>The challenge</h3>
-              <p className={styles.engineeringFieldLogBody}>
-                {leader.challenge}
-              </p>
+              {leader.challenge.split(/\n\n+/).map((chunk, i) => (
+                <p key={i} className={styles.engineeringFieldLogBody}>
+                  {chunk.trim()}
+                </p>
+              ))}
             </section>
-            <section
-              className={styles.engineeringFieldLogSection}
-              aria-label="Primary source">
-              <h3 className={styles.engineeringFieldLogH3}>
-                {leader.fieldLogSource
-                  ? 'Primary source — survey'
-                  : 'Primary source — shared engineering feat'}
-              </h3>
-              <p className={styles.engineeringFieldLogMeta}>
-                {src.shortLabel}
-                {src.year ? ` (${src.year})` : ''}
-              </p>
-              <div className={styles.engineeringFieldLogScan}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={src.imageUrl} alt={src.imageAlt} />
-              </div>
-              <p className={styles.engineeringFieldLogSnippet}>
-                {src.transcript}
-              </p>
-              {src.archiveUrl && src.archiveName ? (
-                <a
-                  href={src.archiveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.inlineArchiveLink}>
-                  Open at {src.archiveName} ↗
-                </a>
-              ) : null}
-            </section>
+            {primarySrc ? (
+              <section
+                className={styles.engineeringFieldLogSection}
+                aria-label="Primary source">
+                <h3 className={styles.engineeringFieldLogH3}>
+                  {primarySrc.sectionHeading ??
+                    (leader.fieldLogSource
+                      ? 'Primary source (survey)'
+                      : 'Primary source (shared stereo)')}
+                </h3>
+                <p className={styles.engineeringFieldLogMeta}>
+                  {primarySrc.shortLabel}
+                  {primarySrc.year ? ` (${primarySrc.year})` : ''}
+                </p>
+                {primarySrc.horizontalScroll ? (
+                  <p
+                    className={styles.engineeringFieldLogScrollHint}
+                    aria-hidden>
+                    Scroll sideways to follow the map
+                  </p>
+                ) : null}
+                <div
+                  className={
+                    primarySrc.horizontalScroll
+                      ? `${styles.engineeringFieldLogScan} ${styles.engineeringFieldLogScanWide}`
+                      : styles.engineeringFieldLogScan
+                  }>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={primarySrc.imageUrl} alt={primarySrc.imageAlt} />
+                </div>
+                {primarySrc.transcript.split(/\n\n+/).map((chunk, i) => (
+                  <p key={i} className={styles.engineeringFieldLogSnippet}>
+                    {chunk.trim()}
+                  </p>
+                ))}
+                {primarySrc.archiveUrl && primarySrc.archiveName ? (
+                  <a
+                    href={primarySrc.archiveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.inlineArchiveLink}>
+                    Open at {primarySrc.archiveName} ↗
+                  </a>
+                ) : null}
+              </section>
+            ) : null}
+            {leader.fieldLogCoda ? (
+              <section
+                className={styles.engineeringFieldLogSection}
+                aria-label="Why this matters">
+                <p className={styles.engineeringFieldLogBody}>
+                  {leader.fieldLogCoda}
+                </p>
+              </section>
+            ) : null}
           </motion.div>
         </motion.div>
       )}
@@ -140,46 +174,108 @@ function ArchitectCard({
     <motion.article
       className={styles.architectCard}
       onHoverStart={() => setHovered(true)}
-      onHoverEnd={() => setHovered(false)}
-      whileTap={{ scale: 0.985 }}>
-      <button
-        type="button"
-        className={styles.architectCardBtn}
-        onClick={() => onOpen(leader)}
-        aria-label={`Open field log: ${leader.name}, ${leader.epithet}`}>
-        <motion.div
-          className={styles.architectPhotoFrame}
-          animate={{ scale: hovered ? 1.04 : 1 }}
-          transition={{ type: 'spring', stiffness: 400, damping: 28 }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={leader.imageUrl}
-            alt={leader.imageAlt}
-            className={styles.architectPhoto}
-          />
-          <motion.div
-            className={styles.architectRoleBadge}
-            initial={false}
-            animate={{
-              opacity: hovered ? 1 : 0,
-              y: hovered ? 0 : 8,
-            }}
-            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}>
-            {leader.roleBadge}
-          </motion.div>
-        </motion.div>
-        <h3 className={styles.architectName}>{leader.name}</h3>
-        <p className={styles.architectEpithet}>{leader.epithet}</p>
-        <p className={styles.architectEra}>{leader.timelineEra}</p>
-      </button>
+      onHoverEnd={() => setHovered(false)}>
+      <div className={styles.architectCardInner}>
+        <div className={styles.personFigureRow}>
+          <div className={styles.personFigurePhotoCol}>
+            <motion.div
+              className={styles.architectPhotoFrame}
+              animate={{ scale: hovered ? 1.04 : 1 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 28 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={leader.imageUrl}
+                alt={leader.imageAlt}
+                className={styles.architectPhoto}
+              />
+            </motion.div>
+          </div>
+          <div className={styles.personFigureTextCol}>
+            <h3 className={styles.architectName}>{leader.name}</h3>
+            <p className={styles.architectEpithet}>{leader.epithet}</p>
+            <p className={styles.architectRoleLine}>{leader.roleBadge}</p>
+            <p className={styles.architectEra}>{leader.timelineEra}</p>
+            <button
+              type="button"
+              className={styles.architectFieldLogCta}
+              onClick={() => onOpen(leader)}
+              aria-label={`Open field log for ${leader.name}. Extra detail, challenge, primary source.`}>
+              Open field log
+              <span className={styles.architectFieldLogCtaHint}>
+                More text + primary source (modal)
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
     </motion.article>
+  )
+}
+
+function LaborHorizontalFigureCard({
+  leader,
+  onOpen,
+  reduceMotion,
+}: {
+  leader: EngineeringLeader
+  onOpen: (l: EngineeringLeader) => void
+  reduceMotion?: boolean | null
+}) {
+  const motionOff = Boolean(reduceMotion)
+  const [hovered, setHovered] = useState(false)
+
+  return (
+    <section
+      className={styles.museumLaborFigureCard}
+      aria-label="Key figure"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}>
+      <div className={styles.museumLaborFigureCardBody}>
+        <div className={styles.museumLaborFigureCardRow}>
+          <motion.div
+            className={styles.museumLaborFigureCardPhoto}
+            animate={
+              motionOff
+                ? { scale: 1 }
+                : { scale: hovered ? 1.03 : 1, transition: { duration: 0.35 } }
+            }>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={leader.imageUrl}
+              alt={leader.imageAlt}
+              className={styles.museumLaborFigureCardImg}
+            />
+          </motion.div>
+          <div className={styles.museumLaborFigureCardMeta}>
+            <h3 className={styles.museumLaborFigureCardName}>{leader.name}</h3>
+            <p className={styles.museumLaborFigureCardTitle}>
+              {leader.epithet} · {leader.roleBadge}
+            </p>
+            <p className={styles.museumLaborFigureCardYears}>
+              {leader.timelineEra}
+            </p>
+          </div>
+        </div>
+        <button
+          type="button"
+          className={styles.museumLaborFigureFieldLogBtn}
+          onClick={() => onOpen(leader)}
+          aria-label={`Open field log for ${leader.name}. Extra detail and primary source.`}>
+          Open field log
+          <span className={styles.museumLaborFigureFieldLogBtnSub}>
+            Modal with challenge + archive image
+          </span>
+        </button>
+      </div>
+    </section>
   )
 }
 
 export function EngineeringLeaderSpotlight({
   leaderId,
-  sectionHeading = 'Leadership spotlight',
   singleColumn = false,
+  presentation = 'default',
+  reduceMotion: reduceMotionProp,
 }: Props) {
   const leader = engineeringLeaderById(leaderId)
   const [fieldLog, setFieldLog] = useState<EngineeringLeader | null>(null)
@@ -187,10 +283,27 @@ export function EngineeringLeaderSpotlight({
 
   if (!leader) return null
 
+  if (presentation === 'laborHorizontal') {
+    return (
+      <>
+        <LaborHorizontalFigureCard
+          leader={leader}
+          onOpen={setFieldLog}
+          reduceMotion={reduceMotionProp}
+        />
+        <EngineeringFieldLogModal
+          leader={fieldLog}
+          open={fieldLog != null}
+          onClose={closeLog}
+        />
+      </>
+    )
+  }
+
   return (
     <>
-      <section className={styles.architectsSection} aria-label={sectionHeading}>
-        <h2 className={styles.architectsSectionTitle}>{sectionHeading}</h2>
+      <section className={styles.architectsSection} aria-label="Key figure">
+        <h2 className={styles.architectsSectionTitle}>Key figure</h2>
         <div
           className={
             singleColumn

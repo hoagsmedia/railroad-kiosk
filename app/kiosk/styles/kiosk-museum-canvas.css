@@ -1,0 +1,239 @@
+/* ---- Museum exhibit grid (fixed viewport, no in-frame scroll) ---- */
+.museumCanvas {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--museum-gap);
+}
+
+/* Labor: modest gap below title band before narrative + payroll row */
+.exhibitPage[data-layout='labor'] .museumCanvas {
+  gap: calc(var(--museum-gap) * 0.72);
+}
+
+/* Universal exhibit title row: tight vertical rhythm + thin rule under band */
+.museumTitleBand {
+  flex-shrink: 0;
+  padding-bottom: 0.3rem;
+  margin-bottom: 0;
+  border-bottom: 1px solid var(--kiosk-gold-a22);
+}
+
+.museumTitleBand .exhibitHeadingWrap {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.museumTitleBand .screenHeading {
+  margin: 0 0 0.12rem;
+  line-height: 1.12;
+}
+
+.museumTitleBand .conceptThread {
+  margin: 0.22rem 0 0;
+  padding: 0.36rem 0.58rem 0.38rem;
+  font-size: 0.74rem;
+  line-height: 1.42;
+}
+
+.museumSplitPrimary {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
+  gap: var(--museum-gap);
+  align-items: stretch;
+}
+
+.museumNarrative {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--museum-gap) * 0.85);
+  overflow: visible;
+}
+
+.museumNarrative .screenBody {
+  max-width: none;
+}
+
+.museumPersonAnchor .architectsSection {
+  margin: 0;
+}
+
+.museumPersonAnchor .architectsSectionTitle {
+  font-size: 0.68rem;
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--kiosk-gold);
+  font-family: inherit;
+}
+
+/* Full narrative width so key-figure row (portrait + text) is not squeezed */
+.museumPersonAnchor .architectGridSingle {
+  max-width: none;
+  width: 100%;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.museumPersonAnchor .architectName {
+  font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+}
+
+.museumPersonAnchor .architectEpithet,
+.museumPersonAnchor .architectRoleLine {
+  font-size: 0.72rem;
+}
+
+.museumPrimaryCell {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  padding: 0.15rem 0 0 0.25rem;
+}
+
+.museumPrimaryCell .inlineSourceSection,
+.museumPrimaryCell .exhibitSourceWrap {
+  margin-top: 0;
+  max-width: none;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.museumPrimaryCell .inlineSourceComposition {
+  flex: 1;
+  min-height: 0;
+}
+
+.museumPrimaryCell .inlineSourceVisualAnchor {
+  width: 100%;
+  max-width: 100%;
+}
+
+.museumPrimaryCell .inlineSourceFrameOuter {
+  margin-inline: auto;
+}
+
+.museumPrimaryCell .inlineSourceLayerContent {
+  transform: translateY(8px) translateX(-4px);
+}
+
+.museumEngineeringStack {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--museum-gap);
+}
+
+.museumEngineeringSplit {
+  flex: 1 1 58%;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
+  gap: var(--museum-gap);
+  align-items: stretch;
+}
+
+.museumEngineeringBand .museumPrimaryCell {
+  padding-top: 0;
+}
+
+.museumBlueprintRow {
+  flex: 1 1 42%;
+  min-height: 0;
+  max-height: 44%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: stretch;
+}
+
+.museumBlueprintRow .perspectives {
+  width: 100%;
+  max-width: min(100%, 720px);
+  margin-inline: auto 0;
+  min-height: 0;
+  overflow: visible;
+}
+
+.museumBlueprintRow .perspectivesBody {
+  overflow: visible;
+  display: block;
+}
+
+.museumBlueprintRow .perspectivesBody p {
+  margin: 0 0 0.45rem;
+}
+
+.museumBlueprintRow .perspectivesBody p:last-child {
+  margin-bottom: 0;
+}
+
+.museumGeoShell {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: var(--museum-gap);
+}
+
+.museumGeoTop {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
+  gap: var(--museum-gap);
+  align-items: start;
+}
+
+.museumGeoNarrative .screenBody {
+  max-width: none;
+}
+
+.museumGeoMap {
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0;
+}
+
+.museumGeoMap .inlineSourceSection,
+.museumGeoMap .exhibitSourceWrap {
+  margin-top: 0;
+  max-width: none;
+  width: 100%;
+}
+
+.museumGeoMap .inlineSourceHeader {
+  text-align: center;
+}
+
+.museumGeoMap .inlineSourceVisualAnchor {
+  width: 100%;
+  margin-inline: auto;
+}
+
+.museumGeoMap .inlineSourceFrameOuter {
+  margin-inline: auto;
+}
+
+.museumGeoMap .inlineSourceLayerContent {
+  transform: translateY(6px) translateX(6px);
+}
+
+.museumGeoMap .inlineSourceLayerContent .inlineSourceTranscript {
+  font-size: 0.76rem;
+  overflow: visible;
+  display: block;
+}
+

@@ -1,6 +1,7 @@
 'use client'
 
 import styles from '@/app/kiosk/kiosk.module.css'
+import { formatKioskBodySegment } from '@/lib/format-kiosk-body'
 import type { Perspectives } from '@/lib/kiosk-content'
 
 type Props = {
@@ -13,7 +14,7 @@ export function PerspectivesSidebar({ content }: Props) {
       <h3 className={styles.perspectivesTitle}>{content.title}</h3>
       <div className={styles.perspectivesBody}>
         {content.body.map((para, i) => (
-          <p key={i}>{para}</p>
+          <p key={i}>{formatKioskBodySegment(para)}</p>
         ))}
       </div>
     </aside>

@@ -19,9 +19,9 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: 'The Iron Road — History 130 Digital Kiosk',
+  title: 'The Iron Road · History 130 Digital Kiosk',
   description:
-    'Building the Transcontinental Railroad (1863–1869): cause, consequence, labor, engineering, geography, and communication.',
+    'Chronological digital kiosk: vision, decision, labor, engineering, Utah contract labor (1868), Promontory, and consequences of the first transcontinental railroad.',
 }
 
 export default function RootLayout({
@@ -33,7 +33,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased`}>
-      <body className="min-h-dvh h-dvh overflow-hidden flex flex-col bg-[#0f0c0a] text-[#ede4d9]">
+      <body className="min-h-0 h-dvh max-h-dvh overflow-hidden flex items-center justify-center bg-[#0f0c0a] text-[#ede4d9] antialiased">
         {children}
       </body>
     </html>

@@ -1,0 +1,89 @@
+/* Fixed 1440×900 canvas: no vertical scrolling inside the frame */
+.kioskFrame .screenPanel {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.kioskFrame .screenPanelScroll {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 0.45rem clamp(0.65rem, 1.1vw, 1.2rem) 0.55rem;
+}
+
+.kioskFrame .exhibitPage {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+}
+
+/* Labor: clip exhibit paint so the gallery band cannot sit under .navDock */
+.kioskFrame .exhibitPage[data-layout='labor'] {
+  overflow: hidden;
+}
+
+/* Extra bottom inset so film-strip controls stay above the nav hit area */
+.kioskFrame .screenPanelScroll:has(.exhibitPage[data-layout='labor']) {
+  padding-bottom: calc(0.55rem + 0.65rem);
+}
+
+.kioskFrame .exhibitPageInner {
+  flex: 1;
+  min-height: 0;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+}
+
+.kioskFrame .architectPhoto {
+  object-fit: contain;
+}
+
+/*
+ * Primary sources & hero scans — conservative caps so content clears nav + timeline
+ * after the frame scales to fit short laptop viewports (cqh + dvh both bind).
+ */
+.kioskFrame .museumPrimaryCell .inlineSourceImg,
+.kioskFrame .exhibitDocSplitFigure .inlineSourceImg {
+  max-height: min(320px, 30dvh, 34cqh);
+}
+
+.kioskFrame .museumLaborPrimary .inlineSourceImg,
+.kioskFrame .museumLaborPrimary .exhibitLaborPaperImg {
+  max-height: min(240px, 22dvh, 24cqh);
+}
+
+.kioskFrame .museumGeoMap .inlineSourceImg,
+.kioskFrame .exhibitGeographyMapBand .inlineSourceImg {
+  max-height: min(300px, 26dvh, 28cqh);
+}
+
+.kioskFrame .museumHeroFigure .inlineSourceImg {
+  max-height: min(340px, 28dvh, 32cqh);
+}
+
+.kioskFrame .museumHeroFigureConsequences .inlineSourceImg {
+  max-height: min(300px, 26dvh, 28cqh);
+}
+
+.kioskFrame .museumEngineeringBand .inlineSourceImg {
+  max-height: min(360px, 28dvh, 34cqh);
+}
+
+.kioskFrame .exhibitPage[data-layout='event'] .inlineSourceImg {
+  max-height: min(380px, 32dvh, 36cqh);
+}
+
+/* Vision / Decision in-column galleries (if present) */
+.kioskFrame .exhibitPage[data-layout='vision'] .exhibitGalleryImg,
+.kioskFrame .exhibitPage[data-layout='decision'] .exhibitGalleryImg {
+  max-height: min(280px, 24dvh, 30cqh);
+}
+
+/* Key figure (horizontal card): cap photo height in short frames */
+.kioskFrame .museumPersonAnchor .personFigurePhotoCol .architectPhotoFrame {
+  max-height: min(230px, 32cqh);
+}
+

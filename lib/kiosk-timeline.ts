@@ -111,9 +111,62 @@ export function yearLabelPlacements(): YearLabelPlacement[] {
     }))
 }
 
+/** Same calendar day as previous tick: shift right so labels do not stack (Event vs Legacy). */
+const SAME_DAY_NUDGE_PX = 48
+
+/**
+ * If ratio gap to previous tick is below this, dates are too close on the bar
+ * (e.g. late April vs early May 1869) — stagger vertically for legibility.
+ */
+const CLOSE_TICK_RATIO = 0.024
+
+/**
+ * Positions for every screen tick: true date on the rail, with nudges when anchors
+ * collide visually (same day, or neighboring dates squeezed at the end of the bar).
+ */
+export function railTickButtonLayouts(anchors: TimelineAnchor[]): CSSProperties[] {
+  const ratios = anchors.map(a => timelineFillRatio(a))
+  const out: CSSProperties[] = []
+  let lowRow = false
+
+  for (let i = 0; i < anchors.length; i++) {
+    const anchor = anchors[i]
+    const prev = i > 0 ? anchors[i - 1] : null
+    const duplicatePrev =
+      prev != null &&
+      anchor.year === prev.year &&
+      anchor.month === prev.month &&
+      anchor.day === prev.day
+
+    const xNudgePx = duplicatePrev ? SAME_DAY_NUDGE_PX : 0
+
+    const tightWithPrev =
+      i > 0 &&
+      !duplicatePrev &&
+      ratios[i]! - ratios[i - 1]! < CLOSE_TICK_RATIO
+
+    let top: string | undefined
+    if (tightWithPrev) {
+      lowRow = !lowRow
+      top = lowRow ? '0.78rem' : '0.02rem'
+    } else if (!duplicatePrev) {
+      lowRow = false
+    }
+
+    const r = ratios[i]!
+    out.push({
+      left: `calc(${RAIL_TRACK_INSET_PCT}% + ${r * RAIL_TRACK_INNER_PCT}%)`,
+      transform: `translateX(calc(-50% + ${xNudgePx}px))`,
+      ...(top !== undefined ? { top } : {}),
+    })
+  }
+  return out
+}
+
 /**
  * Inline `left` + `transform` so a tick sits on the same date scale as the gold fill.
  * `xNudgePx` separates a screen from the previous one when they share the same calendar anchor.
+ * @deprecated Prefer `railTickButtonLayouts` for multi-tick UIs (handles dense dates).
  */
 export function railTickPositionStyle(
   anchor: TimelineAnchor,
@@ -125,7 +178,7 @@ export function railTickPositionStyle(
     prevAnchor.year === anchor.year &&
     prevAnchor.month === anchor.month &&
     prevAnchor.day === anchor.day
-  const xNudgePx = duplicatePrev ? 18 : 0
+  const xNudgePx = duplicatePrev ? SAME_DAY_NUDGE_PX : 0
   return {
     left: `calc(${RAIL_TRACK_INSET_PCT}% + ${r * RAIL_TRACK_INNER_PCT}%)`,
     transform: `translateX(calc(-50% + ${xNudgePx}px))`,

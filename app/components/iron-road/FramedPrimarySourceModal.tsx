@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect, useId, useRef } from 'react'
 import styles from '@/app/kiosk/kiosk.module.css'
 import type { PrimarySource } from '@/lib/kiosk-content'
+import { formatKioskBodySegment } from '@/lib/format-kiosk-body'
 
 type Props = {
   open: boolean
@@ -80,7 +81,9 @@ export function FramedPrimarySourceModal({ open, source, onClose }: Props) {
               </div>
             </div>
             <div className={styles.modalBody}>
-              <p style={{ marginTop: 0 }}>{source.transcript}</p>
+              <p style={{ marginTop: 0 }}>
+                {formatKioskBodySegment(source.transcript)}
+              </p>
               <a
                 href={source.archiveUrl}
                 target="_blank"

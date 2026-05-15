@@ -1,0 +1,44 @@
+/**
+ * Kiosk design tokens — scoped under .kioskPageShell so framed content inherits.
+ * Loaded first from kiosk.module.css (before layout partials).
+ */
+.kioskPageShell {
+  --museum-gap: 1.125rem;
+
+  --kiosk-gold: #c9a227;
+  --kiosk-gold-pale: #f0d78c;
+  --kiosk-gold-cream: #fff4d2;
+  --kiosk-gold-warm-paper: #f5e6b8;
+
+  --kiosk-gold-a06: rgba(201, 162, 39, 0.06);
+  --kiosk-gold-a07: rgba(201, 162, 39, 0.07);
+  --kiosk-gold-a08: rgba(201, 162, 39, 0.08);
+  --kiosk-gold-a10: rgba(201, 162, 39, 0.1);
+  --kiosk-gold-a12: rgba(201, 162, 39, 0.12);
+  --kiosk-gold-a16: rgba(201, 162, 39, 0.16);
+  --kiosk-gold-a18: rgba(201, 162, 39, 0.18);
+  --kiosk-gold-a20: rgba(201, 162, 39, 0.2);
+  --kiosk-gold-a22: rgba(201, 162, 39, 0.22);
+  --kiosk-gold-a24: rgba(201, 162, 39, 0.24);
+  --kiosk-gold-a25: rgba(201, 162, 39, 0.25);
+  --kiosk-gold-a28: rgba(201, 162, 39, 0.28);
+  --kiosk-gold-a34: rgba(201, 162, 39, 0.34);
+  --kiosk-gold-a35: rgba(201, 162, 39, 0.35);
+  --kiosk-gold-a42: rgba(201, 162, 39, 0.42);
+  --kiosk-gold-a45: rgba(201, 162, 39, 0.45);
+  --kiosk-gold-a50: rgba(201, 162, 39, 0.5);
+  --kiosk-gold-a55: rgba(201, 162, 39, 0.55);
+  --kiosk-gold-a60: rgba(201, 162, 39, 0.6);
+  --kiosk-gold-a65: rgba(201, 162, 39, 0.65);
+  --kiosk-gold-a75: rgba(201, 162, 39, 0.75);
+  --kiosk-gold-a85: rgba(201, 162, 39, 0.85);
+
+  --kiosk-bezel-gradient: linear-gradient(145deg, #d4af3c, #8a6b1e);
+  --kiosk-frame-foil: linear-gradient(145deg, #c9a227, #8a6b1e);
+
+  --kiosk-figure-card-surface: linear-gradient(
+    165deg,
+    rgba(26, 22, 18, 0.88) 0%,
+    rgba(14, 11, 9, 0.68) 100%
+  );
+}

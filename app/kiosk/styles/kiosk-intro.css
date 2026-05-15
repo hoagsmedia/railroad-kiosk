@@ -1,0 +1,274 @@
+/* ---- Intro / attract screen ---- */
+.introRoot {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.introBgWash {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    155deg,
+    #0c0a08 0%,
+    #1a1510 35%,
+    #0f1a22 70%,
+    #080706 100%
+  );
+  pointer-events: none;
+}
+
+.introPhotoLayer {
+  position: absolute;
+  inset: -6%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.introHeroPhoto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 42%;
+  opacity: 0.52;
+  filter: sepia(0.28) contrast(1.08) saturate(0.88);
+  will-change: transform;
+}
+
+.introScrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    rgba(6, 5, 4, 0.82) 0%,
+    rgba(10, 9, 8, 0.45) 38%,
+    rgba(8, 7, 6, 0.55) 58%,
+    rgba(4, 3, 2, 0.88) 100%
+  );
+}
+
+.introVignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.55);
+}
+
+.introRailDecor {
+  position: absolute;
+  bottom: clamp(5rem, 14vh, 7rem);
+  left: 0;
+  right: 0;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+.introRailTrack {
+  position: relative;
+  width: min(420px, 86vw);
+  height: 8px;
+  border-radius: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    #4a3d32 0px,
+    #4a3d32 16px,
+    #1f1a16 16px,
+    #1f1a16 22px
+  );
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.introRailTrack::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(240, 215, 140, 0.08) 40%,
+    rgba(255, 248, 220, 0.18) 50%,
+    rgba(240, 215, 140, 0.08) 60%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: introRailShimmer 9s ease-in-out infinite alternate;
+  opacity: 0.75;
+}
+
+@keyframes introRailShimmer {
+  0% {
+    background-position: 115% 50%;
+  }
+
+  100% {
+    background-position: -15% 50%;
+  }
+}
+
+.introTopBar {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  padding: 0.65rem clamp(1rem, 3vw, 1.75rem);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+}
+
+.introBadge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--kiosk-gold);
+}
+
+.introBadgeMuted {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8a7b6a;
+}
+
+.introMain {
+  position: relative;
+  z-index: 4;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(0.85rem, 2.5vw, 1.5rem) clamp(1rem, 4vw, 2rem) 1.25rem;
+  min-height: 0;
+}
+
+.introEyebrow {
+  margin: 0 0 0.5rem;
+  font-size: clamp(0.62rem, 1.5vw, 0.72rem);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--kiosk-gold);
+  max-width: 36rem;
+  line-height: 1.5;
+}
+
+.introTitle {
+  margin: 0;
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(2.75rem, 10vw, 4.75rem);
+  font-weight: 700;
+  line-height: 1.02;
+  color: #fdf6ec;
+  text-shadow:
+    0 2px 24px rgba(0, 0, 0, 0.75),
+    0 0 60px var(--kiosk-gold-a12);
+}
+
+.introRuleWrap {
+  width: min(340px, 78vw);
+  height: 3px;
+  margin: 1rem auto 0.85rem;
+  border-radius: 2px;
+  overflow: hidden;
+  transform-origin: center;
+}
+
+.introRuleLine {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--kiosk-gold-a25),
+    var(--kiosk-gold-pale),
+    var(--kiosk-gold),
+    var(--kiosk-gold-pale),
+    var(--kiosk-gold-a25),
+    transparent
+  );
+}
+
+.introSubtitle {
+  margin: 0;
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(1.15rem, 3.2vw, 1.65rem);
+  font-weight: 500;
+  color: #e8dfd4;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
+}
+
+.introYears {
+  margin: 0.35rem 0 0;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #a8947c;
+}
+
+.introBlurb {
+  margin: 0.85rem 0 0;
+  max-width: 26rem;
+  font-size: clamp(0.82rem, 1.6vw, 0.95rem);
+  line-height: 1.55;
+  color: #cfc3b4;
+}
+
+.introBlurb em {
+  font-style: italic;
+  color: var(--kiosk-gold-pale);
+}
+
+.introCta {
+  margin-top: 1.1rem;
+  padding: 0.85rem 2.25rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #1a1410;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  background: linear-gradient(180deg, var(--kiosk-gold-warm-paper), var(--kiosk-gold));
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.25),
+    0 10px 36px var(--kiosk-gold-a35);
+  transition:
+    transform 0.15s ease,
+    filter 0.15s ease;
+}
+
+.introCta:hover {
+  filter: brightness(1.06);
+  transform: translateY(-2px);
+}
+
+.introCta:active {
+  transform: translateY(0);
+}
+
+.introHint {
+  margin: 0.85rem 0 0;
+  font-size: 0.78rem;
+  color: #7a6d62;
+  letter-spacing: 0.04em;
+}

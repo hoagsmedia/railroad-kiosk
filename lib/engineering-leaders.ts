@@ -11,6 +11,10 @@ export type EngineeringFieldLogSource = {
   transcript: string
   archiveUrl?: string
   archiveName?: string
+  /** Panel heading for this block (e.g. map vs instrument). */
+  sectionHeading?: string
+  /** Wide strip: fixed height, natural width, scroll horizontally in the modal. */
+  horizontalScroll?: boolean
 }
 
 export type EngineeringLeader = {
@@ -25,6 +29,10 @@ export type EngineeringLeader = {
   challenge: string
   /** When set, the Field Log modal uses this instead of the shared Bloomer Cut stereograph. */
   fieldLogSource?: EngineeringFieldLogSource
+  /** When true, no primary-source block (image + caption) is shown in the field log. */
+  fieldLogOmitPrimarySource?: boolean
+  /** Optional closing line (e.g. after challenge when primary source is omitted). */
+  fieldLogCoda?: string
 }
 
 /** Shared Alfred A. Hart stereograph (Bloomer Cut) for Field Log + kiosk primary source. */
@@ -35,7 +43,7 @@ export const HART_BLOOMER_SOURCE: EngineeringFieldLogSource = {
   imageAlt:
     'Stereograph by Alfred A. Hart: deep railroad cut through rock at Bloomer Cut, Central Pacific line',
   transcript:
-    'Alfred A. Hart’s Central Pacific stereographs marketed the western line as a modern wonder—Bloomer Cut became an icon of black powder, drills, and muscle applied to Sierra granite. The same image backs several Field Logs in this kiosk as a shared picture of survey, grade, and blast.',
+    'Hart **Central Pacific** stereo cards sold the road like a theme park ride. **Bloomer Cut** is powder drills bodies in granite. I reuse one file here as a shared anchor for a few Field Logs.',
   archiveUrl: 'https://www.loc.gov/pictures/item/2005682864/',
   archiveName: 'Library of Congress Prints & Photographs',
 }
@@ -46,50 +54,57 @@ export function engineeringLeaderById(
   return ENGINEERING_LEADERS.find(l => l.id === id)
 }
 
-/** Chronological by peak influence on the transcontinental push: Judah → Crocker (CP) → Dodge (UP). */
+/** Chronological by peak influence on the transcontinental push: Judah, Crocker (CP), Dodge (UP). */
 export const ENGINEERING_LEADERS: EngineeringLeader[] = [
   {
     id: 'judah',
     name: 'Theodore Judah',
     epithet: 'The Dreamer',
-    timelineEra: 'c. 1860–1863',
+    timelineEra: 'c. 1860 to 1863',
     roleBadge: 'Chief Engineer, Central Pacific',
     imageUrl: assetPrimary('CPRR_Chief_Engineer_Theodore_D._Judah.jpg'),
     imageAlt:
       'Portrait of Theodore D. Judah, chief engineer of the Central Pacific Railroad',
     challenge:
-      'Judah obsessed over a practicable route through the Sierra crest—roughly 7,000 ft of elevation, snow, and granite where investors saw folly. His surveys and lobbying helped turn “Crazy Judah’s” line into a charter and a right-of-way before his early death in 1863; others finished the climb he proved possible.',
+      'Judah would not shut up about a route the Sierra could actually hold. Think 7k feet of climb snow granite and money guys calling him nuts. Surveys and lobby work turned Crazy Judah into a charter and dirt on the ground. He died 1863 other people finished the climb he proved was doable.',
     fieldLogSource: {
-      shortLabel: 'Theodolite — survey instrument',
-      year: '19th century',
-      imageUrl: assetPrimary('theodolite_pic2_size1.webp'),
+      shortLabel: 'Central Pacific Railroad, proposed alignment (manuscript)',
+      year: '1861',
+      imageUrl: assetPrimary('judah-map.jpg'),
       imageAlt:
-        'Vintage theodolite surveying instrument on a tripod, used for measuring angles and grades',
+        'Long horizontal manuscript map: Theodore Judah’s proposed Central Pacific alignment across the Sierra with red ink route line',
+      sectionHeading: 'Proposed alignment map',
+      horizontalScroll: true,
       transcript:
-        'Theodolites let engineers measure horizontal and vertical angles with precision—exactly the kind of work Judah did when he argued a Sierra crossing was possible. Field parties carried instruments like this through passes and canyons long before the first rail reached the mountains.',
+        'Filed with the Secretary of State in Sacramento in 1861: four sections on one rolled sheet, ink on linen. The catalogued original is about 77 cm tall and 20 m long end to end (picture unrolling roughly 66 ft of paper). Scale 1 in. = 400 ft. The red line is Judah’s route; parts were never built exactly on this alignment.',
+      archiveUrl: 'https://purl.stanford.edu/gh822ms4734',
+      archiveName: 'Stanford Digital Repository',
     },
   },
   {
     id: 'crocker',
     name: 'Charles Crocker',
     epithet: 'The Organizer',
-    timelineEra: 'c. 1863–1869',
+    timelineEra: 'c. 1863 to 1869',
     roleBadge: 'Construction chief, Central Pacific',
     imageUrl: assetPrimary('charles-crocker.jpg'),
     imageAlt:
       'Portrait of Charles Crocker, Central Pacific construction leader',
     challenge:
-      'Crocker answered the Sierra labor crisis by recruiting thousands of Chinese workers through contractors—managing pay, camps, and brutal winter pushes toward the summit. His organization turned Crocker’s “pets” (as some crews called the Chinese workforce) into the muscle behind the Summit tunnels.',
+      'Sierra hiring went thin Crocker leaned on Chinese workers through contractors then had to run pay camps and winter pushes whether anyone liked it. His actual job was keeping cuts fills tunnel headings on a calendar you can still see in payrolls photos and how deep those cuts are.',
+    fieldLogOmitPrimarySource: true,
+    fieldLogCoda:
+      'You do not get Sierra speed on that calendar without the hiring pipe and the daily grind.',
   },
   {
     id: 'dodge',
     name: 'Grenville M. Dodge',
     epithet: 'The General',
-    timelineEra: 'c. 1866–1869',
+    timelineEra: 'c. 1866 to 1869',
     roleBadge: 'Chief Engineer, Union Pacific',
     imageUrl: assetPrimary('grenville-dodge-acw-winter-2023-scaled.webp'),
     imageAlt: 'Portrait of Grenville M. Dodge in military-style dress',
     challenge:
-      'A Union Army general who treated track as a campaign: Dodge coordinated survey parties, defended the grade against political pressure, and pushed the Union Pacific across the Great Plains—logistics of ties, rails, water, and “hell on wheels” towns moving with the railhead.',
+      'Union officer brain on track layout. Surveys out ahead bridges water stops planned Hell on Wheels towns tailgating the railhead holding the grade when politicians want a detour for votes.',
   },
 ]

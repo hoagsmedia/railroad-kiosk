@@ -1,0 +1,55 @@
+/* Perspectives sidebar */
+.perspectives {
+  border-left: 3px solid #8b2942;
+  background: linear-gradient(
+    180deg,
+    rgba(44, 24, 28, 0.92),
+    rgba(24, 16, 18, 0.96)
+  );
+  padding: 1rem 1.1rem;
+  border-radius: 0 4px 4px 0;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.perspectivesTitle {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 1.05rem;
+  color: #f5d0d8;
+  margin: 0 0 0.5rem;
+  letter-spacing: 0.02em;
+}
+
+.perspectivesSubtitle {
+  margin: -0.2rem 0 0.6rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245, 208, 216, 0.68);
+  line-height: 1.35;
+}
+
+.perspectivesBody {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #e8d5d9;
+}
+
+.perspectivesBody p + p {
+  margin-top: 0.65rem;
+}
+
+.perspectivesBody strong {
+  color: #f5d0d8;
+  font-weight: 650;
+}
+
+.perspectivesFootnote {
+  margin: 0.75rem 0 0;
+  font-size: 0.76rem;
+  font-style: italic;
+  line-height: 1.45;
+  color: rgba(232, 213, 217, 0.62);
+}
+

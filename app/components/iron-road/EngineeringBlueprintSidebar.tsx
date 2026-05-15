@@ -5,45 +5,30 @@ import styles from '@/app/kiosk/kiosk.module.css'
 export function EngineeringBlueprintSidebar() {
   return (
     <aside
-      className={styles.engineeringBlueprint}
+      className={styles.perspectives}
       aria-label="Nineteenth-century engineering methods">
-      <div className={styles.engineeringBlueprintPaper}>
-        <div className={styles.engineeringBlueprintLines} aria-hidden />
-        <h2 className={styles.engineeringBlueprintTitle}>Tech specs</h2>
-        <p className={styles.engineeringBlueprintSubtitle}>
-          Blueprint notes — tools & structures
+      <h3 className={styles.perspectivesTitle}>Tech specs</h3>
+      <p className={styles.perspectivesSubtitle}>
+        Blueprint notes: tools &amp; structures
+      </p>
+      <div className={styles.perspectivesBody}>
+        <p>
+          <strong>Nitroglycerin &amp; black powder.</strong> Crews hand-drilled,
+          tamped charges, and fired blasts in tight Sierra cuts. Unstable
+          nitroglycerin and slower black powder broke granite in layers. Summit
+          Tunnel No. 6 alone needed roughly <strong>1,659 feet</strong> of
+          heading through rock at altitude.
         </p>
-
-        <section className={styles.engineeringBlueprintBlock}>
-          <h3 className={styles.engineeringBlueprintH3}>
-            Nitroglycerin &amp; black powder
-          </h3>
-          <p className={styles.engineeringBlueprintBody}>
-            Crews drilled holes by hand, tamped charges, and set off blasts in
-            tight Sierra cuts. Nitroglycerin (dangerously volatile) and black
-            powder shattered granite inch by inch—Summit Tunnel No. 6 alone
-            required roughly <strong>1,659 feet</strong> of heading through
-            solid rock at high elevation.
-          </p>
-        </section>
-
-        <section className={styles.engineeringBlueprintBlock}>
-          <h3 className={styles.engineeringBlueprintH3}>
-            Trestles &amp; timber
-          </h3>
-          <p className={styles.engineeringBlueprintBody}>
-            Where stone gave way to air, carpenters threw up massive timber
-            trestles. The Dale Creek crossing in Wyoming—often cited near{' '}
-            <strong>150 ft</strong> above the gorge—was a timber lattice
-            masterpiece: falsework, braces, and speed that today reads like
-            daredevil engineering.
-          </p>
-        </section>
-
-        <p className={styles.engineeringBlueprintFoot}>
-          Figures rounded from common period accounts; cite your surveyor.
+        <p>
+          <strong>Trestles &amp; timber.</strong> Where rock gave way to air,
+          carpenters threw up timber trestles fast. Dale Creek in Wyoming, often
+          put near <strong>150 ft</strong> above the gorge, was braced timber
+          and nerve in equal parts.
         </p>
       </div>
+      <p className={styles.perspectivesFootnote}>
+        Numbers rounded from common period sources. Check your own references.
+      </p>
     </aside>
   )
 }

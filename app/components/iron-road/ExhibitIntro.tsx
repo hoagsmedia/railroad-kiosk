@@ -44,7 +44,8 @@ export function ExhibitIntro({ parallax, onEnter }: Props) {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}>
-          Cause · Labor · Engineering · Geography · Event · Communication
+          Vision · Decision · Labor · Engineering · Utah & the line · Event ·
+          Consequences
         </motion.p>
 
         <motion.h1
@@ -80,7 +81,7 @@ export function ExhibitIntro({ parallax, onEnter }: Props) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.38, duration: 0.5 }}>
-          1863 — 1869
+          1863 to 1869
         </motion.p>
 
         <motion.p
@@ -88,9 +89,8 @@ export function ExhibitIntro({ parallax, onEnter }: Props) {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.45, duration: 0.55 }}>
-          Six primary sources. One continent reimagined. Step into a
-          museum-style walkthrough of law, labor, steel, maps, ceremony, and the
-          telegraph wire that carried the word <em>Done</em> across the nation.
+          Flip through eight stops from first survey to fallout. Tap the primary
+          sources to blow them up. Continue and Back move you around.
         </motion.p>
 
         <motion.div

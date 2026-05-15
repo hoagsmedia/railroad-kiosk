@@ -1,0 +1,137 @@
+/* ---- Museum viewport: 1440×900 design canvas, scales down to fit Chrome / laptop ---- */
+.kioskPageShell {
+  --kiosk-view-pad: 0.75rem;
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  max-width: 100%;
+  min-height: 0;
+  max-height: 100dvh;
+  max-height: 100vh;
+  padding: var(--kiosk-view-pad);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.kioskBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 85% 55% at 50% 35%,
+      rgba(42, 34, 28, 0.55),
+      transparent 58%
+    ),
+    linear-gradient(168deg, #0c0a08 0%, #12100e 45%, #080706 100%);
+}
+
+.kioskDesktopStage {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.kioskFrameSizer {
+  position: relative;
+  /* Fit both width and height (vh fallback; svh refines for Chrome UI) */
+  width: min(
+    1440px,
+    calc(100vw - 2 * var(--kiosk-view-pad)),
+    calc((100vh - 2 * var(--kiosk-view-pad)) * 1440 / 900)
+  );
+  max-width: calc(100vw - 2 * var(--kiosk-view-pad));
+  max-height: calc(100vh - 2 * var(--kiosk-view-pad));
+  aspect-ratio: 1440 / 900;
+  height: auto;
+  overflow: hidden;
+  flex-shrink: 1;
+  border-radius: 4px;
+  box-shadow:
+    0 0 0 1px var(--kiosk-gold-a12),
+    0 24px 80px rgba(0, 0, 0, 0.55);
+}
+
+@supports (height: 100svh) {
+  .kioskFrameSizer {
+    width: min(
+      1440px,
+      calc(100vw - 2 * var(--kiosk-view-pad)),
+      calc((100svh - 2 * var(--kiosk-view-pad)) * 1440 / 900)
+    );
+    max-height: calc(100svh - 2 * var(--kiosk-view-pad));
+  }
+}
+
+.kioskFrame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  container-type: size;
+  container-name: kiosk;
+  background: #0a0807;
+}
+
+.kioskMobileOverlay {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .kioskDesktopStage {
+    display: none;
+  }
+
+  .kioskFrameSizer {
+    width: 0;
+    height: 0;
+    box-shadow: none;
+  }
+
+  .kioskMobileOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: rgba(6, 5, 4, 0.94);
+    backdrop-filter: blur(10px);
+  }
+}
+
+.kioskMobileOverlayPanel {
+  max-width: 22rem;
+  padding: 1.5rem 1.35rem;
+  border-radius: 6px;
+  border: 1px solid var(--kiosk-gold-a35);
+  background: linear-gradient(165deg, #1c1814 0%, #12100e 100%);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+}
+
+.kioskMobileOverlayTitle {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #fdf6ec;
+  margin: 0 0 0.75rem;
+}
+
+.kioskMobileOverlayBody {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: #d4cbc2;
+}

@@ -1,0 +1,1302 @@
+.museumHeroStack {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--museum-gap);
+}
+
+.museumHeroTextBand {
+  flex: 0 0 auto;
+}
+
+.museumHeroTextBand .exhibitBodyWrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--museum-gap);
+}
+
+.museumHeroTextBand .bodySection {
+  margin-bottom: 0;
+}
+
+.museumHeroTextBand .screenBody {
+  max-width: none;
+}
+
+.museumHeroNarrow {
+  max-width: 38rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.museumHeroNarrow .screenBody {
+  max-width: none;
+  text-align: center;
+}
+
+.museumHeroFigure {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.museumHeroFigure .inlineSourceSection,
+.museumHeroFigure .exhibitSourceWrap {
+  margin-top: 0;
+  max-width: none;
+  width: 100%;
+}
+
+.museumHeroFigure .inlineSourceVisualAnchor {
+  margin-inline: auto;
+}
+
+.museumHeroFigure .inlineSourceLayerContent {
+  transform: translateY(10px) translateX(-6px);
+}
+
+.museumHeroFigureConsequences .inlineSourceHeader {
+  text-align: center;
+}
+
+.museumHeroFigureConsequences .inlineSourceVisualAnchor {
+  width: 100%;
+  max-width: 420px;
+}
+
+.museumLaborShell {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  /* Slightly favor top row (payroll + narrative) so the film strip sits higher */
+  grid-template-rows: minmax(0, 1.12fr) minmax(0, 0.88fr);
+  gap: calc(var(--museum-gap) * 0.92);
+  /* Tight to title band / concept thread above */
+  padding-top: 0.3rem;
+  /* Keep “On the line” enlarge controls clear of the Back/Continue dock */
+  padding-bottom: 0.85rem;
+  box-sizing: border-box;
+}
+
+.museumLaborTop {
+  position: relative;
+  z-index: 2;
+  min-height: 0;
+  display: grid;
+  /* Narrative + Charles | payroll primary */
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: var(--museum-gap);
+  align-items: stretch;
+}
+
+.museumLaborTopLeft {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--museum-gap);
+  overflow: visible;
+}
+
+.museumLaborCopy .screenBody {
+  max-width: none;
+  line-height: 1.38;
+}
+
+.museumLaborCopy .screenBody p + p {
+  margin-top: 0.35rem;
+}
+
+.museumLaborFigureCard {
+  margin: 0;
+  flex-shrink: 0;
+  align-self: flex-start;
+  width: 100%;
+  max-width: min(100%, 26rem);
+}
+
+.museumLaborFigureCardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border-radius: 5px;
+  border: 1px solid var(--kiosk-gold-a22);
+  background: var(--kiosk-figure-card-surface);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 6px 20px rgba(0, 0, 0, 0.28);
+  color: inherit;
+}
+
+.museumLaborFigureCardRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.1rem;
+  width: 100%;
+}
+
+.museumLaborFigureFieldLogBtn {
+  width: 100%;
+  margin: 0;
+  padding: 0.55rem 0.85rem;
+  border-radius: 4px;
+  border: 2px solid var(--kiosk-gold-a55);
+  background: linear-gradient(
+    180deg,
+    rgba(212, 175, 55, 0.15),
+    rgba(212, 175, 55, 0.05)
+  );
+  color: #fdf6ec;
+  font: inherit;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.095em;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.12rem;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.museumLaborFigureFieldLogBtn:hover {
+  border-color: var(--kiosk-gold-a75);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.museumLaborFigureFieldLogBtn:focus-visible {
+  outline: 2px solid var(--kiosk-gold-a85);
+  outline-offset: 2px;
+}
+
+.museumLaborFigureFieldLogBtnSub {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: none;
+  color: #d4c8bc;
+  line-height: 1.25;
+}
+
+.museumLaborFigureCardBtn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.1rem;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0.85rem 1rem;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid var(--kiosk-gold-a22);
+  background: var(--kiosk-figure-card-surface);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 6px 20px rgba(0, 0, 0, 0.28);
+  color: inherit;
+  font: inherit;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.museumLaborFigureCardBtn:hover {
+  border-color: var(--kiosk-gold-a42);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 8px 28px rgba(0, 0, 0, 0.38);
+}
+
+.museumLaborFigureCardPhoto {
+  flex: 0 0 auto;
+  width: 6.75rem;
+  height: 7.85rem;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--kiosk-gold-a20);
+  background: #070605;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.museumLaborFigureCardImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 18%;
+  filter: sepia(0.12) contrast(1.04);
+}
+
+.museumLaborFigureCardMeta {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.museumLaborFigureCardName {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(1.12rem, 1.95vw, 1.32rem);
+  font-weight: 600;
+  color: #fdf6ec;
+  margin: 0;
+  line-height: 1.15;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
+}
+
+.museumLaborFigureCardTitle {
+  margin: 0;
+  font-size: clamp(0.82rem, 1.2vw, 0.93rem);
+  line-height: 1.45;
+  color: #e0d6ca;
+}
+
+.museumLaborFigureCardYears {
+  margin: 0;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--kiosk-gold);
+}
+
+.museumLaborPrimary {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 0.5rem 0.35rem;
+  border-radius: 5px;
+  background: linear-gradient(
+    168deg,
+    rgba(28, 22, 18, 0.55) 0%,
+    rgba(14, 11, 9, 0.35) 100%
+  );
+  border: 1px solid var(--kiosk-gold-a18);
+}
+
+.museumLaborPrimary .inlineSourceSection,
+.museumLaborPrimary .exhibitSourceWrap {
+  margin-top: 0;
+  max-width: none;
+  width: 100%;
+}
+
+.museumLaborPrimary .inlineSourceVisualAnchor {
+  width: 100%;
+  max-width: 100%;
+  align-items: center;
+}
+
+.museumLaborPrimary .exhibitLaborPaperOuter {
+  max-width: min(100%, min(480px, 46cqi));
+  margin-inline: auto;
+}
+
+.museumLaborPrimary .exhibitLaborPrimaryComposition .inlineSourceHeader {
+  margin-top: 0.5rem;
+  margin-bottom: 0.55rem;
+  gap: 0.35rem;
+}
+
+/* Payroll + caption: centered in cell, uses width better than default flex-end narrow column */
+.museumLaborPrimary .exhibitLaborPrimaryComposition .inlineSourceComposition {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 0.25rem;
+  margin-bottom: 0;
+}
+
+.museumLaborPrimary .exhibitLaborPrimaryComposition .inlineSourceVisualAnchor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.museumLaborPrimary .inlineSourceLayerContent {
+  max-height: min(42%, 9rem);
+  min-height: 3.25rem;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+}
+
+.museumLaborPrimary
+  .exhibitLaborPrimaryComposition
+  .inlineSourceLayerContent
+  .inlineSourceTranscript {
+  font-size: 0.71rem;
+  line-height: 1.42;
+  overflow: visible;
+  display: block;
+  -webkit-line-clamp: unset;
+}
+
+.museumLaborBottom {
+  position: relative;
+  z-index: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 300px);
+  gap: var(--museum-gap);
+  /* Top-align so gallery “read more” isn’t clipped when the perspectives column is tall */
+  align-items: start;
+}
+
+.museumLaborGallery {
+  min-width: 0;
+  width: 100%;
+  align-self: start;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Film gallery chrome on <section.exhibitGallery> so title + strip share one frame */
+.museumLaborGallery .exhibitGallery {
+  margin: 0;
+  max-width: none;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0.35rem 0.85rem 0.45rem;
+  overflow: hidden;
+  /* Pull strip up under payroll row (payroll has higher z-index); ~35px + 15px lift */
+  margin-top: calc(-0.94rem - 1.25rem - 15px);
+  position: relative;
+  z-index: 0;
+  border-radius: 6px;
+  border: 1px solid var(--kiosk-gold-a34);
+  background: linear-gradient(
+    180deg,
+    rgba(32, 28, 22, 0.95) 0%,
+    rgba(14, 12, 10, 0.98) 42%,
+    rgba(18, 15, 12, 0.98) 58%,
+    rgba(28, 24, 20, 0.95) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.35),
+    0 8px 26px rgba(0, 0, 0, 0.42);
+}
+
+/* Inner stack: layout only; border/background live on .exhibitGallery */
+.museumLaborGallery .exhibitLaborGalleryPanel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1 1 auto;
+  margin-top: 0;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.museumLaborGallery .exhibitLaborGalleryPanel .exhibitGalleryTitle {
+  flex-shrink: 0;
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(0.86rem, 1.35vw, 0.98rem);
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #ebe3d8;
+  margin: 0;
+  padding: 0.48rem 0 0.4rem;
+  text-align: left;
+  background: transparent;
+  /* Same inset as strip below — one card, not a stacked header */
+  border-bottom: none;
+}
+
+/* Photo row: shares horizontal padding with title; no decorative sprockets */
+.museumLaborGallery .exhibitLaborFilmStrip {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 0.52rem 0 0.62rem;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.museumLaborGallery .exhibitGalleryGrid {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 0.65rem;
+  row-gap: 0.4rem;
+  align-content: start;
+  justify-content: start;
+  justify-items: stretch;
+  align-items: stretch;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.museumLaborGallery .exhibitGalleryItem:not(:last-child) {
+  border-right: 1px solid rgba(0, 0, 0, 0.4);
+  padding-right: 0.65rem;
+  margin-right: 0;
+  box-shadow: 1px 0 0 rgba(255, 255, 255, 0.035);
+}
+
+.museumLaborGallery .exhibitGalleryItem {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Equal column height; wide matte = shorter image so ~3–4 caption lines fit — full aspect in modal */
+.museumLaborGallery .exhibitGalleryFigure {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  max-width: 100%;
+  gap: 0.32rem;
+  margin: 0;
+}
+
+.museumLaborGallery .exhibitLaborGalleryMatBtn {
+  display: block;
+  flex-shrink: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  color: inherit;
+  border-radius: 2px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.museumLaborGallery .exhibitLaborGalleryMatBtn:focus-visible {
+  outline: 2px solid var(--kiosk-gold);
+  outline-offset: 2px;
+}
+
+.museumLaborGallery .exhibitLaborGalleryImgMat {
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 2.1 / 1;
+  line-height: 0;
+  border-radius: 2px;
+  background: rgba(6, 5, 4, 0.35);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+}
+
+.museumLaborGallery .exhibitLaborGalleryMatBtn .exhibitLaborGalleryImgMat {
+  width: 100%;
+  max-width: 100%;
+}
+
+.museumLaborGallery .exhibitLaborGalleryActions {
+  flex-shrink: 0;
+  margin-top: auto;
+  padding-top: 0.35rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.museumLaborGallery .exhibitLaborGalleryActions .enlargeBtn {
+  padding: 0.32rem 0.55rem;
+  font-size: 0.68rem;
+}
+
+.museumLaborGallery .exhibitGalleryImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: cover;
+  object-position: center;
+  vertical-align: bottom;
+  border-radius: inherit;
+}
+
+.museumLaborGallery .exhibitGalleryCaption {
+  flex: 0 0 auto;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  margin: 0;
+  text-align: left;
+  font-size: 0.72rem;
+  line-height: 1.38;
+  overflow-wrap: anywhere;
+}
+
+.museumLaborPerspectives {
+  align-self: stretch;
+  min-height: 0;
+  min-width: 0;
+  overflow: visible;
+}
+
+.museumLaborPerspectives .perspectives {
+  height: 100%;
+  min-height: 0;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+}
+
+.museumLaborPerspectives .perspectivesBody {
+  flex: 1;
+  overflow: visible;
+  display: block;
+  font-size: 0.92rem;
+  line-height: 1.58;
+}
+
+.exhibitPage[data-layout='vision'] .museumNarrative,
+.exhibitPage[data-layout='decision'] .museumNarrative {
+  border-left: 3px solid var(--kiosk-gold-a24);
+  padding-left: 1rem;
+  margin-left: 0;
+}
+
+.exhibitMain {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.exhibitHeadingWrap {
+  margin-bottom: 0.35rem;
+}
+
+.conceptThread {
+  margin: 0 0 0.85rem;
+  padding: 0.5rem 0.65rem 0.55rem;
+  max-width: min(52rem, 100%);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: rgba(235, 227, 216, 0.82);
+  border-left: 2px solid var(--kiosk-gold-a35);
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.bodySection {
+  margin: 0 0 1rem;
+}
+
+.bodySection:last-child {
+  margin-bottom: 0;
+}
+
+.bodySectionTitle {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(1rem, 2.2vw, 1.12rem);
+  font-weight: 600;
+  color: #e8dfd2;
+  margin: 0 0 0.4rem;
+  letter-spacing: 0.02em;
+}
+
+/* Labor — compact fit; payroll slides from top-right (motion) + tight paper frame */
+.exhibitLaborLayout {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0;
+  min-width: 0;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.exhibitLaborPayrollHero {
+  width: 100%;
+  flex-shrink: 0;
+  padding: 0.35rem 0.45rem 0.4rem;
+  border-radius: 5px;
+  background: linear-gradient(
+    168deg,
+    rgba(28, 22, 18, 0.72) 0%,
+    rgba(14, 11, 9, 0.5) 100%
+  );
+  border: 1px solid var(--kiosk-gold-a20);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 8px 28px rgba(0, 0, 0, 0.32);
+}
+
+.exhibitLaborHeroEyebrow {
+  margin: 0 0 0.3rem;
+  font-size: 0.62rem;
+  font-weight: 650;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--kiosk-gold);
+}
+
+.exhibitLaborHeroSplit {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.5rem 0.85rem;
+  align-items: start;
+}
+
+.exhibitLaborHeroCopy {
+  min-width: 0;
+  max-width: 11rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.exhibitLaborPrimaryComposition {
+  margin-top: 0;
+  max-width: none;
+  flex: 1;
+  min-width: 0;
+}
+
+.exhibitLaborPrimaryComposition .inlineSourceHeader {
+  margin-bottom: 0.35rem;
+}
+
+.exhibitLaborPrimaryComposition .inlineSourceTitle {
+  font-size: clamp(0.78rem, 1.2vw, 0.9rem);
+  line-height: 1.2;
+}
+
+.exhibitLaborPrimaryComposition .inlineSourceVisualAnchor {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
+  max-width: min(100%, 400px);
+  margin-inline: auto 0;
+}
+
+.exhibitLaborPrimaryComposition .inlineSourceLayerContent {
+  align-self: stretch;
+  width: 100%;
+  box-sizing: border-box;
+  max-height: min(62%, 9.5rem);
+  min-height: 3.85rem;
+  transform: translateY(4px);
+}
+
+.exhibitLaborPrimaryComposition
+  .inlineSourceLayerContent
+  .inlineSourceTranscript {
+  flex: none;
+  font-size: 0.68rem;
+  line-height: 1.42;
+  -webkit-line-clamp: 4;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-y: hidden;
+}
+
+.exhibitLaborPaperStage {
+  flex-shrink: 0;
+}
+
+/* Gold bezel + mat hug the scan (no full-bleed bar) */
+.exhibitLaborPaperOuter {
+  width: fit-content;
+  max-width: min(340px, 36cqi);
+  padding: 2px;
+  border-radius: 3px;
+  background: var(--kiosk-bezel-gradient);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.35),
+    0 10px 32px rgba(0, 0, 0, 0.45);
+}
+
+.exhibitLaborPaperMat {
+  width: fit-content;
+  max-width: 100%;
+  padding: 3px 4px;
+  border-radius: 2px;
+  background: radial-gradient(ellipse at 30% 12%, #2e2822 0%, #14110e 100%);
+}
+
+.exhibitLaborPaperImgShell {
+  width: fit-content;
+  max-width: 100%;
+  line-height: 0;
+  background: #070605;
+  border: 1px solid var(--kiosk-gold-a22);
+}
+
+.exhibitLaborPaperImg {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: min(19cqh, 168px);
+  object-fit: contain;
+  filter: sepia(0.22) contrast(1.06);
+}
+
+.exhibitLaborLowerGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.45rem 0.75rem;
+  align-items: start;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.exhibitLaborLowerLeft,
+.exhibitLaborLowerRight {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  overflow: hidden;
+}
+
+.exhibitLaborLowerLeft .screenBody {
+  font-size: 0.76rem;
+  line-height: 1.42;
+}
+
+.exhibitLaborLowerLeft .screenBody p + p {
+  margin-top: 0.3rem;
+}
+
+.exhibitLaborLowerLeft .architectsSection {
+  margin: 0;
+}
+
+.exhibitLaborLowerLeft .architectsSectionTitle {
+  font-size: 0.88rem;
+  margin-bottom: 0.3rem;
+}
+
+.exhibitLaborLowerLeft .architectGridSingle {
+  max-width: 11.5rem;
+  grid-template-columns: minmax(0, 11.5rem);
+}
+
+.exhibitLaborLowerLeft .architectPhotoFrame {
+  aspect-ratio: 3 / 4;
+  max-height: 7.5rem;
+}
+
+.exhibitLaborLowerLeft .architectName {
+  font-size: 0.88rem;
+  margin-top: 0.35rem;
+}
+
+.exhibitLaborLowerLeft .architectEpithet {
+  font-size: 0.65rem;
+}
+
+.exhibitLaborLowerLeft .architectRoleLine {
+  font-size: 0.62rem;
+}
+
+.exhibitLaborGalleryBundle {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.exhibitLaborGalleryBundle .exhibitGallery {
+  margin-top: 0;
+}
+
+.exhibitLaborGalleryBundle .exhibitGalleryTitle {
+  font-size: 0.78rem;
+  margin-bottom: 0.25rem;
+}
+
+.exhibitLaborGalleryBundle .exhibitGalleryGrid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0.4rem;
+  overflow: hidden;
+}
+
+.exhibitLaborGalleryBundle .exhibitGalleryItem {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 50%;
+}
+
+.exhibitLaborGalleryBundle .exhibitGalleryFigure {
+  gap: 0.2rem;
+}
+
+.exhibitLaborGalleryBundle .exhibitGalleryImg {
+  max-height: 52px;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.exhibitLaborGalleryBundle .exhibitGalleryCaption {
+  font-size: 0.58rem;
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.exhibitLaborGalleryBundle .exhibitGalleryReadMore {
+  margin-top: 0.25rem;
+  font-size: 0.68rem;
+}
+
+.exhibitLaborLowerRight .perspectives {
+  border-radius: 4px;
+  padding: 0.45rem 0.55rem;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 6px 20px rgba(0, 0, 0, 0.28);
+  flex-shrink: 0;
+}
+
+.exhibitLaborLowerRight .perspectivesTitle {
+  font-size: 0.88rem;
+  margin-bottom: 0.25rem;
+}
+
+.exhibitLaborLowerRight .perspectivesBody {
+  font-size: 0.72rem;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (max-width: 899px) {
+  .exhibitLaborLowerGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .exhibitLaborHeroSplit {
+    grid-template-columns: 1fr;
+  }
+
+  .exhibitLaborPaperStage {
+    justify-self: center;
+  }
+}
+
+.exhibitEngineeringHeroRow {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: stretch;
+  margin-top: 0.35rem;
+  min-width: 0;
+}
+
+@media (min-width: 900px) {
+  .exhibitEngineeringHeroRow {
+    display: grid;
+    grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+    gap: 1rem 1.25rem;
+    align-items: start;
+  }
+}
+
+.exhibitEngineeringSourceCol {
+  min-width: 0;
+}
+
+.exhibitEngineeringSourceCol .inlineSourceSection,
+.exhibitEngineeringSourceCol .exhibitSourceWrap {
+  margin-top: 0;
+}
+
+.exhibitMain .exhibitEngineeringHeroRow + .exhibitBodyWrap {
+  margin-top: 0.9rem;
+}
+
+.exhibitBodyWrap {
+  margin-bottom: 0;
+}
+
+.exhibitSourceWrap {
+  margin-top: 0;
+}
+
+.exhibitSidebarSlot {
+  min-width: 0;
+}
+
+.exhibitSplit {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  margin-top: 0.35rem;
+}
+
+@media (min-width: 1024px) {
+  .exhibitSplit {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1.25rem 1.5rem;
+    align-items: start;
+  }
+
+  .exhibitPage[data-layout='engineering'] .exhibitSplit {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  }
+}
+
+/* Vision / Decision — legislative dossier rail */
+.exhibitPage[data-layout='vision'] .exhibitMain,
+.exhibitPage[data-layout='decision'] .exhibitMain {
+  border-left: 3px solid var(--kiosk-gold-a28);
+  padding-left: 1rem;
+  margin-left: -0.125rem;
+}
+
+/* Vision / Decision — text column + floated primary source */
+.exhibitDocSplitWrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) min(64%, min(760px, 100%));
+  gap: 1.1rem 1.35rem;
+  align-items: start;
+  min-width: 0;
+}
+
+.exhibitDocSplitTextColumn {
+  grid-column: 1;
+  grid-row: 1;
+  min-width: 0;
+}
+
+.exhibitDocSplitFigure {
+  grid-column: 2;
+  grid-row: 1;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0.15rem 0 0 0.35rem;
+  box-sizing: border-box;
+}
+
+.exhibitDocSplitFigure .inlineSourceSection,
+.exhibitDocSplitFigure .exhibitSourceWrap {
+  margin-top: 0;
+  max-width: 100%;
+}
+
+.exhibitDocSplitFigure .inlineSourceFrameOuter,
+.exhibitDocSplitFigure .inlineSourceFrame,
+.exhibitDocSplitFigure .inlineSourceMat {
+  width: 100%;
+  max-width: 100%;
+}
+
+.exhibitDocSplitFigure .inlineSourceImgWrap {
+  width: 100%;
+  max-width: 100%;
+}
+
+.exhibitDocSplitFigure .inlineSourceImg {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: min(38dvh, 480px);
+  object-fit: contain;
+}
+
+.exhibitDocSplitFigure .inlineSourceVisualAnchor {
+  width: 100%;
+  margin-inline: auto;
+}
+
+.exhibitDocSplitFigure .inlineSourceTitle {
+  font-size: clamp(0.95rem, 1.9vw, 1.1rem);
+}
+
+.exhibitPage[data-layout='vision'] .screenBody,
+.exhibitPage[data-layout='decision'] .screenBody {
+  max-width: none;
+}
+
+.exhibitPage[data-layout='vision'] .exhibitDocSplitTextColumn .exhibitGallery,
+.exhibitPage[data-layout='decision']
+  .exhibitDocSplitTextColumn
+  .exhibitGallery {
+  margin-top: 0.85rem;
+  max-width: none;
+  width: 100%;
+}
+
+.exhibitPage[data-layout='vision']
+  .exhibitDocSplitTextColumn
+  .exhibitGalleryImg,
+.exhibitPage[data-layout='decision']
+  .exhibitDocSplitTextColumn
+  .exhibitGalleryImg {
+  max-height: min(62dvh, 720px);
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (max-width: 767px) {
+  .exhibitDocSplitWrap {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+
+  .exhibitDocSplitTextColumn {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .exhibitDocSplitFigure {
+    grid-column: 1;
+    grid-row: 2;
+    padding: 0;
+  }
+
+  .exhibitPage[data-layout='vision'] .exhibitDocSplitTextColumn .exhibitGallery,
+  .exhibitPage[data-layout='decision']
+    .exhibitDocSplitTextColumn
+    .exhibitGallery {
+    max-width: none;
+  }
+}
+
+/* Labor — contextual photographs + captions */
+.exhibitGallery {
+  margin: 1rem 0 0;
+  padding: 0;
+  max-width: min(52rem, 100%);
+}
+
+.exhibitGalleryTitle {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-weight: 600;
+  color: #ebe3d8;
+  margin: 0 0 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.exhibitGalleryGrid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem 1.25rem;
+}
+
+@media (min-width: 720px) {
+  .exhibitGalleryGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.exhibitGalleryItem {
+  margin: 0;
+}
+
+.exhibitGalleryFigure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: 100%;
+}
+
+.exhibitGalleryImg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(22dvh, 260px);
+  object-fit: contain;
+  object-position: top center;
+  border-radius: 3px;
+  border: 1px solid var(--kiosk-gold-a20);
+  background: #0a0908;
+  filter: sepia(0.22) contrast(1.05);
+}
+
+.exhibitGalleryCaption {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: #d4cbc2;
+}
+
+.exhibitGalleryReadMore {
+  margin: 1rem 0 0;
+  font-size: 0.88rem;
+}
+
+/* Engineering — cool inset panel behind split */
+@media (min-width: 1024px) {
+  .exhibitPage[data-layout='engineering'] .exhibitSplit {
+    padding: 1rem 1rem 1.1rem;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.22);
+    border: 1px solid rgba(120, 160, 190, 0.12);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+}
+
+/* Map band — full-width primary (Utah / survey map layout; readable at scale) */
+.exhibitGeographyMapBand {
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  max-height: 32dvh;
+  padding: 0.35rem clamp(0.75rem, 2vw, 1.25rem);
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.exhibitGeographyMapBand .inlineSourceSection,
+.exhibitGeographyMapBand .exhibitSourceWrap {
+  margin-top: 0;
+  max-width: none;
+}
+
+.exhibitGeographyMapBand .inlineSourceHeader {
+  text-align: center;
+}
+
+.exhibitGeographyMapBand .inlineSourceFrameOuter {
+  width: 100%;
+  max-width: 100%;
+}
+
+.exhibitGeographyMapBand .inlineSourceFrame {
+  width: 100%;
+  max-width: 100%;
+}
+
+.exhibitGeographyMapBand .inlineSourceMat {
+  width: 100%;
+  max-width: 100%;
+}
+
+.exhibitGeographyMapBand .inlineSourceImgWrap {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #070605;
+}
+
+.exhibitGeographyMapBand .inlineSourceImg {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: min(26dvh, 320px);
+  object-fit: contain;
+}
+
+.exhibitGeographyMapBand .inlineSourceLayerContent {
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+  max-height: 46%;
+  min-height: 4.25rem;
+  padding: 0.4rem 0.5rem 0.45rem;
+}
+
+.exhibitGeographyMapBand .inlineSourceLayerContent .inlineSourceTranscript {
+  flex: none;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  -webkit-line-clamp: 3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-y: hidden;
+}
+
+.exhibitGeographyMapBand .inlineSourceActions {
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Utah-labor / map-band — stacked layout: map band flexes; nav lives in .navDock */
+@media (max-width: 1023px) {
+  .exhibitPageInner[data-layout='utah-labor'] .exhibitMain {
+    flex: 0 1 auto;
+  }
+
+  .exhibitPageInner[data-layout='utah-labor'] .exhibitSidebarSlot {
+    flex: 0 1 auto;
+  }
+
+  .exhibitPageInner[data-layout='utah-labor'] .exhibitGeographyMapBand {
+    flex: 1 1 auto;
+  }
+}
+
+/* Event — ceremony “poster” first: taller scan */
+.exhibitPage[data-layout='event'] .inlineSourceSection {
+  margin-top: 0.25rem;
+}
+
+.exhibitPage[data-layout='event'] .inlineSourceImg {
+  max-height: min(48dvh, 520px);
+}
+
+.exhibitPage[data-layout='event'] .inlineSourceLayerContent {
+  max-height: min(42%, 9.5rem);
+}
+
+/* Consequences — narrow telegraph column */
+.exhibitPage[data-layout='consequences'] .exhibitMain {
+  max-width: 42rem;
+  margin-inline: auto;
+  width: 100%;
+}
+
+.exhibitPage[data-layout='consequences'] .exhibitHeadingWrap {
+  text-align: center;
+}
