@@ -25,17 +25,21 @@
 .exhibitDocSplitFigure .inlineSourceVisualAnchor,
 .exhibitEngineeringSourceCol .inlineSourceVisualAnchor,
 .exhibitGeographyMapBand .inlineSourceVisualAnchor {
-  width: 100%;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
 }
 
 .inlineSourceLayerContent {
   position: absolute;
   z-index: 3;
-  left: 8px;
-  right: 8px;
+  left: 50%;
+  right: auto;
   bottom: 8px;
+  width: min(calc(100% - 16px), var(--kiosk-primary-overlay-max-w));
+  max-width: var(--kiosk-primary-overlay-max-w);
   max-height: min(52%, 11.5rem);
-  min-height: 5rem;
+  min-height: 3.25rem;
   padding: 0.55rem 0.65rem 0.55rem;
   display: flex;
   flex-direction: column;
@@ -57,7 +61,20 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
   border: 1px solid var(--kiosk-gold-a22);
   border-top-color: var(--kiosk-gold-a08);
-  transform: translateY(6px);
+  transform: translate(-50%, 6px);
+}
+
+.inlineSourceLayerContent .inlineSourceOverlayHint {
+  margin: 0;
+  padding: 0;
+  flex: 0 0 auto;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: #e8dfd4;
+  text-align: center;
+  text-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.95),
+    0 0 18px rgba(0, 0, 0, 0.65);
 }
 
 .inlineSourceLayerContent .inlineSourceTranscript {
@@ -92,6 +109,8 @@
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   gap: 0.45rem 0.75rem;
   flex-shrink: 0;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .inlineSourceLayerContent .inlineArchiveLink {

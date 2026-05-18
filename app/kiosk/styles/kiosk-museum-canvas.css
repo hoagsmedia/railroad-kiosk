@@ -74,9 +74,9 @@
   font-family: inherit;
 }
 
-/* Full narrative width so key-figure row (portrait + text) is not squeezed */
+/* Full narrative width; key-figure card caps at shared token */
 .museumPersonAnchor .architectGridSingle {
-  max-width: none;
+  max-width: var(--kiosk-key-figure-max-w);
   width: 100%;
   grid-template-columns: minmax(0, 1fr);
 }
@@ -117,8 +117,9 @@
 }
 
 .museumPrimaryCell .inlineSourceVisualAnchor {
-  width: 100%;
+  width: fit-content;
   max-width: 100%;
+  margin-inline: auto;
 }
 
 .museumPrimaryCell .inlineSourceFrameOuter {
@@ -126,7 +127,7 @@
 }
 
 .museumPrimaryCell .inlineSourceLayerContent {
-  transform: translateY(8px) translateX(-4px);
+  transform: translate(-50%, 8px);
 }
 
 .museumEngineeringStack {
@@ -228,7 +229,7 @@
 }
 
 .museumGeoMap .inlineSourceLayerContent {
-  transform: translateY(6px) translateX(6px);
+  transform: translate(-50%, 6px);
 }
 
 .museumGeoMap .inlineSourceLayerContent .inlineSourceTranscript {

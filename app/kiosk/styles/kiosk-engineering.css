@@ -27,12 +27,14 @@
 }
 
 .architectGridSingle {
-  grid-template-columns: minmax(0, 15rem);
-  max-width: 15rem;
+  grid-template-columns: minmax(0, 1fr);
+  max-width: var(--kiosk-key-figure-max-w);
 }
 
 .architectCard {
   min-width: 0;
+  width: 100%;
+  max-width: var(--kiosk-key-figure-max-w);
 }
 
 .architectCardBtn {
@@ -193,6 +195,7 @@
 .personFigureShell {
   width: 100%;
   min-width: 0;
+  max-width: var(--kiosk-key-figure-max-w);
 }
 
 .personFigureArticle {

@@ -3,7 +3,6 @@
 import type { ReactNode } from 'react'
 
 import styles from '@/app/kiosk/kiosk.module.css'
-import { formatKioskBodySegment } from '@/lib/format-kiosk-body'
 import type { PrimarySource } from '@/lib/kiosk-content'
 
 type Props = {
@@ -68,10 +67,8 @@ export function PrimarySourceComposition({
         <div className={styles.inlineSourceVisualAnchor}>
           {imageStack ?? defaultStack}
           <div className={styles.inlineSourceLayerContent}>
-            <p className={styles.inlineSourceTranscript}>
-              {formatKioskBodySegment(
-                source.kioskTranscript ?? source.transcript
-              )}
+            <p className={styles.inlineSourceOverlayHint}>
+              For more detail, enlarge the scan.
             </p>
             <div className={styles.inlineSourceActions}>
               {furtherReading ? (

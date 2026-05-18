@@ -55,7 +55,7 @@
 }
 
 .museumHeroFigure .inlineSourceLayerContent {
-  transform: translateY(10px) translateX(-6px);
+  transform: translate(-50%, 10px);
 }
 
 .museumHeroFigureConsequences .inlineSourceHeader {
@@ -70,26 +70,41 @@
 .museumLaborShell {
   flex: 1;
   min-height: 0;
-  display: grid;
-  /* Slightly favor top row (payroll + narrative) so the film strip sits higher */
-  grid-template-rows: minmax(0, 1.12fr) minmax(0, 0.88fr);
-  gap: calc(var(--museum-gap) * 0.92);
-  /* Tight to title band / concept thread above */
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--museum-gap) * 1.15);
   padding-top: 0.3rem;
-  /* Keep “On the line” enlarge controls clear of the Back/Continue dock */
   padding-bottom: 0.85rem;
   box-sizing: border-box;
+  overflow: hidden;
+}
+
+.museumLaborShell > * {
+  min-height: 0;
 }
 
 .museumLaborTop {
   position: relative;
-  z-index: 2;
+  z-index: 1;
+  flex: 0 0 44%;
   min-height: 0;
   display: grid;
-  /* Narrative + Charles | payroll primary */
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   gap: var(--museum-gap);
   align-items: stretch;
+  overflow: hidden;
+}
+
+.museumLaborBottom {
+  position: relative;
+  z-index: 2;
+  flex: 1 1 0;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 300px);
+  gap: var(--museum-gap);
+  align-items: stretch;
+  overflow: hidden;
 }
 
 .museumLaborTopLeft {
@@ -97,8 +112,31 @@
   min-height: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--museum-gap);
-  overflow: visible;
+  gap: calc(var(--museum-gap) * 0.55);
+  overflow: hidden;
+}
+
+.museumLaborCopy {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.museumLaborFigureAnchor {
+  flex: 0 0 auto;
+  min-height: 0;
+  width: 100%;
+  max-width: var(--kiosk-key-figure-max-w);
+}
+
+.museumLaborTopLeft .museumLaborFigureCardBody {
+  padding: 0.7rem 0.85rem;
+  gap: 0.55rem;
+}
+
+.museumLaborTopLeft .museumLaborFigureFieldLogBtn {
+  padding: 0.45rem 0.75rem;
+  font-size: 0.7rem;
 }
 
 .museumLaborCopy .screenBody {
@@ -115,7 +153,7 @@
   flex-shrink: 0;
   align-self: flex-start;
   width: 100%;
-  max-width: min(100%, 26rem);
+  max-width: var(--kiosk-key-figure-max-w);
 }
 
 .museumLaborFigureCardBody {
@@ -221,6 +259,11 @@
     0 8px 28px rgba(0, 0, 0, 0.38);
 }
 
+.museumLaborTopLeft .museumLaborFigureCardPhoto {
+  width: 6.1rem;
+  height: 7.1rem;
+}
+
 .museumLaborFigureCardPhoto {
   flex: 0 0 auto;
   width: 6.75rem;
@@ -279,9 +322,10 @@
   min-width: 0;
   min-height: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: 0.75rem 0.5rem 0.35rem;
+  overflow: hidden;
+  padding: 0.55rem 0.5rem 0.25rem;
   border-radius: 5px;
   background: linear-gradient(
     168deg,
@@ -337,9 +381,12 @@
 .museumLaborPrimary .inlineSourceLayerContent {
   max-height: min(42%, 9rem);
   min-height: 3.25rem;
-  left: 6px;
-  right: 6px;
+  left: 50%;
+  right: auto;
   bottom: 6px;
+  width: min(calc(100% - 12px), var(--kiosk-primary-overlay-max-w));
+  max-width: var(--kiosk-primary-overlay-max-w);
+  transform: translate(-50%, 4px);
 }
 
 .museumLaborPrimary
@@ -353,21 +400,9 @@
   -webkit-line-clamp: unset;
 }
 
-.museumLaborBottom {
-  position: relative;
-  z-index: 1;
-  min-height: 0;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 300px);
-  gap: var(--museum-gap);
-  /* Top-align so gallery “read more” isn’t clipped when the perspectives column is tall */
-  align-items: start;
-}
-
 .museumLaborGallery {
   min-width: 0;
   width: 100%;
-  align-self: start;
   min-height: 0;
   display: flex;
   flex-direction: column;
@@ -383,10 +418,6 @@
   flex-direction: column;
   padding: 0.35rem 0.85rem 0.45rem;
   overflow: hidden;
-  /* Pull strip up under payroll row (payroll has higher z-index); ~35px + 15px lift */
-  margin-top: calc(-0.94rem - 1.25rem - 15px);
-  position: relative;
-  z-index: 0;
   border-radius: 6px;
   border: 1px solid var(--kiosk-gold-a34);
   background: linear-gradient(
@@ -435,8 +466,8 @@
 /* Photo row: shares horizontal padding with title; no decorative sprockets */
 .museumLaborGallery .exhibitLaborFilmStrip {
   flex: 1 1 auto;
-  min-height: 0;
-  padding: 0.52rem 0 0.62rem;
+  min-height: min(13.5rem, 28cqh);
+  padding: 0.52rem 0 0.5rem;
   border: none;
   border-radius: 0;
   background: transparent;
@@ -445,12 +476,14 @@
 }
 
 .museumLaborGallery .exhibitGalleryGrid {
-  flex: 0 0 auto;
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   column-gap: 0.65rem;
   row-gap: 0.4rem;
-  align-content: start;
+  align-content: stretch;
   justify-content: start;
   justify-items: stretch;
   align-items: stretch;
@@ -488,8 +521,10 @@
 }
 
 .museumLaborGallery .exhibitLaborGalleryMatBtn {
-  display: block;
-  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
   padding: 0;
   margin: 0;
   border: none;
@@ -509,9 +544,12 @@
 }
 
 .museumLaborGallery .exhibitLaborGalleryImgMat {
+  position: relative;
+  flex: 1 1 auto;
   width: 100%;
   max-width: 100%;
-  aspect-ratio: 2.1 / 1;
+  min-height: 7.25rem;
+  aspect-ratio: 4 / 3;
   line-height: 0;
   border-radius: 2px;
   background: rgba(6, 5, 4, 0.35);
@@ -524,18 +562,44 @@
   max-width: 100%;
 }
 
-.museumLaborGallery .exhibitLaborGalleryActions {
-  flex-shrink: 0;
-  margin-top: auto;
-  padding-top: 0.35rem;
+.museumLaborGallery .exhibitLaborGalleryHoverOverlay {
+  position: absolute;
+  inset: 0;
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  background: rgba(8, 6, 5, 0.58);
+  opacity: 0;
+  transition: opacity 0.22s ease;
+  pointer-events: none;
 }
 
-.museumLaborGallery .exhibitLaborGalleryActions .enlargeBtn {
-  padding: 0.32rem 0.55rem;
+.museumLaborGallery .exhibitLaborGalleryHoverLabel {
+  padding: 0.42rem 0.8rem;
   font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #f5ebe0;
+  border: 1px solid var(--kiosk-gold-a75);
+  border-radius: 3px;
+  background: rgba(14, 11, 9, 0.82);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+}
+
+.museumLaborGallery
+  .exhibitLaborGalleryMatBtn:hover
+  .exhibitLaborGalleryHoverOverlay,
+.museumLaborGallery
+  .exhibitLaborGalleryMatBtn:focus-visible
+  .exhibitLaborGalleryHoverOverlay {
+  opacity: 1;
+}
+
+.museumLaborGallery .exhibitLaborGalleryMatBtn:hover .exhibitGalleryImg,
+.museumLaborGallery .exhibitLaborGalleryMatBtn:focus-visible .exhibitGalleryImg {
+  transform: scale(1.04);
 }
 
 .museumLaborGallery .exhibitGalleryImg {
@@ -548,6 +612,7 @@
   object-position: center;
   vertical-align: bottom;
   border-radius: inherit;
+  transition: transform 0.28s ease;
 }
 
 .museumLaborGallery .exhibitGalleryCaption {
@@ -566,20 +631,21 @@
   align-self: stretch;
   min-height: 0;
   min-width: 0;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .museumLaborPerspectives .perspectives {
   height: 100%;
   min-height: 0;
-  overflow: visible;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
 .museumLaborPerspectives .perspectivesBody {
   flex: 1;
-  overflow: visible;
+  min-height: 0;
+  overflow: hidden;
   display: block;
   font-size: 0.92rem;
   line-height: 1.58;
@@ -710,12 +776,12 @@
 }
 
 .exhibitLaborPrimaryComposition .inlineSourceLayerContent {
-  align-self: stretch;
-  width: 100%;
+  width: min(100%, var(--kiosk-primary-overlay-max-w));
+  max-width: var(--kiosk-primary-overlay-max-w);
   box-sizing: border-box;
   max-height: min(62%, 9.5rem);
   min-height: 3.85rem;
-  transform: translateY(4px);
+  transform: translate(-50%, 4px);
 }
 
 .exhibitLaborPrimaryComposition
@@ -1047,7 +1113,8 @@
 }
 
 .exhibitDocSplitFigure .inlineSourceVisualAnchor {
-  width: 100%;
+  width: fit-content;
+  max-width: 100%;
   margin-inline: auto;
 }
 
@@ -1238,12 +1305,15 @@
 }
 
 .exhibitGeographyMapBand .inlineSourceLayerContent {
-  left: 4px;
-  right: 4px;
+  left: 50%;
+  right: auto;
   bottom: 4px;
+  width: min(calc(100% - 8px), var(--kiosk-primary-overlay-max-w));
+  max-width: var(--kiosk-primary-overlay-max-w);
   max-height: 46%;
   min-height: 4.25rem;
   padding: 0.4rem 0.5rem 0.45rem;
+  transform: translate(-50%, 0);
 }
 
 .exhibitGeographyMapBand .inlineSourceLayerContent .inlineSourceTranscript {

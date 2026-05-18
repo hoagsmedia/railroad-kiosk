@@ -41,4 +41,7 @@
     rgba(26, 22, 18, 0.88) 0%,
     rgba(14, 11, 9, 0.68) 100%
   );
+
+  --kiosk-key-figure-max-w: min(100%, 24rem);
+  --kiosk-primary-overlay-max-w: min(100%, 20rem);
 }

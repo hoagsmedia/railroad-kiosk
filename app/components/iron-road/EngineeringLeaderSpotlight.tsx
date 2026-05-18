@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import styles from '@/app/kiosk/kiosk.module.css'
 import {
   engineeringLeaderById,
@@ -33,9 +34,14 @@ function EngineeringFieldLogModal({
 }) {
   const titleId = useId()
   const panelRef = useRef<HTMLDivElement>(null)
+  const [mounted, setMounted] = useState(false)
   const primarySrc = leader?.fieldLogOmitPrimarySource
     ? null
     : (leader?.fieldLogSource ?? HART_BLOOMER_SOURCE)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     if (!open) return
@@ -51,7 +57,9 @@ function EngineeringFieldLogModal({
     }
   }, [open, onClose])
 
-  return (
+  if (!mounted) return null
+
+  return createPortal(
     <AnimatePresence>
       {open && leader && (
         <motion.div
@@ -157,7 +165,8 @@ function EngineeringFieldLogModal({
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   )
 }
 

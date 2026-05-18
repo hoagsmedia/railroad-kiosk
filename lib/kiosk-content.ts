@@ -227,17 +227,17 @@ export const KIOSK_SCREENS: KioskScreen[] = [
     ],
     gallery: [
       {
-        imageUrl: assetPrimary(
-          'chinese-immigrants-railroad-gettyimages-514881902.avif'
-        ),
+        imageUrl: assetPrimary('or-n-cut-117-handcar.jpg'),
         imageAlt:
-          'Historical photograph of Chinese railroad workers along the line with hand tools and track materials',
-        caption:
-          'Sierra grade work: tools, ties, and crews doing much of the heavy labor.',
-        modalTitle: 'Chinese railroad workers with tools and track materials',
-        modalYear: 'c. 1865 to 1869',
+          'Historical photograph of railroad workers standing on a handcar, ca. 1880',
+        caption: 'Maintenance crews on a handcar, ca. 1880.',
+        modalTitle: 'Railroad workers on a handcar',
+        modalYear: 'c. 1880',
         modalTranscript:
-          '**Chinese crews** carried much of the difficult **Sierra** work: **grading**, **track**, and **supply**. Many were hired through labor brokers as the **Central Pacific** pushed east from California.',
+          'Track maintenance workers, called **gandy dancers** in railroad slang, patrolled the **Oregon Pacific Railroad** on a **handcar**. Four workers pose on the car in a cut between embankments.',
+        archiveUrl:
+          'https://content.libraries.wsu.edu/digital/collection/wsuvan1/id/1116/',
+        archiveName: 'Oregon Historical Society (via WSU Libraries)',
       },
       {
         imageUrl: assetPrimary(
@@ -250,16 +250,22 @@ export const KIOSK_SCREENS: KioskScreen[] = [
         modalYear: 'c. 1865 to 1869',
         modalTranscript:
           '**Cuts**, **fills**, tunnel headings, **Sierra** weather, **black powder**, slides, and frost were part of the work behind the polished railroad images.',
+        archiveUrl:
+          'https://calisphere.org/item/896f1a5e7a8f3be656aba91c383329df/',
+        archiveName: 'Calisphere (California State Library)',
       },
       {
-        imageUrl: assetPrimary('chinese-workers.jpg'),
+        imageUrl: assetPrimary('cp-tunnel-8-east-portal-stereograph.png'),
         imageAlt:
-          'Historical photograph of Chinese railroad workers with tools along the track',
-        caption: 'On the grade: workers, tools, ties, and contractor pace.',
-        modalTitle: 'Chinese workers on the grade (primary-source print)',
-        modalYear: 'c. 1860s',
+          'Alfred A. Hart stereograph of a Chinese worker at the east portal heading of Central Pacific Tunnel No. 8 in the Sierra Nevada',
+        caption: 'Tunnel heading: east portal, No. 8, in the Sierra.',
+        modalTitle:
+          'Heading of east portal, Tunnel No. 8 (Central Pacific stereograph)',
+        modalYear: 'c. 1866 to 1868',
         modalTranscript:
-          'This print shows **Chinese** workers on the **grade** with **tools** and **ties**. The pace came from **contractors** and **Charles Crocker**’s hiring system on the **Central Pacific**.',
+          'Alfred A. Hart stereograph **204** shows a **Chinese** worker at the **east portal** of **Tunnel No. 8** during **Central Pacific** work in the **Sierra Nevada**. Hart documented construction for the company from **1866** to **1869**.',
+        archiveUrl: 'https://www.loc.gov/pictures/resource/stereo.1s00553/',
+        archiveName: 'Library of Congress',
       },
     ],
     galleryTitle: 'On the line',

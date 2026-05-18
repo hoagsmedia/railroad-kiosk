@@ -369,6 +369,14 @@ function ExhibitShell({
                           className={styles.exhibitGalleryImg}
                           loading="lazy"
                         />
+                        <span
+                          className={styles.exhibitLaborGalleryHoverOverlay}
+                          aria-hidden>
+                          <span
+                            className={styles.exhibitLaborGalleryHoverLabel}>
+                            Click to enlarge
+                          </span>
+                        </span>
                       </div>
                     </button>
                     {item.caption ? (
@@ -376,14 +384,6 @@ function ExhibitShell({
                         {item.caption}
                       </figcaption>
                     ) : null}
-                    <div className={styles.exhibitLaborGalleryActions}>
-                      <button
-                        type="button"
-                        className={styles.enlargeBtn}
-                        onClick={() => openExhibitGalleryEnlarge(item)}>
-                        Enlarge
-                      </button>
-                    </div>
                   </figure>
                 </motion.li>
               ))}
@@ -600,7 +600,9 @@ function ExhibitShell({
               {bodyBlock}
             </motion.div>
             {screen.engineeringSpotlight ? (
-              <motion.div variants={laborMotionItem(reduceMotion)}>
+              <motion.div
+                className={styles.museumLaborFigureAnchor}
+                variants={laborMotionItem(reduceMotion)}>
                 <EngineeringLeaderSpotlight
                   leaderId={screen.engineeringSpotlight}
                   presentation="laborHorizontal"
