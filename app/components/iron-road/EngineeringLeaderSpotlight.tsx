@@ -202,7 +202,7 @@ function ArchitectCard({
               aria-label={`Open field log for ${leader.name}. Extra detail, challenge, primary source.`}>
               Open field log
               <span className={styles.architectFieldLogCtaHint}>
-                More text + primary source (modal)
+                More detail and source
               </span>
             </button>
           </div>
@@ -263,7 +263,7 @@ function LaborHorizontalFigureCard({
           aria-label={`Open field log for ${leader.name}. Extra detail and primary source.`}>
           Open field log
           <span className={styles.museumLaborFigureFieldLogBtnSub}>
-            Modal with challenge + archive image
+            More detail and source
           </span>
         </button>
       </div>

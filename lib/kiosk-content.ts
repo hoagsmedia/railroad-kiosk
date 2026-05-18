@@ -110,7 +110,7 @@ export const UTAH_LABOR_STEREO_DEVILS_GATE: PrimarySource = {
   imageAlt:
     'Stereograph: Union Pacific train on a timber trestle at Devil’s Gate, Weber Canyon',
   transcript:
-    'Russell sold the **Union Pacific** by leaning into spectacle: **timber trestle** over the water, excursion cars, canyon walls Utah crews were still grading toward **Promontory**.',
+    'Russell framed the **Union Pacific** as spectacle: a **timber trestle** over the water, excursion cars, and the canyon walls Utah crews were grading toward **Promontory**.',
   kioskTranscript:
     '**UP** stereograph: trestle and excursion train in **Weber Canyon**.',
   archiveUrl:
@@ -127,7 +127,7 @@ export const UTAH_LABOR_STEREO_ECHO_CAMP: PrimarySource = {
   imageAlt:
     'Stereograph: tent encampment of railroad workers at Echo Canyon on the Union Pacific line',
   transcript:
-    'Echo Canyon “**Mormon Village**” is basically the contract camp: **wall tents** on the slope, a scratch town where **bishop-led** gangs crashed between **fills** and **UP** **track**.',
+    'Echo Canyon’s “**Mormon Village**” shows contract camp life: **wall tents** on the slope and a temporary town where **bishop-led** crews lived while building **fills** and **UP** **track**.',
   kioskTranscript:
     '**Echo Canyon**: tents and supply lines on the **contract grade**.',
   archiveUrl:
@@ -142,7 +142,7 @@ export const UTAH_LABOR_YOUNG_PROFILE: UtahLaborFigureProfile = {
     'Signed 1868 Union Pacific contract; delegated bishop-led grading crews',
   era: 'c. 1868 · Echo & Weber Canyons',
   leadershipLine:
-    'He hammered company people on the telegraph for tools and a Salt Lake tie-in. When shipments fell through he sometimes paid out of pocket while Utah crews and the parallel **Central Pacific** were both bearing down on Promontory.',
+    'He pressed company officers by telegraph for tools and a Salt Lake connection. When shipments fell short, he sometimes paid from his own funds while Utah crews and the **Central Pacific** pushed toward Promontory.',
   imageUrl: assetPrimary('brigham-young.jpg'),
   imageAlt: 'Portrait of Brigham Young',
 }
@@ -158,11 +158,11 @@ export const KIOSK_SCREENS: KioskScreen[] = [
     slug: 'vision',
     heading: 'The Vision',
     conceptThread:
-      "**Vision** first honestly. If you can't show a workable line through the mountains there's nothing real to charter yet.",
+      'A railroad starts with a line on paper. Judah had to prove the Sierra route could work before anyone would fund it.',
     engineeringSpotlight: 'judah',
     body: [
-      'Late 1850s **Theodore Judah** is out doing **surveys**, bugging investors, saying granite and snow are engineering headaches not a reason to bail.',
-      'His **maps** and **court testimony** finally gave backers something they could point at: a Sierra crossing that could happen if someone paid for it.',
+      'In the late 1850s, **Theodore Judah** surveyed possible routes, spoke with investors, and argued that granite and snow were engineering problems, not reasons to stop.',
+      'His **maps** and **court testimony** gave backers something concrete: a Sierra crossing that could be built if someone paid for it.',
     ],
     primarySource: {
       shortLabel: 'Survey theodolite (period instrument)',
@@ -172,7 +172,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
       imageAlt:
         'Vintage theodolite surveying instrument on a tripod, used for measuring angles and grades',
       transcript:
-        'Teams carried theodolites to nail angles and grades way before steel caught up. Same kind of stubborn field math Judah used when he swore the Sierra was crossable.',
+        'Survey teams used theodolites to measure angles and grades before rails reached the mountains. Judah’s case for the Sierra depended on this kind of field work.',
       archiveUrl: 'https://www.loc.gov/pictures/search/?q=theodolite',
       archiveName: 'Library of Congress (search)',
     },
@@ -185,7 +185,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
     slug: 'decision',
     heading: 'The Decision',
     conceptThread:
-      '**Law** is what actually moves the money. 1862 turned arguing into land grants bonds and two companies that had a job.',
+      'The 1862 law turned the railroad from an argument into a funded project with two companies and federal support.',
     historicalFigure: {
       name: 'Abraham Lincoln',
       epithet: 'The President',
@@ -195,8 +195,8 @@ export const KIOSK_SCREENS: KioskScreen[] = [
         'Seated portrait of President Abraham Lincoln, facing front, Washington, D.C., January 1864',
     },
     body: [
-      'July 1862 **Abraham Lincoln** signs the **Pacific Railway Act** with the **Civil War** on. **Land grants and bonds** were trying to glue California and the West to the Union. Railroad stuff as war strategy basically.',
-      'It charters **Union Pacific** and boosts **Central Pacific** toward one line from the Missouri River to the Pacific.',
+      'In July 1862, **Abraham Lincoln** signed the **Pacific Railway Act** while the **Civil War** was underway. **Land grants and bonds** helped tie California and the West more tightly to the Union.',
+      'The act chartered **Union Pacific** and strengthened **Central Pacific**, aiming for one line from the Missouri River to the Pacific.',
     ],
     primarySource: {
       shortLabel: 'Pacific Railway Act (1862)',
@@ -206,7 +206,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
       imageUrl: assetPrimary('Pacific Railway Act.jpg'),
       imageAlt: 'Digitized scan of the Pacific Railway Act (1862)',
       transcript:
-        'Single big law packing federal land bond help company charters for railroad plus telegraph out to the ocean. Defense settlement freight all in one file.',
+        'The act joined land grants, federal bond support, railroad charters, and a telegraph line to the Pacific. Defense, settlement, and freight all sat in the same law.',
       archiveUrl: 'https://www.loc.gov/item/rbpe.01001500/',
       archiveName: 'Library of Congress',
     },
@@ -219,11 +219,11 @@ export const KIOSK_SCREENS: KioskScreen[] = [
     slug: 'labor',
     heading: 'The Labor',
     conceptThread:
-      "**Labor** is where paper hits dirt. Gangs brokers pay stubs that don't treat people the same.",
+      'The railroad was built by hired crews, labor brokers, and pay systems that did not treat workers equally.',
     engineeringSpotlight: 'crocker',
     body: [
-      '**Charles Crocker** ran **Central Pacific** construction day to day. Camps contractors the brutal rhythm of Sierra cuts and tunnels. When white hiring dried up he leaned hard on Chinese workers coming in through brokers.',
-      "Payroll is boring but it's the receipts. Who clocked in who got paid and on what rude terms.",
+      '**Charles Crocker** managed **Central Pacific** construction: camps, contractors, and the hard pace of Sierra cuts and tunnels. When white hiring fell short, the company relied heavily on Chinese workers hired through brokers.',
+      'Payroll records are plain, but they matter. They show who worked, who was paid, and the terms behind the finished railroad.',
     ],
     gallery: [
       {
@@ -233,11 +233,11 @@ export const KIOSK_SCREENS: KioskScreen[] = [
         imageAlt:
           'Historical photograph of Chinese railroad workers along the line with hand tools and track materials',
         caption:
-          'Sierra grade: tools ties crews that carried a huge share of the actual lifting.',
+          'Sierra grade work: tools, ties, and crews doing much of the heavy labor.',
         modalTitle: 'Chinese railroad workers with tools and track materials',
         modalYear: 'c. 1865 to 1869',
         modalTranscript:
-          '**Chinese crews** did a ton of the brutal **Sierra** work. **Grading** **track** **supply** often through brokers while **Central Pacific** shoved east from California.',
+          '**Chinese crews** carried much of the difficult **Sierra** work: **grading**, **track**, and **supply**. Many were hired through labor brokers as the **Central Pacific** pushed east from California.',
       },
       {
         imageUrl: assetPrimary(
@@ -245,28 +245,28 @@ export const KIOSK_SCREENS: KioskScreen[] = [
         ),
         imageAlt:
           'Historical photograph of railroad construction in the Sierra Nevada mountains',
-        caption: 'Powder cold bad rock while the hero photos looked shiny.',
+        caption: 'Powder, cold, and hard rock behind the celebration images.',
         modalTitle: 'Sierra Nevada railroad construction',
         modalYear: 'c. 1865 to 1869',
         modalTranscript:
-          '**Cuts** **fills** tunnel headings **Sierra** weather **black powder** slides frost. All sitting next to the cleaned up heroic calendar art people saw in print.',
+          '**Cuts**, **fills**, tunnel headings, **Sierra** weather, **black powder**, slides, and frost were part of the work behind the polished railroad images.',
       },
       {
         imageUrl: assetPrimary('chinese-workers.jpg'),
         imageAlt:
           'Historical photograph of Chinese railroad workers with tools along the track',
-        caption: 'On the grade: contractor pace not poster art.',
+        caption: 'On the grade: workers, tools, ties, and contractor pace.',
         modalTitle: 'Chinese workers on the grade (primary-source print)',
         modalYear: 'c. 1860s',
         modalTranscript:
-          'Print off the **grade**. **Chinese** gangs **tools** **ties**. Tempo came from **contractors** and **Charles Crocker** hiring on the **Central Pacific**.',
+          'This print shows **Chinese** workers on the **grade** with **tools** and **ties**. The pace came from **contractors** and **Charles Crocker**’s hiring system on the **Central Pacific**.',
       },
     ],
     galleryTitle: 'On the line',
     perspectives: {
       title: 'For context',
       body: [
-        'People throw around **10k+** Chinese workers at peak and a big chunk of **CP** labor on the western half. Books stay pretty Golden Spike until you open ledgers and see **unequal pay** and **split camps**.',
+        'Historians often cite **10,000 or more** Chinese workers at peak, with a large share of **CP** labor on the western half. Ledgers also show **unequal pay** and **segregated camps**.',
       ],
     },
     primarySource: {
@@ -277,9 +277,9 @@ export const KIOSK_SCREENS: KioskScreen[] = [
       imageAlt:
         'Handwritten Central Pacific payroll from January 1864, company headquarters, with pay entries and Chinese signatures',
       transcript:
-        'January 1864 **Central Pacific** sheet from HQ desk work in **Sacramento** or **San Francisco** not a snowy cut count. **Chinese marks** sit with Euro names in the same columns historians mine for wage gaps and **who built the west end**. Archive has front and back scans.',
+        'This January 1864 **Central Pacific** payroll came from company office work in **Sacramento** or **San Francisco**, not from a camp ledger. **Chinese marks** appear beside Euro-American names. The columns help historians compare wages and trace **who built the western end**.',
       kioskTranscript:
-        'Office tally for one January: **names** **days** **Chinese marks** next to English. Archive has the full sheet.',
+        'Office payroll for one January: **names**, **days**, and **Chinese marks** beside English names.',
       archiveUrl: 'https://searchworks.stanford.edu/view/cn005wb2925',
       archiveName: 'Stanford SearchWorks',
     },
@@ -292,12 +292,12 @@ export const KIOSK_SCREENS: KioskScreen[] = [
     slug: 'engineering',
     heading: 'The Engineering',
     conceptThread:
-      '**Engineering** fills in what the law leaves vague. Grade bridges holes in the rock where the map was polite.',
+      'Engineering turned the authorized route into roadbed: grades, bridges, cuts, tunnels, and water stops.',
     engineeringSpotlight: 'dodge',
     body: [
-      'From **1866** **Grenville M. Dodge** runs **Union Pacific** engineering like a field op. Surveys bridges water stops plus fighting politicians who want the line bent for votes.',
-      'On the **Sierra** side **Central Pacific** leaned on **nitroglycerin** **black powder** fat **timber trestles**. Same toolbox sketched in the tech panel.',
-      'Survey books and plates turn statute talk into lines on paper. Rivers **land-grant** width station ticks. Flat on vellum mean on the ground when you ask **whose fields** the cut eats.',
+      'From **1866**, **Grenville M. Dodge** led **Union Pacific** engineering work: surveys, bridges, water stops, and arguments over where the line should run.',
+      'On the **Sierra** side, **Central Pacific** crews used **nitroglycerin**, **black powder**, and large **timber trestles**. The tech panel summarizes that work.',
+      'Survey books and plates turned legal language into lines on paper: rivers, **land-grant** widths, and station points. On the ground, those lines shaped access and land claims.',
     ],
     primarySource: {
       shortLabel: 'Alfred A. Hart, Bloomer Cut stereograph',
@@ -307,7 +307,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
       imageAlt:
         'Stereograph by Alfred A. Hart: deep railroad cut through rock at Bloomer Cut on the Central Pacific line',
       transcript:
-        'Hart stereo cards marketed **Central Pacific** like a movie set. **Bloomer Cut** equals powder drills people deep in granite. Dodge **Field Log** is the **UP** half of the toolbox if you want the pair.',
+        'Hart’s stereo cards marketed the **Central Pacific** as an engineering achievement. **Bloomer Cut** shows powder, drills, and workers deep in granite. Dodge’s **Field Log** gives the **UP** side of the same problem.',
       archiveUrl: 'https://www.loc.gov/pictures/item/2005682864/',
       archiveName: 'Library of Congress Prints & Photographs',
     },
@@ -320,15 +320,15 @@ export const KIOSK_SCREENS: KioskScreen[] = [
     slug: 'utah-labor',
     heading: 'Utah & the line',
     conceptThread:
-      '**Contract labor** stuck on a skinny corridor. Utah org outside cash race to the spike.',
+      'Utah labor linked local organization, outside railroad money, and the race toward Promontory.',
     body: [
-      '**1868** **Brigham Young** **Union Pacific** deal throws Utahns on **Echo** and **Weber** grades when drought ate farm work. **Bishops** run sections basically same machine that moved canal dirt now moves **track**.',
-      "**UP** keeps whiffing on promised **tools**. **Young** telegraphs office guys and covers gaps with his own checkbook when he's cornered. **Central Pacific** gangs close by so a lot of Saints cash wages on **either** rail toward **Promontory**.",
+      'In **1868**, **Brigham Young**’s **Union Pacific** contract put Utah workers on grades in **Echo** and **Weber** Canyons after drought reduced farm work. **Bishops** organized work sections, much as they had organized irrigation labor.',
+      'The **UP** often failed to deliver promised **tools**. **Young** pressed company officers by telegraph and sometimes covered shortages himself. With **Central Pacific** crews nearby, many Latter-day Saints earned wages on **either** line toward **Promontory**.',
     ],
     perspectives: {
       title: 'For context',
       body: [
-        'Utah State digital exhibit wires the **1868** contract to canyon work and the join-up race using contracts telegrams boring company mail.',
+        'Utah State’s digital exhibit connects the **1868** contract to canyon construction and the race to join the rails, using contracts, telegrams, and company correspondence.',
       ],
     },
     primarySource: {
@@ -338,9 +338,9 @@ export const KIOSK_SCREENS: KioskScreen[] = [
         'Weber Canyon trestle; Echo Canyon camp; Brigham Young and the 1868 Union Pacific agreement',
       year: 'c. 1868 to 1869',
       transcript:
-        'Hit **Enlarge** on each stereo for the long captions. **Young** **1868** deal puts Utahns on **Echo** **Weber** grades. Camp shots and Weber trestle are where **bishop-led** labor meets **UP** steel.',
+        'Use **Enlarge** on each stereograph for fuller captions. **Young**’s **1868** contract put Utah workers on **Echo** and **Weber** grades. Camp views and the Weber trestle show where **bishop-led** labor met **UP** steel.',
       kioskTranscript:
-        '**Profile** tells **Young** contracting. **Enlarge** each stereograph for **Weber** and **Echo**.',
+        '**Profile** shows **Young**’s contracting role. **Enlarge** each stereograph for **Weber** and **Echo**.',
       archiveUrl:
         'https://exhibits.usu.edu/exhibits/show/transcontinentalrailroad/anticipationandanxiety/latterdaysaints',
       archiveName: 'USU Digital Exhibits',
@@ -358,10 +358,10 @@ export const KIOSK_SCREENS: KioskScreen[] = [
     slug: 'the-race',
     heading: 'The Race',
     conceptThread:
-      'Federal **subsidies** pay by the mile so yeah speed turns into strategy once the charters are locked.',
+      'Federal **subsidies** rewarded mileage, so speed became part of the race.',
     body: [
-      '**Land** and **bonds** reward track in the ground not waiting around. Both roads go ham. **Hell on Wheels** chasing **UP** **Sierra** cuts on **CP** while bosses fight over the meet point.',
-      '**April 1869** they pick **Promontory Summit**. Few days before **Charles Crocker** crews rip **ten miles of rail in a day**. Irish and Chinese teams choreographed burst. Partly theater still real logistics.',
+      '**Land** and **bonds** rewarded track laid, not delay. The **UP** pushed across the plains while **CP** crews worked through the **Sierra**, and company leaders argued over the meeting point.',
+      'In **April 1869**, the companies settled on **Promontory Summit**. A few days earlier, **Charles Crocker**’s crews laid **ten miles of rail in one day**. It was partly public theater, but it also required careful coordination.',
     ],
     primarySource: {
       shortLabel: 'Chinese workers and the iron road (1869)',
@@ -372,7 +372,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
       imageAlt:
         'Historical photograph of Chinese railroad workers with a handcar on the track',
       transcript:
-        'Stuff like this ran in papers and tourist albums endgame. **Handcars** **rails** bodies still moving while **Promontory** and the **ten-mile** stunt steal headlines.',
+        'Images like this appeared in newspapers and albums near the end of construction. **Handcars**, **rails**, and crews still mattered while **Promontory** and the **ten-mile** record drew attention.',
       kioskTranscript: '**Handcar** crews late push toward Promontory.',
       archiveUrl:
         'https://www.loc.gov/pictures/search/?q=Chinese+railroad+workers+transcontinental',
@@ -387,19 +387,19 @@ export const KIOSK_SCREENS: KioskScreen[] = [
     slug: 'event',
     heading: 'The Event',
     conceptThread:
-      "**Promontory** is a photo and a party. It doesn't balance the ledger on pain or money.",
+      '**Promontory** marked completion, but it did not settle the questions of labor, cost, land, or memory.',
     body: [],
     bodySections: [
       {
         title: 'What happened',
         paragraphs: [
-          '**May 10 1869** engines square up at **Promontory Summit** Utah Territory. Last spike for cameras basically. Andrew J. Russell frames engineers and stovepipe hats because the country wanted reunion candy.',
+          'On **May 10, 1869**, locomotives met at **Promontory Summit**, Utah Territory. Officials staged the last spike for the cameras, and Andrew J. Russell framed the scene for a national audience.',
         ],
       },
       {
         title: 'Why it mattered',
         paragraphs: [
-          "Image sells **national healing through steel** but it's staged. **Golden Spike** jams **powder** **payroll** **politics** into one hammer swing people can clap at.",
+          'The image promoted **national reunion through steel**, but it was staged. The **Golden Spike** compressed years of **powder**, **payroll**, and **politics** into one public moment.',
         ],
       },
     ],
@@ -410,7 +410,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
       imageUrl: assetPrimary('iconic_meeting.jpg'),
       imageAlt: 'Photograph of the Last Spike ceremony at Promontory Summit',
       transcript:
-        "Russell pushes **unity through infrastructure** in one frame. Look who's dead center who's missing what the crop is trying to sell you.",
+        'Russell’s photograph presents **unity through infrastructure**. Look at who is centered, who is missing, and what the frame asks viewers to remember.',
       archiveUrl: 'https://www.loc.gov/pictures/item/2005677835/',
       archiveName: 'Library of Congress Prints & Photographs',
     },
@@ -423,11 +423,11 @@ export const KIOSK_SCREENS: KioskScreen[] = [
     slug: 'consequences',
     heading: 'The Consequences',
     conceptThread:
-      "**Aftermath** keeps going after the crowd goes home. Markets and land and memory don't stop just because the spike landed.",
+      '**Aftermath** continued after the ceremony. Markets, land, labor, and memory kept changing.',
     body: [
-      'Done track accelerates western **timber** **ore** **cattle** **grain** on schedules and squeezes the country tighter. Upside mostly stuck to **bondholders** railroads **shippers**.',
-      'Telegraph outruns steam. People shorthand distance with **Done**. Same corridor scrambles **land** **labor** **law**. Fights over **who owed who** outlive any speech.',
-      '**Plains** side the line rides with **Army posts** **reservations** pressure on **bison** herds that fed whole economies. I try to keep the iron road next to **broken treaties** and **mess** not a tidy progress reel.',
+      'Completed track moved western **timber**, **ore**, **cattle**, and **grain** on faster schedules and tied markets more tightly together. Much of the gain went to **bondholders**, railroad companies, and **shippers**.',
+      'Telegraph wires let news move faster than steam. The word **Done** became a simple message for a very complicated change in **land**, **labor**, and **law**.',
+      'For many **Plains** nations, the line came with **Army posts**, **reservations**, and pressure on **bison** herds that sustained whole economies. The railroad’s history includes growth, broken treaties, and lasting disruption.',
     ],
     primarySource: {
       shortLabel: 'The “Done” telegram (May 10, 1869)',
@@ -438,7 +438,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
       imageAlt:
         'Facsimile Western Union style telegraph form with the word DONE in large type',
       transcript:
-        'Stories talk about a short wire people remember as **Done**. Facsimile is just the word. Park Service page has the ceremony breakdown.',
+        'Accounts often remember a short wire: **Done**. This facsimile isolates the word; the Park Service link gives the ceremony context.',
       archiveUrl:
         'https://www.nps.gov/gosp/learn/historyculture/the-last-spike.htm',
       archiveName:

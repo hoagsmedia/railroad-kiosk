@@ -89,8 +89,9 @@ export function ExhibitIntro({ parallax, onEnter }: Props) {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.45, duration: 0.55 }}>
-          Flip through eight stops from first survey to fallout. Tap the primary
-          sources to blow them up. Continue and Back move you around.
+          Move through eight stops from early surveys to the railroad&apos;s
+          legacy. Tap primary sources to enlarge them. Continue and Back move
+          between screens.
         </motion.p>
 
         <motion.div

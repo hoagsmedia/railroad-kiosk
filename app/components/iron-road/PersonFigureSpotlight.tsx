@@ -9,7 +9,7 @@ type Props = {
   figure: HistoricalFigureSpotlight
 }
 
-/** Static portrait + epithet + role (no field-log modal)—e.g. Lincoln on The Decision. */
+/** Static portrait + epithet + role, e.g. Lincoln on The Decision. */
 export function PersonFigureSpotlight({ figure }: Props) {
   const [hovered, setHovered] = useState(false)
 

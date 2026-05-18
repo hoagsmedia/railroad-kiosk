@@ -14,20 +14,20 @@ export function EngineeringBlueprintSidebar() {
       <div className={styles.perspectivesBody}>
         <p>
           <strong>Nitroglycerin &amp; black powder.</strong> Crews hand-drilled,
-          tamped charges, and fired blasts in tight Sierra cuts. Unstable
-          nitroglycerin and slower black powder broke granite in layers. Summit
-          Tunnel No. 6 alone needed roughly <strong>1,659 feet</strong> of
-          heading through rock at altitude.
+          tamped charges, and fired blasts in tight Sierra cuts. Nitroglycerin
+          was powerful but unstable; black powder was slower but familiar.
+          Summit Tunnel No. 6 needed roughly <strong>1,659 feet</strong> of
+          heading through granite at altitude.
         </p>
         <p>
           <strong>Trestles &amp; timber.</strong> Where rock gave way to air,
-          carpenters threw up timber trestles fast. Dale Creek in Wyoming, often
-          put near <strong>150 ft</strong> above the gorge, was braced timber
-          and nerve in equal parts.
+          carpenters built timber trestles quickly. Dale Creek in Wyoming, often
+          listed near <strong>150 ft</strong> above the gorge, shows the speed
+          and risk of that work.
         </p>
       </div>
       <p className={styles.perspectivesFootnote}>
-        Numbers rounded from common period sources. Check your own references.
+        Numbers are rounded from period accounts.
       </p>
     </aside>
   )

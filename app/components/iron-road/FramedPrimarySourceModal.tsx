@@ -71,7 +71,7 @@ export function FramedPrimarySourceModal({ open, source, onClose }: Props) {
             <div className={styles.modalScanColumn}>
               <div className={styles.modalMat}>
                 <div className={styles.modalScanWrap}>
-                  {/* eslint-disable-next-line @next/next/no-img-element -- local / archival assets */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={source.imageUrl}
                     alt={source.imageAlt}

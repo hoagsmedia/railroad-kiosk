@@ -116,7 +116,7 @@ const SAME_DAY_NUDGE_PX = 48
 
 /**
  * If ratio gap to previous tick is below this, dates are too close on the bar
- * (e.g. late April vs early May 1869) — stagger vertically for legibility.
+ * (e.g. late April vs early May 1869), stagger vertically for legibility.
  */
 const CLOSE_TICK_RATIO = 0.024
 
@@ -124,7 +124,9 @@ const CLOSE_TICK_RATIO = 0.024
  * Positions for every screen tick: true date on the rail, with nudges when anchors
  * collide visually (same day, or neighboring dates squeezed at the end of the bar).
  */
-export function railTickButtonLayouts(anchors: TimelineAnchor[]): CSSProperties[] {
+export function railTickButtonLayouts(
+  anchors: TimelineAnchor[]
+): CSSProperties[] {
   const ratios = anchors.map(a => timelineFillRatio(a))
   const out: CSSProperties[] = []
   let lowRow = false
@@ -141,9 +143,7 @@ export function railTickButtonLayouts(anchors: TimelineAnchor[]): CSSProperties[
     const xNudgePx = duplicatePrev ? SAME_DAY_NUDGE_PX : 0
 
     const tightWithPrev =
-      i > 0 &&
-      !duplicatePrev &&
-      ratios[i]! - ratios[i - 1]! < CLOSE_TICK_RATIO
+      i > 0 && !duplicatePrev && ratios[i]! - ratios[i - 1]! < CLOSE_TICK_RATIO
 
     let top: string | undefined
     if (tightWithPrev) {

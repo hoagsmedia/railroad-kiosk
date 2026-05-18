@@ -43,7 +43,7 @@ export const HART_BLOOMER_SOURCE: EngineeringFieldLogSource = {
   imageAlt:
     'Stereograph by Alfred A. Hart: deep railroad cut through rock at Bloomer Cut, Central Pacific line',
   transcript:
-    'Hart **Central Pacific** stereo cards sold the road like a theme park ride. **Bloomer Cut** is powder drills bodies in granite. I reuse one file here as a shared anchor for a few Field Logs.',
+    'Hart’s **Central Pacific** stereo cards presented the railroad as an engineering achievement. **Bloomer Cut** shows powder, drills, and workers cutting through Sierra granite.',
   archiveUrl: 'https://www.loc.gov/pictures/item/2005682864/',
   archiveName: 'Library of Congress Prints & Photographs',
 }
@@ -66,7 +66,7 @@ export const ENGINEERING_LEADERS: EngineeringLeader[] = [
     imageAlt:
       'Portrait of Theodore D. Judah, chief engineer of the Central Pacific Railroad',
     challenge:
-      'Judah would not shut up about a route the Sierra could actually hold. Think 7k feet of climb snow granite and money guys calling him nuts. Surveys and lobby work turned Crazy Judah into a charter and dirt on the ground. He died 1863 other people finished the climb he proved was doable.',
+      'Judah kept pressing for a route the Sierra could actually hold: steep grades, snow, granite, and skeptical investors included. His surveys and lobbying helped turn a proposed line into a charter and right-of-way. He died in 1863, before others finished the climb he had argued was possible.',
     fieldLogSource: {
       shortLabel: 'Central Pacific Railroad, proposed alignment (manuscript)',
       year: '1861',
@@ -76,7 +76,7 @@ export const ENGINEERING_LEADERS: EngineeringLeader[] = [
       sectionHeading: 'Proposed alignment map',
       horizontalScroll: true,
       transcript:
-        'Filed with the Secretary of State in Sacramento in 1861: four sections on one rolled sheet, ink on linen. The catalogued original is about 77 cm tall and 20 m long end to end (picture unrolling roughly 66 ft of paper). Scale 1 in. = 400 ft. The red line is Judah’s route; parts were never built exactly on this alignment.',
+        'Filed with the Secretary of State in Sacramento in 1861: four sections on one rolled sheet, ink on linen. The catalogued original is about 77 cm tall and 20 m long end to end, roughly 66 ft unrolled. Scale: 1 in. = 400 ft. The red line is Judah’s route; parts were not built exactly on this alignment.',
       archiveUrl: 'https://purl.stanford.edu/gh822ms4734',
       archiveName: 'Stanford Digital Repository',
     },
@@ -91,10 +91,10 @@ export const ENGINEERING_LEADERS: EngineeringLeader[] = [
     imageAlt:
       'Portrait of Charles Crocker, Central Pacific construction leader',
     challenge:
-      'Sierra hiring went thin Crocker leaned on Chinese workers through contractors then had to run pay camps and winter pushes whether anyone liked it. His actual job was keeping cuts fills tunnel headings on a calendar you can still see in payrolls photos and how deep those cuts are.',
+      'When Sierra hiring fell short, Crocker relied on Chinese workers hired through contractors. He managed pay, camps, and winter pushes while keeping cuts, fills, and tunnel headings on schedule. Payrolls, photographs, and the cuts themselves show the scale of that system.',
     fieldLogOmitPrimarySource: true,
     fieldLogCoda:
-      'You do not get Sierra speed on that calendar without the hiring pipe and the daily grind.',
+      'That labor system made the Central Pacific’s Sierra pace possible.',
   },
   {
     id: 'dodge',
@@ -105,6 +105,6 @@ export const ENGINEERING_LEADERS: EngineeringLeader[] = [
     imageUrl: assetPrimary('grenville-dodge-acw-winter-2023-scaled.webp'),
     imageAlt: 'Portrait of Grenville M. Dodge in military-style dress',
     challenge:
-      'Union officer brain on track layout. Surveys out ahead bridges water stops planned Hell on Wheels towns tailgating the railhead holding the grade when politicians want a detour for votes.',
+      'Dodge brought wartime logistics to railroad engineering. Survey crews worked ahead of the railhead, bridges and water stops had to be planned in order, and moving towns followed close behind. He also defended the grade against political pressure to reroute the line.',
   },
 ]
