@@ -3,7 +3,7 @@
  * Loaded first from kiosk.module.css (before layout partials).
  */
 .kioskPageShell {
-  --museum-gap: 1.125rem;
+  --museum-gap: 0.95rem;
 
   --kiosk-gold: #c9a227;
   --kiosk-gold-pale: #f0d78c;

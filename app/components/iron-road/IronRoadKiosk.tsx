@@ -328,110 +328,118 @@ function ExhibitShell({
 
   const galleryTitleText = screen.galleryTitle ?? 'On the line'
 
+  const prepGalleryBlock =
+    screen.gallery && screen.gallery.length > 0 && screen.slug === 'vision' ? (
+      <section
+        className={`${styles.exhibitGallery} ${styles.museumPrepGallery} ${styles.museumPrepGalleryInNarrative}`}
+        aria-label="Related artifacts">
+        <h2 className={styles.exhibitGalleryTitle}>{galleryTitleText}</h2>
+        <ul className={styles.exhibitGalleryGrid}>
+          {screen.gallery.map((item, i) => (
+            <li key={i} className={styles.exhibitGalleryItem}>
+              <figure className={styles.exhibitGalleryFigure}>
+                <button
+                  type="button"
+                  className={styles.exhibitPrepGalleryMatBtn}
+                  onClick={() => openExhibitGalleryEnlarge(item)}
+                  aria-label={`Enlarge artifact: ${item.imageAlt}`}>
+                  <div className={styles.exhibitPrepGalleryImgMat}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={item.imageUrl}
+                      alt=""
+                      className={styles.exhibitGalleryImg}
+                      loading="lazy"
+                    />
+                    <span
+                      className={styles.exhibitPrepGalleryHoverOverlay}
+                      aria-hidden>
+                      <span className={styles.exhibitPrepGalleryHoverLabel}>
+                        Click to enlarge
+                      </span>
+                    </span>
+                  </div>
+                </button>
+                {item.caption ? (
+                  <figcaption className={styles.exhibitGalleryCaption}>
+                    {item.caption}
+                  </figcaption>
+                ) : null}
+                {item.archiveUrl ? (
+                  <a
+                    href={item.archiveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${styles.enlargeBtn} ${styles.museumPrepGalleryEnlargeLink}`}>
+                    Enlarge
+                  </a>
+                ) : null}
+              </figure>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ) : null
+
   const galleryBlock =
-    screen.gallery && screen.gallery.length > 0 ? (
+    screen.gallery && screen.gallery.length > 0 && screen.slug === 'labor' ? (
       <section
         className={styles.exhibitGallery}
         aria-label="Related photographs">
-        {screen.slug === 'labor' ? (
-          <motion.div
-            className={styles.exhibitLaborGalleryPanel}
-            variants={laborMotionPassThrough(reduceMotion)}>
-            <motion.h2
-              className={styles.exhibitGalleryTitle}
-              variants={laborMotionItem(reduceMotion)}>
-              {galleryTitleText}
-            </motion.h2>
-            <motion.ul
-              className={`${styles.exhibitLaborFilmStrip} ${styles.exhibitGalleryGrid}`}
-              variants={laborGalleryStripPassThrough(reduceMotion)}>
-              {screen.gallery.map((item, i) => (
-                <motion.li
-                  key={i}
-                  className={styles.exhibitGalleryItem}
-                  variants={laborMotionItem(reduceMotion)}
-                  whileHover={
-                    reduceMotion
-                      ? undefined
-                      : { y: -1, transition: { duration: 0.22 } }
-                  }>
-                  <figure className={styles.exhibitGalleryFigure}>
-                    <button
-                      type="button"
-                      className={styles.exhibitLaborGalleryMatBtn}
-                      onClick={() => openExhibitGalleryEnlarge(item)}
-                      aria-label={`Enlarge photograph: ${item.imageAlt}`}>
-                      <div className={styles.exhibitLaborGalleryImgMat}>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={item.imageUrl}
-                          alt=""
-                          className={styles.exhibitGalleryImg}
-                          loading="lazy"
-                        />
-                        <span
-                          className={styles.exhibitLaborGalleryHoverOverlay}
-                          aria-hidden>
-                          <span
-                            className={styles.exhibitLaborGalleryHoverLabel}>
-                            Click to enlarge
-                          </span>
+        <motion.div
+          className={styles.exhibitLaborGalleryPanel}
+          variants={laborMotionPassThrough(reduceMotion)}>
+          <motion.h2
+            className={styles.exhibitGalleryTitle}
+            variants={laborMotionItem(reduceMotion)}>
+            {galleryTitleText}
+          </motion.h2>
+          <motion.ul
+            className={`${styles.exhibitLaborFilmStrip} ${styles.exhibitGalleryGrid}`}
+            variants={laborGalleryStripPassThrough(reduceMotion)}>
+            {screen.gallery.map((item, i) => (
+              <motion.li
+                key={i}
+                className={styles.exhibitGalleryItem}
+                variants={laborMotionItem(reduceMotion)}
+                whileHover={
+                  reduceMotion
+                    ? undefined
+                    : { y: -1, transition: { duration: 0.22 } }
+                }>
+                <figure className={styles.exhibitGalleryFigure}>
+                  <button
+                    type="button"
+                    className={styles.exhibitLaborGalleryMatBtn}
+                    onClick={() => openExhibitGalleryEnlarge(item)}
+                    aria-label={`Enlarge photograph: ${item.imageAlt}`}>
+                    <div className={styles.exhibitLaborGalleryImgMat}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={item.imageUrl}
+                        alt=""
+                        className={styles.exhibitGalleryImg}
+                        loading="lazy"
+                      />
+                      <span
+                        className={styles.exhibitLaborGalleryHoverOverlay}
+                        aria-hidden>
+                        <span className={styles.exhibitLaborGalleryHoverLabel}>
+                          Click to enlarge
                         </span>
-                      </div>
-                    </button>
-                    {item.caption ? (
-                      <figcaption className={styles.exhibitGalleryCaption}>
-                        {item.caption}
-                      </figcaption>
-                    ) : null}
-                  </figure>
-                </motion.li>
-              ))}
-            </motion.ul>
-          </motion.div>
-        ) : (
-          <div className={styles.exhibitLaborGalleryPanel}>
-            <h2 className={styles.exhibitGalleryTitle}>{galleryTitleText}</h2>
-            <div className={styles.exhibitLaborFilmStrip}>
-              <ul className={styles.exhibitGalleryGrid}>
-                {screen.gallery.map((item, i) => (
-                  <li key={i} className={styles.exhibitGalleryItem}>
-                    <figure className={styles.exhibitGalleryFigure}>
-                      <button
-                        type="button"
-                        className={styles.exhibitLaborGalleryMatBtn}
-                        onClick={() => openExhibitGalleryEnlarge(item)}
-                        aria-label={`Enlarge photograph: ${item.imageAlt}`}>
-                        <div className={styles.exhibitLaborGalleryImgMat}>
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={item.imageUrl}
-                            alt=""
-                            className={styles.exhibitGalleryImg}
-                            loading="lazy"
-                          />
-                        </div>
-                      </button>
-                      {item.caption ? (
-                        <figcaption className={styles.exhibitGalleryCaption}>
-                          {item.caption}
-                        </figcaption>
-                      ) : null}
-                      <div className={styles.exhibitLaborGalleryActions}>
-                        <button
-                          type="button"
-                          className={styles.enlargeBtn}
-                          onClick={() => openExhibitGalleryEnlarge(item)}>
-                          Enlarge
-                        </button>
-                      </div>
-                    </figure>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        )}
+                      </span>
+                    </div>
+                  </button>
+                  {item.caption ? (
+                    <figcaption className={styles.exhibitGalleryCaption}>
+                      {item.caption}
+                    </figcaption>
+                  ) : null}
+                </figure>
+              </motion.li>
+            ))}
+          </motion.ul>
+        </motion.div>
       </section>
     ) : null
 
@@ -472,7 +480,10 @@ function ExhibitShell({
 
   const historicalFigureBlock =
     screen.historicalFigure != null ? (
-      <PersonFigureSpotlight figure={screen.historicalFigure} />
+      <PersonFigureSpotlight
+        figure={screen.historicalFigure}
+        onEnlargeGalleryItem={openExhibitGalleryEnlarge}
+      />
     ) : null
 
   const personAnchorBlock = engineeringSpotlightBlock ?? historicalFigureBlock
@@ -486,8 +497,36 @@ function ExhibitShell({
           {personAnchorBlock ? (
             <div className={styles.museumPersonAnchor}>{personAnchorBlock}</div>
           ) : null}
+          {screen.slug === 'vision' ? prepGalleryBlock : null}
         </div>
-        <div className={styles.museumPrimaryCell}>{sourceBlock}</div>
+        <div
+          className={
+            screen.slug === 'vision' || screen.slug === 'decision'
+              ? `${styles.museumPrimaryCell} ${styles.museumVisionPrimaryCell}`
+              : styles.museumPrimaryCell
+          }>
+          {screen.slug === 'vision' ? (
+            <div className={styles.museumVisionRightStack}>
+              <div className={styles.museumVisionSourceCluster}>
+                {sourceBlock}
+              </div>
+              {screen.perspectives ? (
+                <div className={styles.museumVisionPerspectivesSlot}>
+                  <PerspectivesSidebar content={screen.perspectives} />
+                </div>
+              ) : null}
+            </div>
+          ) : screen.slug === 'decision' && screen.perspectives ? (
+            <div className={styles.museumVisionRightStack}>
+              {sourceBlock}
+              <div className={styles.museumVisionPerspectivesSlot}>
+                <PerspectivesSidebar content={screen.perspectives} />
+              </div>
+            </div>
+          ) : (
+            sourceBlock
+          )}
+        </div>
       </div>
     </div>
   )

@@ -16,6 +16,29 @@ export type PrimarySource = {
   kioskTranscript?: string
   archiveUrl: string
   archiveName: string
+  /** Optional extra scans cycled in the enlarge modal (defaults to `imageUrl` only). */
+  modalViews?: PrimarySourceModalView[]
+}
+
+export type PrimarySourceModalView = {
+  imageUrl: string
+  imageAlt: string
+  label: string
+}
+
+export function getPrimarySourceModalViews(
+  source: PrimarySource
+): PrimarySourceModalView[] {
+  if (source.modalViews && source.modalViews.length > 0) {
+    return source.modalViews
+  }
+  return [
+    {
+      imageUrl: source.imageUrl,
+      imageAlt: source.imageAlt,
+      label: 'View',
+    },
+  ]
 }
 
 export type Perspectives = {
@@ -64,6 +87,14 @@ export type HistoricalFigureSpotlight = {
   roleBadge: string
   imageUrl: string
   imageAlt: string
+  /** Extra narrative + artifacts opened from the key-figure card. */
+  detailModal?: {
+    paragraphs: string[]
+    gallery?: ExhibitGalleryItem[]
+    galleryTitle?: string
+    archiveUrl?: string
+    archiveName?: string
+  }
 }
 
 export type BodySection = {
@@ -158,25 +189,64 @@ export const KIOSK_SCREENS: KioskScreen[] = [
     slug: 'vision',
     heading: 'The Vision',
     conceptThread:
-      'A railroad starts with a line on paper. Judah had to prove the Sierra route could work before anyone would fund it.',
+      'Before rails reached the mountains, survey parties mapped the West with compasses, chronometers, and barometers, and Judah had to prove the Sierra route could work.',
     engineeringSpotlight: 'judah',
     body: [
-      'In the late 1850s, **Theodore Judah** surveyed possible routes, spoke with investors, and argued that granite and snow were engineering problems, not reasons to stop.',
-      'His **maps** and **court testimony** gave backers something concrete: a Sierra crossing that could be built if someone paid for it.',
+      '**Theodore Judah** was chief engineer of the **Sacramento Valley Railroad** when he surveyed a route across the **Sierra** and began seeking investors for a transcontinental line.',
+      'In the **1850s**, Congress funded **Pacific Railroad Surveys** from the **Mississippi** to the **Pacific**. Equipped with **Smithsonian** instructions and elite **Parkinson & Frodsham** chronometers, parties fixed longitude and mapped rival routes across the **West**.',
+      '**Judah** built on that baseline with localized fieldwork, using transits, barometers, and leveling chains to prove the **Dutch Flat Route** could climb the **Sierra** at a manageable grade. His **maps**, court testimony, and lobbying gave backers something concrete: a northern crossing that could be built if someone paid for it.',
     ],
+    gallery: [
+      {
+        imageUrl: assetPrimary('cp-railroad-survey-siskiyou.jpg'),
+        imageAlt:
+          'Portrait of Central Pacific Railroad surveyors with their instruments at Sacramento River Canyon',
+        caption: 'Survey party with instruments, Sacramento River Canyon.',
+        modalTitle: 'Central Pacific Railroad Survey',
+        modalYear: 'c. 1888',
+        modalTranscript:
+          'Portrait of **Central Pacific Railroad** surveyors with their instruments at **Sacramento River Canyon**. While chronometers fixed the **West**’s geographical grid, field parties like this measured local terrain: the step between **Judah**’s **Sierra** surveys and graded roadbed.',
+        archiveUrl:
+          'http://archives.csuchico.edu/digital/collection/coll11/id/21401',
+        archiveName: 'CSU Chico Digital Collections',
+      },
+    ],
+    galleryTitle: 'Survey instruments',
     primarySource: {
-      shortLabel: 'Survey theodolite (period instrument)',
-      fullTitle: 'Theodolite used for measuring angles and grades in the field',
+      shortLabel: 'Parkinson & Frodsham box chronometer',
+      fullTitle: 'Parkinson & Frodsham Box Chronometer',
       year: '19th c.',
-      imageUrl: assetPrimary('theodolite_pic2_size1.webp'),
+      imageUrl: assetPrimary('parkinson-frodsham-chronometer.jpg'),
       imageAlt:
-        'Vintage theodolite surveying instrument on a tripod, used for measuring angles and grades',
+        'Parkinson and Frodsham marine chronometer in its wooden case, viewed at an angle',
       transcript:
-        'Survey teams used theodolites to measure angles and grades before rails reached the mountains. Judah’s case for the Sierra depended on this kind of field work.',
-      archiveUrl: 'https://www.loc.gov/pictures/search/?q=theodolite',
-      archiveName: 'Library of Congress (search)',
+        '**Parkinson & Frodsham** marine chronometers were built to keep exact time through temperature swings, first for **British** navigation at sea and then for mapping trackless country on land. Survey teams paired them with celestial readings to fix longitude during the **Pacific Railroad Surveys** (**1853–1855**), producing the baseline maps **Theodore Judah** later used to target the **Sierra Nevada**. On the ground, Judah applied the same mathematical rigor with transits and leveling chains to prove the **Dutch Flat Route** at roughly **105 feet per mile**.',
+      archiveUrl:
+        'https://timeandnavigation.si.edu/multimedia-asset/marine-chronometer-by-parkinson-frodsham-no-2349',
+      archiveName: 'Smithsonian Time and Navigation',
+      modalViews: [
+        {
+          imageUrl: assetPrimary('parkinson-frodsham-chronometer.jpg'),
+          imageAlt:
+            'Parkinson and Frodsham marine chronometer in its wooden case, viewed at an angle',
+          label: 'Wooden case',
+        },
+        {
+          imageUrl: assetPrimary('parkinson-frodsham-chronometer-top.jpg'),
+          imageAlt:
+            'Parkinson and Frodsham box chronometer dial, viewed from above in its open case',
+          label: 'Dial & escapement',
+        },
+      ],
     },
     backgroundImageUrl: assetPrimary('map_lg.jpg'),
+    perspectives: {
+      title: 'For context',
+      body: [
+        'The **Pacific Railroad Surveys** (**1853–1855**) documented multiple geographically viable transcontinental routes in a detailed **twelve-volume** report, anchored by **Parkinson & Frodsham** chronometers that fixed longitude across the **West**. Political **gridlock** over the route’s location followed.',
+        'Critics mocked **Theodore Judah** as “Crazy Judah,” but his **Sierra Nevada** surveys, built on federal baseline maps and executed with the same precision, bypassed that stalemate and convinced investors the **Dutch Flat Route** could work.',
+      ],
+    },
   },
   {
     id: 2,
@@ -185,7 +255,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
     slug: 'decision',
     heading: 'The Decision',
     conceptThread:
-      'The 1862 law turned the railroad from an argument into a funded project with two companies and federal support.',
+      'Secession broke a decade-long route deadlock. In 1862 Lincoln signed a law that turned the railroad from an argument into a funded project.',
     historicalFigure: {
       name: 'Abraham Lincoln',
       epithet: 'The President',
@@ -193,10 +263,45 @@ export const KIOSK_SCREENS: KioskScreen[] = [
       imageUrl: assetPrimary('lincoln-seated-loc-2008680391.jpg'),
       imageAlt:
         'Seated portrait of President Abraham Lincoln, facing front, Washington, D.C., January 1864',
+      detailModal: {
+        paragraphs: [
+          'Raised on the **western frontier**, **Abraham Lincoln** sympathized with farmers and miners and followed the push for **river** and **rail** connections. Long before the **White House**, he filed inventions: in **1849** the U.S. Patent Office issued **patent no. 6469** for a rig to lift grounded steamboats over shoals. He is still the only U.S. president to hold a patent.',
+          'In **1862**, with the **Civil War** underway, **California** supporters mailed Lincoln a sizable **gold nugget** and a letter wishing him success in preserving the **Union**. The gift arrived as he signed the **Pacific Railway Act**, tying western loyalty to a railroad meant to reach the **Pacific**.',
+        ],
+        galleryTitle: 'Featured artifacts',
+        gallery: [
+          {
+            imageUrl: assetPrimary('lincoln-patent-model.jpg'),
+            imageAlt:
+              "Abraham Lincoln's 1849 patent model for buoying vessels over shoals",
+            caption: 'Hand-carved patent model, 1849.',
+            modalTitle: 'Abraham Lincoln’s patent model (1849)',
+            modalYear: '1849',
+            modalTranscript:
+              'Lincoln’s wooden **patent model** for buoying vessels over shoals, tied to **patent no. 6469** (**1849**). The full-size idea was meant to float stranded steamboats without unloading cargo.',
+            archiveUrl: 'https://www.si.edu/spotlight/tcrr/preparation',
+            archiveName: 'Smithsonian Institution',
+          },
+          {
+            imageUrl: assetPrimary('lincoln-gold-nugget.jpg'),
+            imageAlt:
+              'Gold nugget in a presentation box sent to President Lincoln by citizens of San Francisco',
+            caption: 'California gold nugget, c. 1862.',
+            modalTitle: 'Gold nugget sent to President Lincoln',
+            modalYear: '1862–1865',
+            modalTranscript:
+              'Presentation **gold nugget** mailed from **California** during the **Civil War**, with a letter backing Lincoln and the **Union**. Western gold and railroad politics often moved in the same channels in these years.',
+            archiveUrl: 'https://www.si.edu/spotlight/tcrr/preparation',
+            archiveName: 'Smithsonian Institution',
+          },
+        ],
+        archiveUrl: 'https://www.si.edu/spotlight/tcrr/preparation',
+        archiveName: 'Smithsonian Institution',
+      },
     },
     body: [
-      'In July 1862, **Abraham Lincoln** signed the **Pacific Railway Act** while the **Civil War** was underway. **Land grants and bonds** helped tie California and the West more tightly to the Union.',
-      'The act chartered **Union Pacific** and strengthened **Central Pacific**, aiming for one line from the Missouri River to the Pacific.',
+      'For years, politicians argued whether the line should terminate in the **North** or the **South**. **Secession** in **1860–1861** ended that deadlock; a **northern** route with **Council Bluffs, Iowa** as the eastern terminus moved forward.',
+      'In **July 1862**, **Abraham Lincoln** signed the **Pacific Railway Act** while the **Civil War** was underway. **Land grants and bonds** chartered **Union Pacific** and strengthened **Central Pacific** toward one line to the Pacific.',
     ],
     primarySource: {
       shortLabel: 'Pacific Railway Act (1862)',
@@ -211,6 +316,13 @@ export const KIOSK_SCREENS: KioskScreen[] = [
       archiveName: 'Library of Congress',
     },
     backgroundImageUrl: assetPrimary('map_lg.jpg'),
+    perspectives: {
+      title: 'For context',
+      body: [
+        'Wartime urgency sharpened the case. **California** had joined the **Union** in **1850**, and leaders in **Washington** worried about keeping the **Pacific** coast connected if fighting dragged on. A railroad promised faster mail, troops, and freight than **Overland** trails could move.',
+        'The **1862** statute bundled more than rails: **Government bonds** paid in stages, alternating **land-grant** sections along the right-of-way, and a **telegraph** line to the **Pacific**. Companies could borrow against the promise of future traffic and settlers.',
+      ],
+    },
   },
   {
     id: 3,

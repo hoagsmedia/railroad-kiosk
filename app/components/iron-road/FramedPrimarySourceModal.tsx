@@ -1,9 +1,12 @@
 'use client'
 
-import { motion, AnimatePresence } from 'framer-motion'
-import { useEffect, useId, useRef } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import styles from '@/app/kiosk/kiosk.module.css'
-import type { PrimarySource } from '@/lib/kiosk-content'
+import {
+  getPrimarySourceModalViews,
+  type PrimarySource,
+} from '@/lib/kiosk-content'
 import { formatKioskBodySegment } from '@/lib/format-kiosk-body'
 
 type Props = {
@@ -15,6 +18,22 @@ type Props = {
 export function FramedPrimarySourceModal({ open, source, onClose }: Props) {
   const titleId = useId()
   const panelRef = useRef<HTMLDivElement>(null)
+  const views = source ? getPrimarySourceModalViews(source) : []
+  const [viewIndex, setViewIndex] = useState(0)
+  const hasMultipleViews = views.length > 1
+  const activeView = views[viewIndex] ?? views[0]
+
+  const goPrev = useCallback(() => {
+    setViewIndex(i => (i - 1 + views.length) % views.length)
+  }, [views.length])
+
+  const goNext = useCallback(() => {
+    setViewIndex(i => (i + 1) % views.length)
+  }, [views.length])
+
+  useEffect(() => {
+    setViewIndex(0)
+  }, [source?.imageUrl, open])
 
   useEffect(() => {
     if (!open) return
@@ -22,17 +41,20 @@ export function FramedPrimarySourceModal({ open, source, onClose }: Props) {
     panelRef.current?.focus()
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
+      if (!hasMultipleViews) return
+      if (e.key === 'ArrowLeft') goPrev()
+      if (e.key === 'ArrowRight') goNext()
     }
     document.addEventListener('keydown', onKey)
     return () => {
       document.removeEventListener('keydown', onKey)
       prev?.focus?.()
     }
-  }, [open, onClose])
+  }, [open, onClose, hasMultipleViews, goPrev, goNext])
 
   return (
     <AnimatePresence>
-      {open && source && (
+      {open && source && activeView && (
         <motion.div
           className={styles.modalBackdrop}
           role="presentation"
@@ -69,14 +91,41 @@ export function FramedPrimarySourceModal({ open, source, onClose }: Props) {
               </span>
             </h2>
             <div className={styles.modalScanColumn}>
-              <div className={styles.modalMat}>
-                <div className={styles.modalScanWrap}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={source.imageUrl}
-                    alt={source.imageAlt}
-                    className={styles.modalScan}
-                  />
+              <div className={styles.modalScanCarousel}>
+                {hasMultipleViews ? (
+                  <div className={styles.modalScanNavRow}>
+                    <button
+                      type="button"
+                      className={styles.modalScanNavBtn}
+                      onClick={goPrev}
+                      aria-label="Previous image">
+                      ←
+                    </button>
+                    <p className={styles.modalScanViewLabel}>
+                      {activeView.label}{' '}
+                      <span className={styles.modalScanViewCount}>
+                        ({viewIndex + 1} of {views.length})
+                      </span>
+                    </p>
+                    <button
+                      type="button"
+                      className={styles.modalScanNavBtn}
+                      onClick={goNext}
+                      aria-label="Next image">
+                      →
+                    </button>
+                  </div>
+                ) : null}
+                <div className={styles.modalMat}>
+                  <div className={styles.modalScanWrap}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      key={activeView.imageUrl}
+                      src={activeView.imageUrl}
+                      alt={activeView.imageAlt}
+                      className={styles.modalScan}
+                    />
+                  </div>
                 </div>
               </div>
             </div>

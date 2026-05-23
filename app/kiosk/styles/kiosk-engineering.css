@@ -374,14 +374,81 @@
 
 .engineeringFieldLogPanel .inlineArchiveLink {
   color: #1a4a6e;
+  pointer-events: auto;
+  position: relative;
+  z-index: 1;
 }
 
 .engineeringFieldLogPanel .closeBtn {
   color: #1a2834;
   border-color: rgba(61, 90, 115, 0.4);
   background: rgba(255, 255, 255, 0.75);
+  pointer-events: auto;
 }
 
 .engineeringFieldLogPanel .closeBtn:hover {
   background: rgba(255, 255, 255, 0.95);
+}
+
+.personFigureTextCol .architectFieldLogCta {
+  margin-top: 0.55rem;
+  align-self: flex-start;
+}
+
+.historicalFigureModalGallery {
+  list-style: none;
+  margin: 0.35rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem 0.65rem;
+}
+
+.historicalFigureModalGalleryItem {
+  min-width: 0;
+}
+
+.historicalFigureModalGalleryFigure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+}
+
+.historicalFigureModalGalleryBtn {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 1px solid rgba(61, 90, 115, 0.35);
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  line-height: 0;
+  overflow: hidden;
+}
+
+.historicalFigureModalGalleryBtn:focus-visible {
+  outline: 2px solid #3d5a73;
+  outline-offset: 2px;
+}
+
+.historicalFigureModalGalleryBtn:hover .historicalFigureModalGalleryImg {
+  transform: scale(1.03);
+}
+
+.historicalFigureModalGalleryImg {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.22s ease;
+}
+
+.historicalFigureModalGalleryCaption {
+  margin: 0;
+  font-size: 0.68rem;
+  line-height: 1.35;
+  color: #2a3844;
 }

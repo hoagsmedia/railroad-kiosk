@@ -598,7 +598,9 @@
 }
 
 .museumLaborGallery .exhibitLaborGalleryMatBtn:hover .exhibitGalleryImg,
-.museumLaborGallery .exhibitLaborGalleryMatBtn:focus-visible .exhibitGalleryImg {
+.museumLaborGallery
+  .exhibitLaborGalleryMatBtn:focus-visible
+  .exhibitGalleryImg {
   transform: scale(1.04);
 }
 
@@ -656,6 +658,119 @@
   border-left: 3px solid var(--kiosk-gold-a24);
   padding-left: 1rem;
   margin-left: 0;
+}
+
+.exhibitPage[data-layout='decision'] .museumPersonAnchor .personFigurePhotoCol {
+  width: clamp(8.7rem, 38.4%, 12rem);
+}
+
+.museumPersonAnchor .architectFieldLogCta {
+  position: relative;
+  z-index: 2;
+}
+
+.museumPrepGallery.exhibitGallery {
+  margin-top: 0.75rem;
+  max-width: 100%;
+}
+
+.museumPrepGallery .exhibitGalleryTitle {
+  font-size: clamp(0.88rem, 1.6vw, 1rem);
+  margin-bottom: 0.55rem;
+}
+
+.museumPrepGallery .exhibitGalleryGrid {
+  gap: 0.65rem 0.75rem;
+}
+
+.museumPrepGallery .exhibitPrepGalleryMatBtn {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  color: inherit;
+  border-radius: 2px;
+}
+
+.museumPrepGallery .exhibitPrepGalleryMatBtn:focus-visible {
+  outline: 2px solid var(--kiosk-gold);
+  outline-offset: 2px;
+}
+
+.museumPrepGallery .exhibitPrepGalleryImgMat {
+  position: relative;
+  width: 100%;
+  aspect-ratio: auto;
+  min-height: 0;
+  line-height: 0;
+  border-radius: 2px;
+  background: rgba(6, 5, 4, 0.35);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem;
+  box-sizing: border-box;
+}
+
+.museumPrepGallery .exhibitGalleryImg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(6.75rem, 16cqh);
+  aspect-ratio: auto;
+  object-fit: contain;
+  object-position: center;
+  transition: transform 0.28s ease;
+}
+
+.museumPrepGallery .exhibitPrepGalleryHoverOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 6, 5, 0.52);
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
+.museumPrepGallery .exhibitPrepGalleryHoverLabel {
+  padding: 0.35rem 0.55rem;
+  border-radius: 2px;
+  border: 1px solid var(--kiosk-gold-a45);
+  background: rgba(10, 8, 7, 0.82);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ebe3d8;
+}
+
+.museumPrepGallery
+  .exhibitPrepGalleryMatBtn:hover
+  .exhibitPrepGalleryHoverOverlay,
+.museumPrepGallery
+  .exhibitPrepGalleryMatBtn:focus-visible
+  .exhibitPrepGalleryHoverOverlay {
+  opacity: 1;
+}
+
+.museumPrepGallery .exhibitPrepGalleryMatBtn:hover .exhibitGalleryImg,
+.museumPrepGallery .exhibitPrepGalleryMatBtn:focus-visible .exhibitGalleryImg {
+  transform: scale(1.04);
+}
+
+.museumPrepGallery .exhibitGalleryCaption {
+  margin-top: 0.28rem;
+  font-size: 0.72rem;
+  line-height: 1.4;
 }
 
 .exhibitMain {

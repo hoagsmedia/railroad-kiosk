@@ -111,6 +111,16 @@
   flex-shrink: 0;
   justify-content: center;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 4;
+  pointer-events: auto;
+}
+
+.inlineSourceLayerContent .inlineSourceActions a,
+.inlineSourceLayerContent .inlineSourceActions button {
+  pointer-events: auto;
+  position: relative;
+  z-index: 1;
 }
 
 .inlineSourceLayerContent .inlineArchiveLink {
@@ -254,6 +264,7 @@
   color: var(--kiosk-gold-pale);
   text-decoration: underline;
   text-underline-offset: 3px;
+  pointer-events: auto;
 }
 
 .inlineArchiveLink:hover {
@@ -329,4 +340,3 @@
     var(--kiosk-gold-a12)
   );
 }
-

@@ -66,7 +66,7 @@ export const ENGINEERING_LEADERS: EngineeringLeader[] = [
     imageAlt:
       'Portrait of Theodore D. Judah, chief engineer of the Central Pacific Railroad',
     challenge:
-      'Judah kept pressing for a route the Sierra could actually hold: steep grades, snow, granite, and skeptical investors included. His surveys and lobbying helped turn a proposed line into a charter and right-of-way. He died in 1863, before others finished the climb he had argued was possible.',
+      'Judah surveyed for the Sacramento Valley Railroad and kept pressing for a route the Sierra could hold: steep grades, snow, granite, and skeptical investors included. His surveys, maps, and lobbying helped turn a proposed line into a charter and right-of-way. He died in 1863, before others finished the climb he had argued was possible.',
     fieldLogSource: {
       shortLabel: 'Central Pacific Railroad, proposed alignment (manuscript)',
       year: '1861',
