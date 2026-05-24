@@ -463,7 +463,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
   {
     id: 4,
     timelineAnchor: { year: 1866, month: 6, day: 15 },
-    timelineTickLabel: 'c.\n1866',
+    timelineTickLabel: 'Jun\n1866',
     slug: 'engineering',
     heading: 'The Engineering',
     conceptThread:

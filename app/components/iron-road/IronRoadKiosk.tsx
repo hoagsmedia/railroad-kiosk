@@ -63,9 +63,9 @@ const exhibitPageVariants = {
   exit: { x: -28, opacity: 0 },
 }
 
-const LABOR_MOTION_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1]
+const EXHIBIT_MOTION_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1]
 
-function laborStaggerShell(reduceMotion: boolean | null) {
+function exhibitStaggerShell(reduceMotion: boolean | null) {
   if (reduceMotion) return { hidden: {}, visible: {} }
   return {
     hidden: {},
@@ -75,17 +75,7 @@ function laborStaggerShell(reduceMotion: boolean | null) {
   }
 }
 
-function laborStaggerRow(reduceMotion: boolean | null) {
-  if (reduceMotion) return { hidden: {}, visible: {} }
-  return {
-    hidden: {},
-    visible: {
-      transition: { staggerChildren: 0.09, delayChildren: 0.02 },
-    },
-  }
-}
-
-function laborMotionItem(reduceMotion: boolean | null) {
+function exhibitMotionItem(reduceMotion: boolean | null) {
   if (reduceMotion) {
     return {
       hidden: { opacity: 1, y: 0 },
@@ -97,12 +87,12 @@ function laborMotionItem(reduceMotion: boolean | null) {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.52, ease: LABOR_MOTION_EASE },
+      transition: { duration: 0.52, ease: EXHIBIT_MOTION_EASE },
     },
   }
 }
 
-function laborMotionPassThrough(reduceMotion: boolean | null) {
+function exhibitMotionPassThrough(reduceMotion: boolean | null) {
   if (reduceMotion) return { hidden: {}, visible: {} }
   return {
     hidden: {},
@@ -112,7 +102,7 @@ function laborMotionPassThrough(reduceMotion: boolean | null) {
   }
 }
 
-function laborGalleryStripPassThrough(reduceMotion: boolean | null) {
+function exhibitGalleryStripPassThrough(reduceMotion: boolean | null) {
   if (reduceMotion) return { hidden: {}, visible: {} }
   return {
     hidden: {},
@@ -121,6 +111,13 @@ function laborGalleryStripPassThrough(reduceMotion: boolean | null) {
     },
   }
 }
+
+/** @deprecated Labor screen only — use exhibitStaggerShell elsewhere. */
+const laborStaggerShell = exhibitStaggerShell
+/** @deprecated Labor screen only — use exhibitMotionItem elsewhere. */
+const laborMotionItem = exhibitMotionItem
+const laborMotionPassThrough = exhibitMotionPassThrough
+const laborGalleryStripPassThrough = exhibitGalleryStripPassThrough
 
 function reducer(state: State, action: Action): State {
   switch (action.type) {
@@ -499,20 +496,27 @@ function ExhibitShell({
   const visionDecisionLayout = (
     <div className={styles.museumCanvas}>
       <div className={styles.museumTitleBand}>{titleBlock}</div>
-      <div className={styles.museumSplitPrimary}>
-        <div className={styles.museumNarrative}>
+      <motion.div
+        className={styles.museumSplitPrimary}
+        variants={exhibitStaggerShell(reduceMotion)}
+        initial="hidden"
+        animate="visible">
+        <motion.div
+          className={styles.museumNarrative}
+          variants={exhibitMotionItem(reduceMotion)}>
           {bodyBlock}
           {personAnchorBlock ? (
             <div className={styles.museumPersonAnchor}>{personAnchorBlock}</div>
           ) : null}
           {screen.slug === 'vision' ? prepGalleryBlock : null}
-        </div>
-        <div
+        </motion.div>
+        <motion.div
           className={
             screen.slug === 'vision' || screen.slug === 'decision'
               ? `${styles.museumPrimaryCell} ${styles.museumVisionPrimaryCell}`
               : styles.museumPrimaryCell
-          }>
+          }
+          variants={exhibitMotionItem(reduceMotion)}>
           {screen.slug === 'vision' ? (
             <div className={styles.museumVisionRightStack}>
               <div className={styles.museumVisionSourceCluster}>
@@ -534,16 +538,22 @@ function ExhibitShell({
           ) : (
             sourceBlock
           )}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   )
 
   const engineeringLayout = (
     <div className={styles.museumCanvas}>
       <div className={styles.museumTitleBand}>{titleBlock}</div>
-      <div className={styles.museumEngineeringStack}>
-        <div className={styles.museumEngineeringSplit}>
+      <motion.div
+        className={styles.museumEngineeringStack}
+        variants={exhibitStaggerShell(reduceMotion)}
+        initial="hidden"
+        animate="visible">
+        <motion.div
+          className={styles.museumEngineeringSplit}
+          variants={exhibitMotionItem(reduceMotion)}>
           <div className={styles.museumNarrative}>
             {bodyBlock}
             {engineeringSpotlightBlock ? (
@@ -556,21 +566,28 @@ function ExhibitShell({
             className={`${styles.museumPrimaryCell} ${styles.museumEngineeringBand}`}>
             {sourceBlock}
           </div>
-        </div>
-        <div className={styles.museumBlueprintRow}>
+        </motion.div>
+        <motion.div
+          className={styles.museumBlueprintRow}
+          variants={exhibitMotionItem(reduceMotion)}>
           <EngineeringBlueprintSidebar />
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   )
 
   const utahLaborLayout = (
     <div className={styles.museumCanvas}>
       <div className={styles.museumTitleBand}>{titleBlock}</div>
-      <div className={styles.museumUtahShell}>
-        <figure
+      <motion.div
+        className={styles.museumUtahShell}
+        variants={exhibitStaggerShell(reduceMotion)}
+        initial="hidden"
+        animate="visible">
+        <motion.figure
           className={styles.museumUtahCenterFigure}
-          aria-label={UTAH_LABOR_ASHTON_HOMESTEAD.shortLabel}>
+          aria-label={UTAH_LABOR_ASHTON_HOMESTEAD.shortLabel}
+          variants={exhibitMotionItem(reduceMotion)}>
           <div className={styles.museumUtahStereoHeader}>
             <h3 className={styles.museumUtahStereoTitle}>
               {UTAH_LABOR_ASHTON_HOMESTEAD.shortLabel}
@@ -617,12 +634,16 @@ function ExhibitShell({
               </div>
             </div>
           </div>
-        </figure>
-        <div className={styles.museumUtahLeft}>
+        </motion.figure>
+        <motion.div
+          className={styles.museumUtahLeft}
+          variants={exhibitMotionItem(reduceMotion)}>
           {bodyBlock}
           <KeyFigureProfileCard profile={UTAH_LABOR_YOUNG_PROFILE} />
-        </div>
-        <div className={styles.museumUtahRight}>
+        </motion.div>
+        <motion.div
+          className={styles.museumUtahRight}
+          variants={exhibitMotionItem(reduceMotion)}>
           {screen.perspectives ? (
             <PerspectivesSidebar content={screen.perspectives} />
           ) : null}
@@ -637,16 +658,22 @@ function ExhibitShell({
               }
             />
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   )
 
   const theRaceLayout = (
     <div className={styles.museumCanvas}>
       <div className={styles.museumTitleBand}>{titleBlock}</div>
-      <div className={`${styles.museumSplitPrimary} ${styles.museumRaceShell}`}>
-        <div className={`${styles.museumNarrative} ${styles.museumRaceLeft}`}>
+      <motion.div
+        className={`${styles.museumSplitPrimary} ${styles.museumRaceShell}`}
+        variants={exhibitStaggerShell(reduceMotion)}
+        initial="hidden"
+        animate="visible">
+        <motion.div
+          className={`${styles.museumNarrative} ${styles.museumRaceLeft}`}
+          variants={exhibitMotionItem(reduceMotion)}>
           {bodyBlock}
           <div className={styles.museumPersonAnchor}>
             <KeyFigureProfileCard
@@ -654,22 +681,35 @@ function ExhibitShell({
               fieldLogHint="Washington lobbying and Promontory"
             />
           </div>
-        </div>
-        <div
-          className={`${styles.museumPrimaryCell} ${styles.museumRacePrimary}`}>
+        </motion.div>
+        <motion.div
+          className={`${styles.museumPrimaryCell} ${styles.museumRacePrimary}`}
+          variants={exhibitMotionItem(reduceMotion)}>
           {sourceBlock}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   )
 
   const eventLayout = (
     <div className={styles.museumCanvas}>
       <div className={styles.museumTitleBand}>{titleBlock}</div>
-      <div className={styles.museumHeroStack}>
-        <div className={styles.museumHeroTextBand}>{bodyBlock}</div>
-        <div className={styles.museumHeroFigure}>{sourceBlock}</div>
-      </div>
+      <motion.div
+        className={styles.museumHeroStack}
+        variants={exhibitStaggerShell(reduceMotion)}
+        initial="hidden"
+        animate="visible">
+        <motion.div
+          className={styles.museumHeroTextBand}
+          variants={exhibitMotionItem(reduceMotion)}>
+          {bodyBlock}
+        </motion.div>
+        <motion.div
+          className={styles.museumHeroFigure}
+          variants={exhibitMotionItem(reduceMotion)}>
+          {sourceBlock}
+        </motion.div>
+      </motion.div>
     </div>
   )
 
@@ -679,43 +719,52 @@ function ExhibitShell({
   const consequencesLayout = (
     <div className={styles.museumCanvas}>
       <div className={styles.museumTitleBand}>{titleBlock}</div>
-      <div className={styles.museumConsequencesShell}>
-        <section
-          className={styles.museumConsequencesCol}
-          aria-label="Complicated legacy">
-          {consequencesLegacySection ? (
-            <>
-              <h2 className={styles.museumConsequencesHeading}>
-                {consequencesLegacySection.title}
-              </h2>
-              <div className={styles.museumConsequencesBody}>
-                <KioskBodyParagraphs
-                  paragraphs={consequencesLegacySection.paragraphs}
-                />
-              </div>
-            </>
-          ) : null}
-        </section>
-        <section
-          className={`${styles.museumConsequencesCol} ${styles.museumConsequencesPlainsCol}`}
-          aria-label="Impact on the Plains Nations">
-          {consequencesPlainsSection ? (
-            <>
-              <h2 className={styles.museumConsequencesHeading}>
-                {consequencesPlainsSection.title}
-              </h2>
-              <div className={styles.museumConsequencesBody}>
-                <KioskBodyParagraphs
-                  paragraphs={consequencesPlainsSection.paragraphs}
-                />
-              </div>
-            </>
-          ) : null}
-        </section>
+      <motion.div
+        className={styles.museumConsequencesShell}
+        variants={exhibitStaggerShell(reduceMotion)}
+        initial="hidden"
+        animate="visible">
+        <motion.div
+          className={styles.museumConsequencesCopyGrid}
+          variants={exhibitMotionItem(reduceMotion)}>
+          <section
+            className={styles.museumConsequencesCol}
+            aria-label="Complicated legacy">
+            {consequencesLegacySection ? (
+              <>
+                <h2 className={styles.museumConsequencesHeading}>
+                  {consequencesLegacySection.title}
+                </h2>
+                <div className={styles.museumConsequencesBody}>
+                  <KioskBodyParagraphs
+                    paragraphs={consequencesLegacySection.paragraphs}
+                  />
+                </div>
+              </>
+            ) : null}
+          </section>
+          <section
+            className={`${styles.museumConsequencesCol} ${styles.museumConsequencesPlainsCol}`}
+            aria-label="Impact on the Plains Nations">
+            {consequencesPlainsSection ? (
+              <>
+                <h2 className={styles.museumConsequencesHeading}>
+                  {consequencesPlainsSection.title}
+                </h2>
+                <div className={styles.museumConsequencesBody}>
+                  <KioskBodyParagraphs
+                    paragraphs={consequencesPlainsSection.paragraphs}
+                  />
+                </div>
+              </>
+            ) : null}
+          </section>
+        </motion.div>
         {screen.secondarySource ? (
-          <figure
+          <motion.figure
             className={styles.museumConsequencesHeroFigure}
-            aria-label={screen.secondarySource.shortLabel}>
+            aria-label={screen.secondarySource.shortLabel}
+            variants={exhibitMotionItem(reduceMotion)}>
             <p className={styles.museumConsequencesHeroTitle}>
               {screen.secondarySource.shortLabel}
             </p>
@@ -749,9 +798,9 @@ function ExhibitShell({
                 </a>
               </figcaption>
             ) : null}
-          </figure>
+          </motion.figure>
         ) : null}
-      </div>
+      </motion.div>
     </div>
   )
 
