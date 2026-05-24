@@ -18,4 +18,5 @@
 @import './styles/kiosk-screen-layouts.css';
 @import './styles/kiosk-primary-inline.css';
 @import './styles/kiosk-intro.css';
+@import './styles/kiosk-loading.css';
 @import './styles/kiosk-engineering.css';

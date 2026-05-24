@@ -29,6 +29,8 @@ import { ConceptThreadLine } from './ConceptThreadLine'
 import { EngineeringBlueprintSidebar } from './EngineeringBlueprintSidebar'
 import { EngineeringLeaderSpotlight } from './EngineeringLeaderSpotlight'
 import { ExhibitIntro } from './ExhibitIntro'
+import { ExhibitLoadingScreen } from './ExhibitLoadingScreen'
+import { preloadKioskAssets } from '@/lib/kiosk-preload'
 import { FramedPrimarySourceModal } from './FramedPrimarySourceModal'
 import { PersonFigureSpotlight } from './PersonFigureSpotlight'
 import { PrimarySourceComposition } from './PrimarySourceComposition'
@@ -40,6 +42,8 @@ import { KeyFigureProfileCard } from './KeyFigureProfileCard'
 
 type State = {
   showIntro: boolean
+  isPreloading: boolean
+  loadProgress: number
   screenId: number
   modalOpen: boolean
   /** When set, archival modal shows this scan instead of `screen.primarySource`. */
@@ -48,6 +52,9 @@ type State = {
 
 type Action =
   | { type: 'DISMISS_INTRO' }
+  | { type: 'BEGIN_ENTER' }
+  | { type: 'SET_LOAD_PROGRESS'; progress: number }
+  | { type: 'ENTER_READY' }
   | { type: 'NEXT' }
   | { type: 'PREV' }
   | { type: 'OPEN_MODAL'; source?: PrimarySource }
@@ -122,7 +129,18 @@ const laborGalleryStripPassThrough = exhibitGalleryStripPassThrough
 function reducer(state: State, action: Action): State {
   switch (action.type) {
     case 'DISMISS_INTRO':
-      return { ...state, showIntro: false }
+      return { ...state, showIntro: false, isPreloading: false }
+    case 'BEGIN_ENTER':
+      return { ...state, isPreloading: true, loadProgress: 0 }
+    case 'SET_LOAD_PROGRESS':
+      return { ...state, loadProgress: action.progress }
+    case 'ENTER_READY':
+      return {
+        ...state,
+        showIntro: false,
+        isPreloading: false,
+        loadProgress: 1,
+      }
     case 'NEXT':
       return {
         ...state,
@@ -148,6 +166,8 @@ function reducer(state: State, action: Action): State {
     case 'RESTART':
       return {
         showIntro: false,
+        isPreloading: false,
+        loadProgress: 0,
         screenId: 1,
         modalOpen: false,
         modalSourceOverride: null,
@@ -172,18 +192,27 @@ function screenAt(id: number): KioskScreen | undefined {
 
 const PARALLAX_EASE = 0.12
 
-export function IronRoadKiosk() {
+type IronRoadKioskProps = {
+  /** Called on “Enter the exhibit” while the click gesture is still active (for fullscreen). */
+  onRequestFullscreen?: () => Promise<void>
+}
+
+export function IronRoadKiosk({ onRequestFullscreen }: IronRoadKioskProps) {
   const [state, dispatch] = useReducer(reducer, {
     showIntro: true,
+    isPreloading: false,
+    loadProgress: 0,
     screenId: 1,
     modalOpen: false,
     modalSourceOverride: null,
   })
 
   const parallaxTargetRef = useRef({ x: 0, y: 0 })
+  const enteringRef = useRef(false)
   const [parallaxSmooth, setParallaxSmooth] = useState({ x: 0, y: 0 })
 
-  const screen = state.showIntro ? undefined : screenAt(state.screenId)
+  const screen =
+    state.showIntro || state.isPreloading ? undefined : screenAt(state.screenId)
   const currentIndex = state.screenId - 1
 
   const onPointerMove = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
@@ -210,18 +239,41 @@ export function IronRoadKiosk() {
     return () => cancelAnimationFrame(id)
   }, [])
 
-  if (!state.showIntro && !screen) return null
+  const handleEnterExhibit = useCallback(async () => {
+    if (enteringRef.current || state.isPreloading) return
+    enteringRef.current = true
+    dispatch({ type: 'BEGIN_ENTER' })
+
+    try {
+      await onRequestFullscreen?.()
+    } catch {
+      // Fullscreen denied — continue into the exhibit.
+    }
+
+    try {
+      await preloadKioskAssets(({ loaded, total }) => {
+        dispatch({
+          type: 'SET_LOAD_PROGRESS',
+          progress: total > 0 ? loaded / total : 0,
+        })
+      })
+    } finally {
+      dispatch({ type: 'ENTER_READY' })
+      enteringRef.current = false
+    }
+  }, [onRequestFullscreen, state.isPreloading])
+
+  if (!state.showIntro && !state.isPreloading && !screen) return null
 
   return (
     <div
       className="relative flex h-full min-h-0 flex-col overflow-hidden"
       onPointerMove={onPointerMove}
       onPointerLeave={onPointerLeave}>
-      {state.showIntro ? (
-        <ExhibitIntro
-          parallax={parallaxSmooth}
-          onEnter={() => dispatch({ type: 'DISMISS_INTRO' })}
-        />
+      {state.isPreloading ? (
+        <ExhibitLoadingScreen progress={state.loadProgress} />
+      ) : state.showIntro ? (
+        <ExhibitIntro parallax={parallaxSmooth} onEnter={handleEnterExhibit} />
       ) : (
         <ExhibitShell
           state={state}
@@ -863,7 +915,7 @@ function ExhibitShell({
       data-screen={screen.id}>
       <header className="relative z-2 shrink-0 border-b border-white/10 bg-black/50 px-4 py-2 backdrop-blur-sm">
         <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-[#a8947c]">
-          History 130 · Digital kiosk
+          HISTORY 109 · Digital kiosk
         </p>
         <p className="font-playfair text-lg font-semibold leading-tight text-[#fdf6ec] sm:text-xl">
           The Iron Road: 1861–1869

@@ -19,7 +19,7 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: 'The Iron Road · History 130 Digital Kiosk',
+  title: 'The Iron Road · HISTORY 109 Digital Kiosk',
   description:
     'Chronological digital kiosk: vision, decision, labor, engineering, Utah contract labor (1868), Promontory, and consequences of the first transcontinental railroad.',
 }
