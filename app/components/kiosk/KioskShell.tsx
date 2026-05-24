@@ -4,39 +4,12 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 import styles from '@/app/kiosk/kiosk.module.css'
 import { IronRoadKiosk } from '@/app/components/iron-road/IronRoadKiosk'
-
-function isFullscreenElement(el: Element | null): boolean {
-  if (!el) return false
-  return (
-    document.fullscreenElement === el ||
-    // @ts-expect-error legacy Safari
-    document.webkitFullscreenElement === el
-  )
-}
-
-async function requestShellFullscreen(el: HTMLElement): Promise<void> {
-  if (el.requestFullscreen) {
-    await el.requestFullscreen()
-    return
-  }
-  // @ts-expect-error legacy Safari
-  if (el.webkitRequestFullscreen) {
-    // @ts-expect-error legacy Safari
-    await el.webkitRequestFullscreen()
-  }
-}
-
-async function exitShellFullscreen(): Promise<void> {
-  if (document.exitFullscreen) {
-    await document.exitFullscreen()
-    return
-  }
-  // @ts-expect-error legacy Safari
-  if (document.webkitExitFullscreen) {
-    // @ts-expect-error legacy Safari
-    await document.webkitExitFullscreen()
-  }
-}
+import {
+  exitDocumentFullscreen,
+  isFullscreenElement,
+  requestElementFullscreen,
+  shellSupportsFullscreen,
+} from '@/lib/kiosk-fullscreen'
 
 export function KioskShell() {
   const shellRef = useRef<HTMLDivElement>(null)
@@ -44,15 +17,7 @@ export function KioskShell() {
   const [supported, setSupported] = useState(false)
 
   useEffect(() => {
-    const el = shellRef.current
-    setSupported(
-      Boolean(
-        el &&
-        (el.requestFullscreen ||
-          // @ts-expect-error legacy Safari
-          el.webkitRequestFullscreen)
-      )
-    )
+    setSupported(shellSupportsFullscreen(shellRef.current))
   }, [])
 
   useEffect(() => {
@@ -73,12 +38,23 @@ export function KioskShell() {
 
     try {
       if (isFullscreenElement(el)) {
-        await exitShellFullscreen()
+        await exitDocumentFullscreen()
       } else {
-        await requestShellFullscreen(el)
+        await requestElementFullscreen(el)
       }
     } catch {
       // User denied or browser blocked (common without prior gesture on some builds).
+    }
+  }, [])
+
+  const requestFullscreen = useCallback(async () => {
+    const el = shellRef.current
+    if (!el || !shellSupportsFullscreen(el)) return
+    if (isFullscreenElement(el)) return
+    try {
+      await requestElementFullscreen(el)
+    } catch {
+      // Enter exhibit even when fullscreen is denied.
     }
   }, [])
 
@@ -121,7 +97,7 @@ export function KioskShell() {
         ) : null}
         <div className={styles.kioskFrameSizer}>
           <div className={styles.kioskFrame}>
-            <IronRoadKiosk />
+            <IronRoadKiosk onRequestFullscreen={requestFullscreen} />
           </div>
         </div>
       </div>

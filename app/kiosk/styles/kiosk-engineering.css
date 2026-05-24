@@ -329,11 +329,49 @@
 }
 
 .engineeringFieldLogScan {
+  display: block;
+  width: 100%;
   border-radius: 2px;
   overflow: hidden;
   border: 1px solid rgba(61, 90, 115, 0.45);
   background: #0d0b09;
   line-height: 0;
+}
+
+.engineeringFieldLogScanBtn {
+  padding: 0;
+  margin: 0;
+  cursor: zoom-in;
+  text-align: left;
+}
+
+.engineeringFieldLogScanBtn:hover {
+  border-color: rgba(61, 90, 115, 0.75);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.engineeringFieldLogScanBtn:focus-visible {
+  outline: 2px solid rgba(61, 90, 115, 0.85);
+  outline-offset: 2px;
+}
+
+.engineeringFieldLogEnlargeBtn {
+  margin-top: 0.45rem;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #1a4a6e;
+  background: transparent;
+  border: 1px solid rgba(61, 90, 115, 0.55);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.engineeringFieldLogEnlargeBtn:hover {
+  border-color: rgba(26, 74, 110, 0.85);
+  background: rgba(61, 90, 115, 0.12);
 }
 
 .engineeringFieldLogScanWide {

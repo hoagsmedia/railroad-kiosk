@@ -1,10 +1,12 @@
 'use client'
 
 import { AnimatePresence, motion } from 'framer-motion'
-import { useEffect, useId, useRef } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import styles from '@/app/kiosk/kiosk.module.css'
+import { FramedPrimarySourceModal } from '@/app/components/iron-road/FramedPrimarySourceModal'
 import { formatKioskBodySegment } from '@/lib/format-kiosk-body'
+import { primarySourceFromFieldLogSource } from '@/lib/kiosk-content'
 import type { EngineeringFieldLogSource } from '@/lib/engineering-leaders'
 import { useKioskPortalRoot } from '@/lib/use-kiosk-portal-root'
 
@@ -34,27 +36,40 @@ export function FigureFieldLogModal({
   const titleId = useId()
   const panelRef = useRef<HTMLDivElement>(null)
   const portalRoot = useKioskPortalRoot()
+  const [archivalOpen, setArchivalOpen] = useState(false)
   const primarySrc = profile?.fieldLogOmitPrimarySource
     ? null
     : (profile?.fieldLogSource ?? fallbackPrimarySource ?? null)
+  const archivalSource = primarySrc
+    ? primarySourceFromFieldLogSource(primarySrc)
+    : null
+
+  useEffect(() => {
+    if (!open) setArchivalOpen(false)
+  }, [open])
 
   useEffect(() => {
     if (!open) return
     const prev = document.activeElement as HTMLElement | null
     panelRef.current?.focus()
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
+      if (e.key !== 'Escape') return
+      if (archivalOpen) {
+        setArchivalOpen(false)
+        return
+      }
+      onClose()
     }
     document.addEventListener('keydown', onKey)
     return () => {
       document.removeEventListener('keydown', onKey)
       prev?.focus?.()
     }
-  }, [open, onClose])
+  }, [open, onClose, archivalOpen])
 
   if (!portalRoot) return null
 
-  return createPortal(
+  const fieldLogPortal = createPortal(
     <AnimatePresence>
       {open && profile && (
         <motion.div
@@ -123,15 +138,29 @@ export function FigureFieldLogModal({
                     Scroll sideways to follow the map
                   </p>
                 ) : null}
-                <div
+                <button
+                  type="button"
                   className={
                     primarySrc.horizontalScroll
-                      ? `${styles.engineeringFieldLogScan} ${styles.engineeringFieldLogScanWide}`
-                      : styles.engineeringFieldLogScan
-                  }>
+                      ? `${styles.engineeringFieldLogScan} ${styles.engineeringFieldLogScanWide} ${styles.engineeringFieldLogScanBtn}`
+                      : `${styles.engineeringFieldLogScan} ${styles.engineeringFieldLogScanBtn}`
+                  }
+                  onClick={() => setArchivalOpen(true)}
+                  aria-label={`Enlarge primary source: ${primarySrc.imageAlt}`}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={primarySrc.imageUrl} alt={primarySrc.imageAlt} />
-                </div>
+                  <img
+                    src={primarySrc.imageUrl}
+                    alt={primarySrc.imageAlt}
+                    loading="eager"
+                    decoding="async"
+                  />
+                </button>
+                <button
+                  type="button"
+                  className={styles.engineeringFieldLogEnlargeBtn}
+                  onClick={() => setArchivalOpen(true)}>
+                  Enlarge
+                </button>
                 {primarySrc.transcript.split(/\n\n+/).map((chunk, i) => (
                   <p key={i} className={styles.engineeringFieldLogSnippet}>
                     {formatKioskBodySegment(chunk.trim())}
@@ -162,5 +191,16 @@ export function FigureFieldLogModal({
       )}
     </AnimatePresence>,
     portalRoot
+  )
+
+  return (
+    <>
+      {fieldLogPortal}
+      <FramedPrimarySourceModal
+        open={archivalOpen}
+        source={archivalSource}
+        onClose={() => setArchivalOpen(false)}
+      />
+    </>
   )
 }

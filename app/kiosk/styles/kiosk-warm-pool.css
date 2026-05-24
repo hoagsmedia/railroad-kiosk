@@ -1,0 +1,19 @@
+/* Off-screen pool — keeps preloaded images in the document tree */
+.kioskWarmPool {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  z-index: -1;
+}
+
+.kioskWarmPool img {
+  display: block;
+  width: 1px;
+  height: 1px;
+}

@@ -3,8 +3,7 @@
 import { motion } from 'framer-motion'
 
 import styles from '@/app/kiosk/kiosk.module.css'
-
-const HERO_IMG = `/assets/primary-sources/${encodeURIComponent('iconic_meeting.jpg')}`
+import { KIOSK_INTRO_HERO_URL } from '@/lib/kiosk-preload'
 
 type Props = {
   parallax: { x: number; y: number }
@@ -18,7 +17,7 @@ export function ExhibitIntro({ parallax, onEnter }: Props) {
       <div className={styles.introPhotoLayer} aria-hidden>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={HERO_IMG}
+          src={KIOSK_INTRO_HERO_URL}
           alt=""
           className={styles.introHeroPhoto}
           style={{
@@ -34,8 +33,8 @@ export function ExhibitIntro({ parallax, onEnter }: Props) {
       </div>
 
       <header className={styles.introTopBar}>
-        <span className={styles.introBadge}>History 130</span>
-        <span className={styles.introBadgeMuted}>Digital kiosk exhibit</span>
+        <span className={styles.introBadge}>HISTORY 109</span>
+        <span className={styles.introBadgeMuted}>Prof. Kelly Morrow</span>
       </header>
 
       <div className={styles.introMain}>
@@ -104,6 +103,7 @@ export function ExhibitIntro({ parallax, onEnter }: Props) {
           <p className={styles.introHint}>
             Use Continue / Back to move between screens
           </p>
+          <p className={styles.introCredit}>Created by Joshua Hoagland</p>
         </motion.div>
       </div>
     </div>
