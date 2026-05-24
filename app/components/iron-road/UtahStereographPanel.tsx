@@ -30,7 +30,8 @@ export function UtahStereographPanel({ source, onEnlarge }: Props) {
                     src={source.imageUrl}
                     alt={source.imageAlt}
                     className={styles.inlineSourceImg}
-                    loading="lazy"
+                    loading="eager"
+                    decoding="async"
                   />
                 </div>
               </div>

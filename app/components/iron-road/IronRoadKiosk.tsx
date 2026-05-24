@@ -30,6 +30,7 @@ import { EngineeringBlueprintSidebar } from './EngineeringBlueprintSidebar'
 import { EngineeringLeaderSpotlight } from './EngineeringLeaderSpotlight'
 import { ExhibitIntro } from './ExhibitIntro'
 import { ExhibitLoadingScreen } from './ExhibitLoadingScreen'
+import { KioskWarmImagePool } from './KioskWarmImagePool'
 import { preloadKioskAssets } from '@/lib/kiosk-preload'
 import { FramedPrimarySourceModal } from './FramedPrimarySourceModal'
 import { PersonFigureSpotlight } from './PersonFigureSpotlight'
@@ -275,13 +276,16 @@ export function IronRoadKiosk({ onRequestFullscreen }: IronRoadKioskProps) {
       ) : state.showIntro ? (
         <ExhibitIntro parallax={parallaxSmooth} onEnter={handleEnterExhibit} />
       ) : (
-        <ExhibitShell
-          state={state}
-          screen={screen!}
-          currentIndex={currentIndex}
-          dispatch={dispatch}
-          parallax={parallaxSmooth}
-        />
+        <>
+          <KioskWarmImagePool />
+          <ExhibitShell
+            state={state}
+            screen={screen!}
+            currentIndex={currentIndex}
+            dispatch={dispatch}
+            parallax={parallaxSmooth}
+          />
+        </>
       )}
     </div>
   )
@@ -414,7 +418,8 @@ function ExhibitShell({
                           src={item.imageUrl}
                           alt={item.imageAlt}
                           className={styles.exhibitGalleryImg}
-                          loading="lazy"
+                          loading="eager"
+                          decoding="async"
                         />
                       </div>
                     </div>
@@ -489,7 +494,8 @@ function ExhibitShell({
                         src={item.imageUrl}
                         alt=""
                         className={styles.exhibitGalleryImg}
-                        loading="lazy"
+                        loading="eager"
+                        decoding="async"
                       />
                       <span
                         className={styles.exhibitLaborGalleryHoverOverlay}
@@ -669,7 +675,8 @@ function ExhibitShell({
                         src={UTAH_LABOR_ASHTON_HOMESTEAD.imageUrl}
                         alt={UTAH_LABOR_ASHTON_HOMESTEAD.imageAlt}
                         className={styles.inlineSourceImg}
-                        loading="lazy"
+                        loading="eager"
+                        decoding="async"
                       />
                     </div>
                   </div>
@@ -915,7 +922,7 @@ function ExhibitShell({
       data-screen={screen.id}>
       <header className="relative z-2 shrink-0 border-b border-white/10 bg-black/50 px-4 py-2 backdrop-blur-sm">
         <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-[#a8947c]">
-          HISTORY 109 · Digital kiosk
+          HISTORY 109 · Prof. Kelly Morrow
         </p>
         <p className="font-playfair text-lg font-semibold leading-tight text-[#fdf6ec] sm:text-xl">
           The Iron Road: 1861–1869
@@ -929,6 +936,8 @@ function ExhibitShell({
             src={bg}
             alt=""
             className={styles.bgTextureImg}
+            loading="eager"
+            decoding="async"
             style={{
               transform: `translate(${parallax.x * 18}px, ${parallax.y * 12}px) scale(1.04)`,
             }}

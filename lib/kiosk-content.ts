@@ -60,6 +60,22 @@ export type ExhibitGalleryItem = {
   archiveName?: string
 }
 
+/** Build archival modal payload from a field-log primary source block. */
+export function primarySourceFromFieldLogSource(
+  source: EngineeringFieldLogSource
+): PrimarySource {
+  return {
+    shortLabel: source.shortLabel,
+    fullTitle: source.shortLabel,
+    year: source.year ?? '',
+    imageUrl: source.imageUrl,
+    imageAlt: source.imageAlt,
+    transcript: source.transcript,
+    archiveUrl: source.archiveUrl ?? '',
+    archiveName: source.archiveName ?? 'Archive',
+  }
+}
+
 /** Build modal payload for “On the line” and similar exhibit galleries. */
 export function primarySourceForExhibitGalleryItem(
   item: ExhibitGalleryItem
@@ -552,17 +568,16 @@ export const KIOSK_SCREENS: KioskScreen[] = [
     ],
     primarySource: {
       shortLabel: 'Chinese workers and the iron road',
-      fullTitle:
-        'Photograph of Chinese railroad workers with handcar on the line',
+      fullTitle: 'The Chinese and the Iron Road: Building the Transcontinental',
       year: '1869',
       imageUrl: assetPrimary('chinese-and-the-iron-road-1869.jpg'),
       imageAlt:
-        'Historical photograph of Chinese railroad workers with a handcar on the track',
+        'Chinese railroad workers with a handcar on the line, in the context of the Geisel Library exhibit “The Chinese and the Iron Road” (UC San Diego Today)',
       transcript:
         'Newspaper and album illustrations like this appeared as construction neared its end. Handcars, rails, and crews still mattered after the publicity events passed.',
       archiveUrl:
-        'https://www.loc.gov/pictures/search/?q=Chinese+railroad+workers+transcontinental',
-      archiveName: 'Library of Congress',
+        'https://today.ucsd.edu/story/geisel_library_exhibit_sheds_light_on_chinese_workers_who_built_transcontin',
+      archiveName: 'UC San Diego Today',
     },
     backgroundImageUrl: assetPrimary('map_xl.jpg'),
   },

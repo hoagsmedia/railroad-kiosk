@@ -27,6 +27,11 @@ const EXTRA_PROFILE_SOURCES: PrimarySource[] = [
   UTAH_LABOR_ASHTON_HOMESTEAD,
 ]
 
+/** Decoded images kept for the session so <img> reuse is instant. */
+const imageCache = new Map<string, HTMLImageElement>()
+
+const inFlight = new Map<string, Promise<HTMLImageElement>>()
+
 function addUrl(urls: Set<string>, url?: string | null) {
   if (url) urls.add(url)
 }
@@ -106,13 +111,63 @@ export function collectKioskPreloadUrls(): string[] {
   return [...urls]
 }
 
-function preloadOne(url: string): Promise<void> {
+async function decodeImage(img: HTMLImageElement): Promise<void> {
+  if (!img.complete || img.naturalWidth === 0) return
+  if (typeof img.decode === 'function') {
+    try {
+      await img.decode()
+    } catch {
+      // decode() can reject for oversized images; loaded bitmap is still usable
+    }
+  }
+}
+
+function loadImageElement(url: string): Promise<HTMLImageElement> {
   return new Promise(resolve => {
     const img = new Image()
-    img.onload = () => resolve()
-    img.onerror = () => resolve()
+    const finish = () => {
+      void decodeImage(img).finally(() => resolve(img))
+    }
+    img.onload = finish
+    img.onerror = finish
     img.src = url
+    if (img.complete) finish()
   })
+}
+
+/** Load + decode one URL; dedupes concurrent requests. */
+export async function ensureKioskImageReady(
+  url: string
+): Promise<HTMLImageElement> {
+  const cached = imageCache.get(url)
+  if (cached?.complete && cached.naturalWidth > 0) {
+    await decodeImage(cached)
+    return cached
+  }
+
+  const pending = inFlight.get(url)
+  if (pending) return pending
+
+  const promise = loadImageElement(url).then(img => {
+    imageCache.set(url, img)
+    inFlight.delete(url)
+    return img
+  })
+  inFlight.set(url, promise)
+  return promise
+}
+
+export function getKioskImageDimensions(
+  url: string
+): { width: number; height: number } | null {
+  const img = imageCache.get(url)
+  if (!img?.complete || img.naturalWidth === 0) return null
+  return { width: img.naturalWidth, height: img.naturalHeight }
+}
+
+export function isKioskImageCached(url: string): boolean {
+  const img = imageCache.get(url)
+  return Boolean(img?.complete && img.naturalWidth > 0)
 }
 
 const MIN_LOADING_MS = 600
@@ -122,7 +177,7 @@ export type PreloadProgress = {
   total: number
 }
 
-/** Preload exhibit images; failed URLs do not block entry. */
+/** Preload and decode all exhibit images; failed URLs do not block entry. */
 export async function preloadKioskAssets(
   onProgress?: (progress: PreloadProgress) => void
 ): Promise<void> {
@@ -138,13 +193,17 @@ export async function preloadKioskAssets(
 
   const preloadStarted = performance.now()
 
-  await Promise.all(
-    urls.map(async url => {
-      await preloadOne(url)
-      loaded += 1
-      report()
-    })
-  )
+  const BATCH = 6
+  for (let i = 0; i < urls.length; i += BATCH) {
+    const batch = urls.slice(i, i + BATCH)
+    await Promise.all(
+      batch.map(async url => {
+        await ensureKioskImageReady(url)
+        loaded += 1
+        report()
+      })
+    )
+  }
 
   const elapsed = performance.now() - preloadStarted
   if (elapsed < MIN_LOADING_MS) {

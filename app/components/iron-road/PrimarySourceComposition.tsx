@@ -32,6 +32,8 @@ export function PrimarySourceComposition({
               src={source.imageUrl}
               alt={source.imageAlt}
               className={styles.inlineSourceImg}
+              loading="eager"
+              decoding="async"
             />
           </div>
         </div>

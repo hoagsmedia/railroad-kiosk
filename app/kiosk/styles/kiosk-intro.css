@@ -272,3 +272,10 @@
   color: #7a6d62;
   letter-spacing: 0.04em;
 }
+
+.introCredit {
+  margin: 0.45rem 0 0;
+  font-size: 0.72rem;
+  color: #6a5f55;
+  letter-spacing: 0.06em;
+}

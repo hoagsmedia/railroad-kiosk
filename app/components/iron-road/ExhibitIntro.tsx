@@ -34,7 +34,7 @@ export function ExhibitIntro({ parallax, onEnter }: Props) {
 
       <header className={styles.introTopBar}>
         <span className={styles.introBadge}>HISTORY 109</span>
-        <span className={styles.introBadgeMuted}>Digital kiosk exhibit</span>
+        <span className={styles.introBadgeMuted}>Prof. Kelly Morrow</span>
       </header>
 
       <div className={styles.introMain}>
@@ -103,6 +103,7 @@ export function ExhibitIntro({ parallax, onEnter }: Props) {
           <p className={styles.introHint}>
             Use Continue / Back to move between screens
           </p>
+          <p className={styles.introCredit}>Created by Joshua Hoagland</p>
         </motion.div>
       </div>
     </div>
