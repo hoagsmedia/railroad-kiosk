@@ -69,7 +69,7 @@ export function primarySourceForExhibitGalleryItem(
   return {
     shortLabel: item.modalTitle ?? item.imageAlt.slice(0, 72),
     fullTitle: item.modalTitle ?? item.imageAlt,
-    year: item.modalYear ?? 'c. 1860s',
+    year: item.modalYear ?? '1860s',
     imageUrl: item.imageUrl,
     imageAlt: item.imageAlt,
     transcript,
@@ -161,7 +161,7 @@ export const UTAH_LABOR_STEREO_ECHO_CAMP: PrimarySource = {
   shortLabel: 'Mormon workers’ camp, Echo Canyon',
   fullTitle:
     'No. 109, Mormon Village, on line of Railroad, Echo Canyon (stereograph)',
-  year: 'c. 1868',
+  year: '1868',
   imageUrl: assetPrimary('mormon-village.jpg'),
   imageAlt:
     'Stereograph: tent encampment of railroad workers at Echo Canyon on the Union Pacific line',
@@ -178,18 +178,18 @@ export const UTAH_LABOR_YOUNG_PROFILE: UtahLaborFigureProfile = {
   name: 'Brigham Young',
   epithet: 'Territorial Planner',
   roleLine: 'Signed 1868 Rail Contracts',
-  era: 'c. 1868 · Echo & Weber Canyons',
+  era: '1868 · Echo & Weber Canyons',
   fieldLogChallenge:
     '**Young** treated the railroad as a matter of survival for Utah Territory. He dealt directly with **Union Pacific**’s **Thomas Durant** and **Central Pacific** leaders to protect wages for local workers.\n\nWhen **Union Pacific** ran short of cash and failed to deliver tools or pay, **Young** pressed officers by telegraph and used Church funds to cover gaps until thousands of Utah men stayed employed on the grade.',
   fieldLogSource: {
     shortLabel: 'Latter-day Saint grading camp, Echo Canyon',
-    year: 'ca. 1868',
+    year: ' 1868',
     sectionHeading: 'Primary source',
     imageUrl: assetPrimary('mormon-village.jpg'),
     imageAlt:
       'Andrew J. Russell stereograph of a Latter-day Saint grading camp in Echo Canyon',
     transcript:
-      'Andrew J. Russell’s stereograph of a Latter-day Saint grading camp in Echo Canyon, ca. **1868**.',
+      'Andrew J. Russell’s stereograph of a Latter-day Saint grading camp in Echo Canyon, **1868**.',
     archiveUrl:
       'https://exhibits.usu.edu/exhibits/show/transcontinentalrailroad/anticipationandanxiety/latterdaysaints',
     archiveName: 'Utah State University Digital Exhibits',
@@ -216,18 +216,18 @@ export const THE_RACE_HUNTINGTON_PROFILE: KioskKeyFigureProfile = {
   name: 'Collis P. Huntington',
   epithet: 'Political Negotiator',
   roleLine: 'CP Vice President',
-  era: 'c. 1869 · Washington, D.C.',
+  era: '1869 · Washington, D.C.',
   fieldLogChallenge:
     'From Washington, D.C., **Huntington** handled telegraph traffic and political lobbying for the **Central Pacific**. While crews blasted through the mountains, he fought a paper war against **Union Pacific**’s **Thomas Durant** until federal officials fixed **Promontory Summit** as the official terminus.',
   fieldLogSource: {
     shortLabel: 'Collis P. Huntington at his office desk',
-    year: 'ca. mid-1890s',
+    year: ' mid-1890s',
     sectionHeading: 'Primary source',
     imageUrl: assetPrimary('collis-p-huntington-desk.png'),
     imageAlt:
       'Archival photograph of Collis P. Huntington writing correspondence at his office desk',
     transcript:
-      'Collis P. Huntington at work in his corporate office, ca. mid-1890s.',
+      'Collis P. Huntington at work in his corporate office,  mid-1890s.',
     archiveUrl:
       'https://mds.marshall.edu/cgi/viewcontent.cgi?article=1143&context=sc_finding_aids',
     archiveName: 'Marshall University Digital Scholar',
@@ -247,7 +247,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
     slug: 'vision',
     heading: 'The Vision',
     conceptThread:
-      'Before rails reached the mountains, survey parties mapped the West with compasses, chronometers, and barometers, and Judah had to prove the Sierra route could work.',
+      'Before rails reached the mountains, survey parties mapped the West with compasses, chronometers, and barometers, while Judah worked to prove the Sierra route could succeed.',
     engineeringSpotlight: 'judah',
     body: [
       '**Theodore Judah** was chief engineer of the **Sacramento Valley Railroad** when he surveyed a route across the **Sierra** and began seeking investors for a transcontinental line.',
@@ -261,7 +261,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
           'Portrait of Central Pacific Railroad surveyors with their instruments at Sacramento River Canyon',
         caption: 'Survey party with instruments, Sacramento River Canyon.',
         modalTitle: 'Central Pacific Railroad Survey',
-        modalYear: 'c. 1888',
+        modalYear: '1888',
         modalTranscript:
           'Portrait of **Central Pacific Railroad** surveyors with their instruments at **Sacramento River Canyon**. While chronometers fixed the **West**’s geographical grid, field parties like this measured local terrain: the step between **Judah**’s **Sierra** surveys and graded roadbed.',
         archiveUrl:
@@ -332,7 +332,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
             imageAlt:
               "Abraham Lincoln's 1849 patent model for buoying vessels over shoals",
             caption: 'Hand-carved patent model, 1849.',
-            modalTitle: 'Abraham Lincoln’s patent model (1849)',
+            modalTitle: 'Abraham Lincoln’s patent model',
             modalYear: '1849',
             modalTranscript:
               'Lincoln’s wooden **patent model** for buoying vessels over shoals, tied to **patent no. 6469** (**1849**). The full-size idea was meant to float stranded steamboats without unloading cargo.',
@@ -343,7 +343,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
             imageUrl: assetPrimary('lincoln-gold-nugget.jpg'),
             imageAlt:
               'Gold nugget in a presentation box sent to President Lincoln by citizens of San Francisco',
-            caption: 'California gold nugget, c. 1862.',
+            caption: 'California gold nugget, 1862.',
             modalTitle: 'Gold nugget sent to President Lincoln',
             modalYear: '1862–1865',
             modalTranscript:
@@ -361,7 +361,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
       'In **July 1862**, **Abraham Lincoln** signed the **Pacific Railway Act** while the **Civil War** was underway. **Land grants and bonds** chartered **Union Pacific** and strengthened **Central Pacific** toward one line to the Pacific.',
     ],
     primarySource: {
-      shortLabel: 'Pacific Railway Act (1862)',
+      shortLabel: 'Pacific Railway Act',
       fullTitle:
         'An Act to aid in the Construction of a Railroad and Telegraph Line from the Missouri River to the Pacific Ocean',
       year: '1862',
@@ -369,8 +369,9 @@ export const KIOSK_SCREENS: KioskScreen[] = [
       imageAlt: 'Digitized scan of the Pacific Railway Act (1862)',
       transcript:
         'The act joined land grants, federal bond support, railroad charters, and a telegraph line to the Pacific. Defense, settlement, and freight all sat in the same law.',
-      archiveUrl: 'https://www.loc.gov/item/rbpe.01001500/',
-      archiveName: 'Library of Congress',
+      archiveUrl:
+        'https://www.archives.gov/milestone-documents/pacific-railway-act',
+      archiveName: 'National Archives',
     },
     backgroundImageUrl: assetPrimary('map_lg.jpg'),
     perspectives: {
@@ -398,10 +399,10 @@ export const KIOSK_SCREENS: KioskScreen[] = [
       {
         imageUrl: assetPrimary('or-n-cut-117-handcar.jpg'),
         imageAlt:
-          'Historical photograph of railroad workers standing on a handcar, ca. 1880',
-        caption: 'Maintenance crews on a handcar, ca. 1880.',
+          'Historical photograph of railroad workers standing on a handcar,  1880',
+        caption: 'Maintenance crews on a handcar,  1880.',
         modalTitle: 'Railroad workers on a handcar',
-        modalYear: 'c. 1880',
+        modalYear: '1880',
         modalTranscript:
           'Track maintenance workers, called **gandy dancers** in railroad slang, patrolled the **Oregon Pacific Railroad** on a **handcar**. Four workers pose on the car in a cut between embankments.',
         archiveUrl:
@@ -414,9 +415,9 @@ export const KIOSK_SCREENS: KioskScreen[] = [
         ),
         imageAlt:
           'Historical photograph of railroad construction in the Sierra Nevada mountains',
-        caption: 'Building the Secret Town wooden trestle, ca. 1867.',
+        caption: 'Building the Secret Town wooden trestle,  1867.',
         modalTitle: 'Sierra Nevada railroad construction',
-        modalYear: 'c. 1865 to 1869',
+        modalYear: '1865 to 1869',
         modalTranscript:
           '**Cuts**, **fills**, tunnel headings, **Sierra** weather, **black powder**, slides, and frost were part of the work behind the polished railroad images.',
         archiveUrl:
@@ -427,10 +428,10 @@ export const KIOSK_SCREENS: KioskScreen[] = [
         imageUrl: assetPrimary('cp-tunnel-8-east-portal-stereograph.png'),
         imageAlt:
           'Alfred A. Hart stereograph of a Chinese worker at the east portal heading of Central Pacific Tunnel No. 8 in the Sierra Nevada',
-        caption: 'Workers at Tunnel No. 8 east portal, Sierra Nevada, ca. 1867.',
+        caption: 'Workers at Tunnel No. 8 east portal, Sierra Nevada,  1867.',
         modalTitle:
           'Heading of east portal, Tunnel No. 8 (Central Pacific stereograph)',
-        modalYear: 'c. 1866 to 1868',
+        modalYear: '1866 to 1868',
         modalTranscript:
           'Alfred A. Hart stereograph **204** shows a **Chinese** worker at the **east portal** of **Tunnel No. 8** during **Central Pacific** work in the **Sierra Nevada**. Hart documented construction for the company from **1866** to **1869**.',
         archiveUrl: 'https://www.loc.gov/pictures/resource/stereo.1s00553/',
@@ -477,7 +478,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
     primarySource: {
       shortLabel: 'Alfred A. Hart, Bloomer Cut stereograph',
       fullTitle: 'View in Bloomer Cut, near Auburn, 63 feet high',
-      year: 'c. 1866',
+      year: '1866',
       imageUrl: assetPrimary('hart-bloomer-cut-stereograph.jpg'),
       imageAlt:
         'Stereograph by Alfred A. Hart: deep railroad cut through rock at Bloomer Cut on the Central Pacific line',
@@ -511,7 +512,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
       shortLabel: 'Utah corridor: stereographs & contract context',
       fullTitle:
         'Weber Canyon trestle; Echo Canyon camp; Brigham Young and the 1868 Union Pacific agreement',
-      year: 'c. 1868 to 1869',
+      year: '1868 to 1869',
       transcript:
         'Stereograph views of contract camps and the **Weber** trestle show where **bishop-led** labor met **UP** steel.',
       kioskTranscript:
@@ -625,10 +626,10 @@ export const KIOSK_SCREENS: KioskScreen[] = [
       },
     ],
     secondarySource: {
-      shortLabel: 'Shoshone observer above the tracks, 1869.',
+      shortLabel: 'Shoshone observer above the tracks',
       fullTitle:
         'Alfred A. Hart, Shoshone observer above the tracks, Nevada, 1869',
-      year: '1869',
+      year: '',
       imageUrl: assetPrimary('hart-indian-viewing-rail-palisades-1869.png'),
       imageAlt:
         'Shoshone observer above the Central Pacific tracks, Nevada, 1869',

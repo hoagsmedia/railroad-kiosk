@@ -11,6 +11,11 @@
   backdrop-filter: blur(6px);
 }
 
+/* Above field-log / key-figure modals in #kiosk-portal-root */
+.modalBackdropRaised {
+  z-index: 60;
+}
+
 .modalPanel {
   position: relative;
   max-width: min(1100px, 100%);
