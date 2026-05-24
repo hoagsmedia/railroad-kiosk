@@ -125,6 +125,11 @@ export function KioskShell() {
           </div>
         </div>
       </div>
+      <div
+        id="kiosk-portal-root"
+        className={styles.kioskPortalRoot}
+        aria-hidden={false}
+      />
     </div>
   )
 }

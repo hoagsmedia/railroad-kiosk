@@ -1,0 +1,106 @@
+/* The Race: narrative + key figure (left) | primary source (right) */
+
+.exhibitPage[data-layout='the-race'] .museumRaceShell {
+  flex: 1;
+  min-height: 0;
+  align-items: stretch;
+}
+
+.exhibitPage[data-layout='the-race'] .museumRaceLeft {
+  border-left: 3px solid var(--kiosk-gold-a24);
+  padding-left: 1rem;
+  min-height: 0;
+  justify-content: flex-start;
+}
+
+.exhibitPage[data-layout='the-race'] .museumRaceLeft .exhibitBodyWrap {
+  flex: 0 1 auto;
+  min-height: 0;
+}
+
+.exhibitPage[data-layout='the-race'] .museumRaceLeft .bodySection + .bodySection {
+  margin-top: 0.85rem;
+}
+
+.exhibitPage[data-layout='the-race'] .museumRaceLeft .bodySectionTitle {
+  font-size: clamp(0.88rem, 1.45vw, 1rem);
+  margin-bottom: 0.35rem;
+}
+
+.exhibitPage[data-layout='the-race'] .museumRaceLeft .screenBody {
+  font-size: clamp(0.88rem, 1.35vw, 0.98rem);
+  line-height: 1.52;
+}
+
+.exhibitPage[data-layout='the-race'] .museumRaceLeft .screenBody p + p {
+  margin-top: 0.55rem;
+}
+
+.exhibitPage[data-layout='the-race'] .museumRaceLeft .museumPersonAnchor {
+  flex-shrink: 0;
+  margin-top: 0.65rem;
+  padding-top: 0;
+}
+
+.exhibitPage[data-layout='the-race'] .museumRacePrimary {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 0;
+}
+
+.exhibitPage[data-layout='the-race'] .museumRacePrimary .inlineSourceSection {
+  margin-top: 0;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.exhibitPage[data-layout='the-race'] .museumRacePrimary .inlineSourceComposition {
+  margin-bottom: 0;
+}
+
+.exhibitPage[data-layout='the-race'] .museumRacePrimary .inlineSourceHeader {
+  margin-bottom: 0.35rem;
+}
+
+.exhibitPage[data-layout='the-race'] .museumRacePrimary .inlineSourceTitle {
+  font-size: clamp(0.88rem, 1.6vw, 1rem);
+  line-height: 1.25;
+}
+
+.exhibitPage[data-layout='the-race'] .museumRacePrimary .inlineSourceImg {
+  max-height: min(34dvh, 360px);
+}
+
+.exhibitPage[data-layout='the-race'] .museumRacePrimary .inlineSourceVisualAnchor {
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: 0;
+}
+
+.exhibitPage[data-layout='the-race'] .museumRacePrimary .inlineSourceLayerContent {
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: none;
+  transform: none;
+  bottom: 0;
+  border-radius: 0 0 2px 2px;
+}
+
+.exhibitPage[data-layout='the-race'] .museumRacePrimary .inlineSourceLayerContent .inlineSourceActions {
+  justify-content: space-between;
+}
+
+@media (max-width: 900px) {
+  .exhibitPage[data-layout='the-race'] .museumSplitPrimary {
+    grid-template-columns: 1fr;
+  }
+
+  .exhibitPage[data-layout='the-race'] .museumRaceLeft {
+    border-left: none;
+    padding-left: 0;
+  }
+}

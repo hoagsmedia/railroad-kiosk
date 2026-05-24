@@ -2,7 +2,7 @@ import { assetPrimary } from '@/lib/kiosk-content'
 
 export type EngineeringLeaderId = 'judah' | 'dodge' | 'crocker'
 
-/** Optional field-log “primary source” block (defaults to Bloomer Cut Hart stereograph). */
+/** Optional field-log “primary source” block (defaults to Dale Creek Trestle photograph). */
 export type EngineeringFieldLogSource = {
   shortLabel: string
   year?: string
@@ -27,7 +27,7 @@ export type EngineeringLeader = {
   imageUrl: string
   imageAlt: string
   challenge: string
-  /** When set, the Field Log modal uses this instead of the shared Bloomer Cut stereograph. */
+  /** When set, the Field Log modal uses this instead of the shared Dale Creek Trestle photograph. */
   fieldLogSource?: EngineeringFieldLogSource
   /** When true, no primary-source block (image + caption) is shown in the field log. */
   fieldLogOmitPrimarySource?: boolean
@@ -35,17 +35,19 @@ export type EngineeringLeader = {
   fieldLogCoda?: string
 }
 
-/** Shared Alfred A. Hart stereograph (Bloomer Cut) for Field Log + kiosk primary source. */
+/** Default field-log primary source (Dodge): Dale Creek Trestle photograph. */
 export const HART_BLOOMER_SOURCE: EngineeringFieldLogSource = {
-  shortLabel: 'Alfred A. Hart, Bloomer Cut stereograph',
-  year: 'c. 1866',
-  imageUrl: assetPrimary('hart-bloomer-cut-stereograph.jpg'),
+  shortLabel: 'Andrew J. Russell, Dale Creek Trestle',
+  year: 'ca. 1868',
+  sectionHeading: 'Primary source',
+  imageUrl: assetPrimary('dale-creek-bridge-russell.jpg'),
   imageAlt:
-    'Stereograph by Alfred A. Hart: deep railroad cut through rock at Bloomer Cut, Central Pacific line',
+    'Andrew J. Russell photograph of the original wooden Dale Creek Trestle spanning a rocky valley on the Union Pacific line',
   transcript:
-    'Hart’s **Central Pacific** stereo cards presented the railroad as an engineering achievement. **Bloomer Cut** shows powder, drills, and workers cutting through Sierra granite.',
-  archiveUrl: 'https://www.loc.gov/pictures/item/2005682864/',
-  archiveName: 'Library of Congress Prints & Photographs',
+    'Andrew J. Russell’s photograph of the original wooden **Dale Creek Trestle**, ca. **1868**.',
+  archiveUrl:
+    'https://www.nga.gov/artworks/226483-plate-8-dale-creek-bridge-above',
+  archiveName: 'National Gallery of Art',
 }
 
 export function engineeringLeaderById(
@@ -66,7 +68,7 @@ export const ENGINEERING_LEADERS: EngineeringLeader[] = [
     imageAlt:
       'Portrait of Theodore D. Judah, chief engineer of the Central Pacific Railroad',
     challenge:
-      'Judah kept pressing for a route the Sierra could actually hold: steep grades, snow, granite, and skeptical investors included. His surveys and lobbying helped turn a proposed line into a charter and right-of-way. He died in 1863, before others finished the climb he had argued was possible.',
+      'Judah surveyed for the Sacramento Valley Railroad and kept pressing for a route the Sierra could hold: steep grades, snow, granite, and skeptical investors included. His surveys, maps, and lobbying helped turn a proposed line into a charter and right-of-way. He died in 1863, before others finished the climb he had argued was possible.',
     fieldLogSource: {
       shortLabel: 'Central Pacific Railroad, proposed alignment (manuscript)',
       year: '1861',
@@ -91,10 +93,18 @@ export const ENGINEERING_LEADERS: EngineeringLeader[] = [
     imageAlt:
       'Portrait of Charles Crocker, Central Pacific construction leader',
     challenge:
-      'When Sierra hiring fell short, Crocker relied on Chinese workers hired through contractors. He managed pay, camps, and winter pushes while keeping cuts, fills, and tunnel headings on schedule. Payrolls, photographs, and the cuts themselves show the scale of that system.',
-    fieldLogOmitPrimarySource: true,
-    fieldLogCoda:
-      'That labor system made the Central Pacific’s Sierra pace possible.',
+      'On **April 28, 1869**, **Crocker** took up a **$10,000** wager with **Union Pacific** and set out to lay a record stretch of track in one **12-hour** shift. Thousands of Chinese workers and a crew of eight Irish rail handlers moved in sequence: teams lifted rails, gauged the line, and spiked track toward **Promontory**.',
+    fieldLogSource: {
+      shortLabel: 'Central Pacific, “Ten miles in one day” sign',
+      year: '1869',
+      imageUrl: assetPrimary('crocker-ten-miles-one-day-1869.png'),
+      imageAlt:
+        'Historical photograph of a wooden sign reading “10 miles of track laid in one day, April 28th 1869,” beside new Central Pacific rails in Utah',
+      transcript:
+        'Central Pacific crews marked their **April 28, 1869** record with this posted sign: **10 miles** of track laid in a single **12-hour** shift. The photograph shows fresh rail stretching toward **Promontory** just days before the lines met.',
+      archiveUrl: 'https://www.hmdb.org/m.asp?m=100050',
+      archiveName: 'Historical Marker Database (10 Miles of Track)',
+    },
   },
   {
     id: 'dodge',

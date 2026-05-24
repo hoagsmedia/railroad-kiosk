@@ -13,13 +13,18 @@ import styles from '@/app/kiosk/kiosk.module.css'
 import {
   KIOSK_SCREENS,
   primarySourceForExhibitGalleryItem,
+  THE_RACE_HUNTINGTON_PROFILE,
+  UTAH_LABOR_ASHTON_HOMESTEAD,
   UTAH_LABOR_STEREO_DEVILS_GATE,
-  UTAH_LABOR_STEREO_ECHO_CAMP,
   UTAH_LABOR_YOUNG_PROFILE,
   type ExhibitGalleryItem,
   type KioskScreen,
   type PrimarySource,
 } from '@/lib/kiosk-content'
+import {
+  formatKioskBodySegment,
+  KioskBodyParagraphs,
+} from '@/lib/format-kiosk-body'
 import { ConceptThreadLine } from './ConceptThreadLine'
 import { EngineeringBlueprintSidebar } from './EngineeringBlueprintSidebar'
 import { EngineeringLeaderSpotlight } from './EngineeringLeaderSpotlight'
@@ -31,7 +36,7 @@ import { PerspectivesSidebar } from './PerspectivesSidebar'
 import { ScreenBody } from './ScreenBody'
 import { TravelerProgressBar } from './TravelerProgressBar'
 import { UtahStereographPanel } from './UtahStereographPanel'
-import { UtahYoungProfileCard } from './UtahYoungProfileCard'
+import { KeyFigureProfileCard } from './KeyFigureProfileCard'
 
 type State = {
   showIntro: boolean
@@ -58,9 +63,9 @@ const exhibitPageVariants = {
   exit: { x: -28, opacity: 0 },
 }
 
-const LABOR_MOTION_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1]
+const EXHIBIT_MOTION_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1]
 
-function laborStaggerShell(reduceMotion: boolean | null) {
+function exhibitStaggerShell(reduceMotion: boolean | null) {
   if (reduceMotion) return { hidden: {}, visible: {} }
   return {
     hidden: {},
@@ -70,17 +75,7 @@ function laborStaggerShell(reduceMotion: boolean | null) {
   }
 }
 
-function laborStaggerRow(reduceMotion: boolean | null) {
-  if (reduceMotion) return { hidden: {}, visible: {} }
-  return {
-    hidden: {},
-    visible: {
-      transition: { staggerChildren: 0.09, delayChildren: 0.02 },
-    },
-  }
-}
-
-function laborMotionItem(reduceMotion: boolean | null) {
+function exhibitMotionItem(reduceMotion: boolean | null) {
   if (reduceMotion) {
     return {
       hidden: { opacity: 1, y: 0 },
@@ -92,12 +87,12 @@ function laborMotionItem(reduceMotion: boolean | null) {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.52, ease: LABOR_MOTION_EASE },
+      transition: { duration: 0.52, ease: EXHIBIT_MOTION_EASE },
     },
   }
 }
 
-function laborMotionPassThrough(reduceMotion: boolean | null) {
+function exhibitMotionPassThrough(reduceMotion: boolean | null) {
   if (reduceMotion) return { hidden: {}, visible: {} }
   return {
     hidden: {},
@@ -107,7 +102,7 @@ function laborMotionPassThrough(reduceMotion: boolean | null) {
   }
 }
 
-function laborGalleryStripPassThrough(reduceMotion: boolean | null) {
+function exhibitGalleryStripPassThrough(reduceMotion: boolean | null) {
   if (reduceMotion) return { hidden: {}, visible: {} }
   return {
     hidden: {},
@@ -116,6 +111,13 @@ function laborGalleryStripPassThrough(reduceMotion: boolean | null) {
     },
   }
 }
+
+/** @deprecated Labor screen only — use exhibitStaggerShell elsewhere. */
+const laborStaggerShell = exhibitStaggerShell
+/** @deprecated Labor screen only — use exhibitMotionItem elsewhere. */
+const laborMotionItem = exhibitMotionItem
+const laborMotionPassThrough = exhibitMotionPassThrough
+const laborGalleryStripPassThrough = exhibitGalleryStripPassThrough
 
 function reducer(state: State, action: Action): State {
   switch (action.type) {
@@ -274,7 +276,7 @@ function ExhibitShell({
 
   const bodyBlock = <ScreenBody screen={screen} />
 
-  const laborPaperStack = (
+  const laborPaperStack = screen.primarySource ? (
     <motion.div
       className={styles.exhibitLaborPaperStage}
       style={{ transformOrigin: '100% 0%' }}
@@ -306,17 +308,17 @@ function ExhibitShell({
         </div>
       </div>
     </motion.div>
-  )
+  ) : null
 
-  const sourceBlock = (
+  const sourceBlock = screen.primarySource ? (
     <PrimarySourceComposition
       source={screen.primarySource}
       onEnlarge={() => dispatch({ type: 'OPEN_MODAL' })}
       furtherReading={screen.furtherReading}
     />
-  )
+  ) : null
 
-  const laborPrimaryComposition = (
+  const laborPrimaryComposition = screen.primarySource ? (
     <PrimarySourceComposition
       source={screen.primarySource}
       onEnlarge={() => dispatch({ type: 'OPEN_MODAL' })}
@@ -324,100 +326,44 @@ function ExhibitShell({
       imageStack={laborPaperStack}
       furtherReading={screen.furtherReading}
     />
-  )
+  ) : null
 
   const galleryTitleText = screen.galleryTitle ?? 'On the line'
 
-  const galleryBlock =
-    screen.gallery && screen.gallery.length > 0 ? (
+  const prepGalleryBlock =
+    screen.gallery && screen.gallery.length > 0 && screen.slug === 'vision' ? (
       <section
-        className={styles.exhibitGallery}
-        aria-label="Related photographs">
-        {screen.slug === 'labor' ? (
-          <motion.div
-            className={styles.exhibitLaborGalleryPanel}
-            variants={laborMotionPassThrough(reduceMotion)}>
-            <motion.h2
-              className={styles.exhibitGalleryTitle}
-              variants={laborMotionItem(reduceMotion)}>
-              {galleryTitleText}
-            </motion.h2>
-            <motion.ul
-              className={`${styles.exhibitLaborFilmStrip} ${styles.exhibitGalleryGrid}`}
-              variants={laborGalleryStripPassThrough(reduceMotion)}>
-              {screen.gallery.map((item, i) => (
-                <motion.li
-                  key={i}
-                  className={styles.exhibitGalleryItem}
-                  variants={laborMotionItem(reduceMotion)}
-                  whileHover={
-                    reduceMotion
-                      ? undefined
-                      : { y: -1, transition: { duration: 0.22 } }
-                  }>
-                  <figure className={styles.exhibitGalleryFigure}>
-                    <button
-                      type="button"
-                      className={styles.exhibitLaborGalleryMatBtn}
-                      onClick={() => openExhibitGalleryEnlarge(item)}
-                      aria-label={`Enlarge photograph: ${item.imageAlt}`}>
-                      <div className={styles.exhibitLaborGalleryImgMat}>
+        className={`${styles.exhibitGallery} ${styles.museumPrepGallery} ${styles.museumPrepGalleryInNarrative}`}
+        aria-label="Related artifacts">
+        <h2 className={styles.exhibitGalleryTitle}>{galleryTitleText}</h2>
+        <ul className={styles.exhibitGalleryGrid}>
+          {screen.gallery.map((item, i) => (
+            <li key={i} className={styles.exhibitGalleryItem}>
+              <figure className={styles.exhibitGalleryFigure}>
+                <div className={styles.inlineSourceComposition}>
+                  <div className={styles.inlineSourceVisualAnchor}>
+                    <div className={styles.exhibitPrepGalleryMatBtn}>
+                      <div className={styles.exhibitPrepGalleryImgMat}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={item.imageUrl}
-                          alt=""
+                          alt={item.imageAlt}
                           className={styles.exhibitGalleryImg}
                           loading="lazy"
                         />
-                        <span
-                          className={styles.exhibitLaborGalleryHoverOverlay}
-                          aria-hidden>
-                          <span
-                            className={styles.exhibitLaborGalleryHoverLabel}>
-                            Click to enlarge
-                          </span>
-                        </span>
                       </div>
-                    </button>
-                    {item.caption ? (
-                      <figcaption className={styles.exhibitGalleryCaption}>
-                        {item.caption}
-                      </figcaption>
-                    ) : null}
-                  </figure>
-                </motion.li>
-              ))}
-            </motion.ul>
-          </motion.div>
-        ) : (
-          <div className={styles.exhibitLaborGalleryPanel}>
-            <h2 className={styles.exhibitGalleryTitle}>{galleryTitleText}</h2>
-            <div className={styles.exhibitLaborFilmStrip}>
-              <ul className={styles.exhibitGalleryGrid}>
-                {screen.gallery.map((item, i) => (
-                  <li key={i} className={styles.exhibitGalleryItem}>
-                    <figure className={styles.exhibitGalleryFigure}>
-                      <button
-                        type="button"
-                        className={styles.exhibitLaborGalleryMatBtn}
-                        onClick={() => openExhibitGalleryEnlarge(item)}
-                        aria-label={`Enlarge photograph: ${item.imageAlt}`}>
-                        <div className={styles.exhibitLaborGalleryImgMat}>
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={item.imageUrl}
-                            alt=""
-                            className={styles.exhibitGalleryImg}
-                            loading="lazy"
-                          />
-                        </div>
-                      </button>
-                      {item.caption ? (
-                        <figcaption className={styles.exhibitGalleryCaption}>
-                          {item.caption}
-                        </figcaption>
-                      ) : null}
-                      <div className={styles.exhibitLaborGalleryActions}>
+                    </div>
+                    <div className={styles.inlineSourceLayerContent}>
+                      <div className={styles.inlineSourceActions}>
+                        {item.archiveUrl && item.archiveName ? (
+                          <a
+                            href={item.archiveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.inlineArchiveLink}>
+                            Open at {item.archiveName} ↗
+                          </a>
+                        ) : null}
                         <button
                           type="button"
                           className={styles.enlargeBtn}
@@ -425,13 +371,80 @@ function ExhibitShell({
                           Enlarge
                         </button>
                       </div>
-                    </figure>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        )}
+                    </div>
+                  </div>
+                </div>
+                {item.caption ? (
+                  <figcaption className={styles.exhibitGalleryCaption}>
+                    {formatKioskBodySegment(item.caption)}
+                  </figcaption>
+                ) : null}
+              </figure>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ) : null
+
+  const galleryBlock =
+    screen.gallery && screen.gallery.length > 0 && screen.slug === 'labor' ? (
+      <section
+        className={styles.exhibitGallery}
+        aria-label="Related photographs">
+        <motion.div
+          className={styles.exhibitLaborGalleryPanel}
+          variants={laborMotionPassThrough(reduceMotion)}>
+          <motion.h2
+            className={styles.exhibitGalleryTitle}
+            variants={laborMotionItem(reduceMotion)}>
+            {galleryTitleText}
+          </motion.h2>
+          <motion.ul
+            className={`${styles.exhibitLaborFilmStrip} ${styles.exhibitGalleryGrid}`}
+            variants={laborGalleryStripPassThrough(reduceMotion)}>
+            {screen.gallery.map((item, i) => (
+              <motion.li
+                key={i}
+                className={styles.exhibitGalleryItem}
+                variants={laborMotionItem(reduceMotion)}
+                whileHover={
+                  reduceMotion
+                    ? undefined
+                    : { y: -1, transition: { duration: 0.22 } }
+                }>
+                <figure className={styles.exhibitGalleryFigure}>
+                  <button
+                    type="button"
+                    className={styles.exhibitLaborGalleryMatBtn}
+                    onClick={() => openExhibitGalleryEnlarge(item)}
+                    aria-label={`Enlarge photograph: ${item.imageAlt}`}>
+                    <div className={styles.exhibitLaborGalleryImgMat}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={item.imageUrl}
+                        alt=""
+                        className={styles.exhibitGalleryImg}
+                        loading="lazy"
+                      />
+                      <span
+                        className={styles.exhibitLaborGalleryHoverOverlay}
+                        aria-hidden>
+                        <span className={styles.exhibitLaborGalleryHoverLabel}>
+                          Click to enlarge
+                        </span>
+                      </span>
+                    </div>
+                  </button>
+                  {item.caption ? (
+                    <figcaption className={styles.exhibitGalleryCaption}>
+                      {formatKioskBodySegment(item.caption)}
+                    </figcaption>
+                  ) : null}
+                </figure>
+              </motion.li>
+            ))}
+          </motion.ul>
+        </motion.div>
       </section>
     ) : null
 
@@ -456,7 +469,7 @@ function ExhibitShell({
           type="button"
           className={`${styles.navBtn} ${styles.navBtnPrimary}`}
           onClick={() => dispatch({ type: 'RESTART' })}>
-          Start over
+          START OVER
         </button>
       )}
     </nav>
@@ -472,7 +485,10 @@ function ExhibitShell({
 
   const historicalFigureBlock =
     screen.historicalFigure != null ? (
-      <PersonFigureSpotlight figure={screen.historicalFigure} />
+      <PersonFigureSpotlight
+        figure={screen.historicalFigure}
+        onEnlargeGalleryItem={openExhibitGalleryEnlarge}
+      />
     ) : null
 
   const personAnchorBlock = engineeringSpotlightBlock ?? historicalFigureBlock
@@ -480,23 +496,64 @@ function ExhibitShell({
   const visionDecisionLayout = (
     <div className={styles.museumCanvas}>
       <div className={styles.museumTitleBand}>{titleBlock}</div>
-      <div className={styles.museumSplitPrimary}>
-        <div className={styles.museumNarrative}>
+      <motion.div
+        className={styles.museumSplitPrimary}
+        variants={exhibitStaggerShell(reduceMotion)}
+        initial="hidden"
+        animate="visible">
+        <motion.div
+          className={styles.museumNarrative}
+          variants={exhibitMotionItem(reduceMotion)}>
           {bodyBlock}
           {personAnchorBlock ? (
             <div className={styles.museumPersonAnchor}>{personAnchorBlock}</div>
           ) : null}
-        </div>
-        <div className={styles.museumPrimaryCell}>{sourceBlock}</div>
-      </div>
+          {screen.slug === 'vision' ? prepGalleryBlock : null}
+        </motion.div>
+        <motion.div
+          className={
+            screen.slug === 'vision' || screen.slug === 'decision'
+              ? `${styles.museumPrimaryCell} ${styles.museumVisionPrimaryCell}`
+              : styles.museumPrimaryCell
+          }
+          variants={exhibitMotionItem(reduceMotion)}>
+          {screen.slug === 'vision' ? (
+            <div className={styles.museumVisionRightStack}>
+              <div className={styles.museumVisionSourceCluster}>
+                {sourceBlock}
+              </div>
+              {screen.perspectives ? (
+                <div className={styles.museumVisionPerspectivesSlot}>
+                  <PerspectivesSidebar content={screen.perspectives} />
+                </div>
+              ) : null}
+            </div>
+          ) : screen.slug === 'decision' && screen.perspectives ? (
+            <div className={styles.museumVisionRightStack}>
+              {sourceBlock}
+              <div className={styles.museumVisionPerspectivesSlot}>
+                <PerspectivesSidebar content={screen.perspectives} />
+              </div>
+            </div>
+          ) : (
+            sourceBlock
+          )}
+        </motion.div>
+      </motion.div>
     </div>
   )
 
   const engineeringLayout = (
     <div className={styles.museumCanvas}>
       <div className={styles.museumTitleBand}>{titleBlock}</div>
-      <div className={styles.museumEngineeringStack}>
-        <div className={styles.museumEngineeringSplit}>
+      <motion.div
+        className={styles.museumEngineeringStack}
+        variants={exhibitStaggerShell(reduceMotion)}
+        initial="hidden"
+        animate="visible">
+        <motion.div
+          className={styles.museumEngineeringSplit}
+          variants={exhibitMotionItem(reduceMotion)}>
           <div className={styles.museumNarrative}>
             {bodyBlock}
             {engineeringSpotlightBlock ? (
@@ -509,21 +566,87 @@ function ExhibitShell({
             className={`${styles.museumPrimaryCell} ${styles.museumEngineeringBand}`}>
             {sourceBlock}
           </div>
-        </div>
-        <div className={styles.museumBlueprintRow}>
+        </motion.div>
+        <motion.div
+          className={styles.museumBlueprintRow}
+          variants={exhibitMotionItem(reduceMotion)}>
           <EngineeringBlueprintSidebar />
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   )
 
   const utahLaborLayout = (
     <div className={styles.museumCanvas}>
       <div className={styles.museumTitleBand}>{titleBlock}</div>
-      <div className={styles.museumUtahShell}>
-        <div className={styles.museumUtahLeft}>
+      <motion.div
+        className={styles.museumUtahShell}
+        variants={exhibitStaggerShell(reduceMotion)}
+        initial="hidden"
+        animate="visible">
+        <motion.figure
+          className={styles.museumUtahCenterFigure}
+          aria-label={UTAH_LABOR_ASHTON_HOMESTEAD.shortLabel}
+          variants={exhibitMotionItem(reduceMotion)}>
+          <div className={styles.museumUtahStereoHeader}>
+            <h3 className={styles.museumUtahStereoTitle}>
+              {UTAH_LABOR_ASHTON_HOMESTEAD.shortLabel}
+            </h3>
+          </div>
+          <div className={styles.inlineSourceComposition}>
+            <div className={styles.inlineSourceVisualAnchor}>
+              <div className={styles.inlineSourceFrameOuter}>
+                <div className={styles.inlineSourceFrame}>
+                  <div className={styles.inlineSourceMat}>
+                    <div className={styles.inlineSourceImgWrap}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={UTAH_LABOR_ASHTON_HOMESTEAD.imageUrl}
+                        alt={UTAH_LABOR_ASHTON_HOMESTEAD.imageAlt}
+                        className={styles.inlineSourceImg}
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className={styles.inlineSourceLayerContent}>
+                <div className={styles.inlineSourceActions}>
+                  <a
+                    href={UTAH_LABOR_ASHTON_HOMESTEAD.archiveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.inlineArchiveLink}>
+                    Open at {UTAH_LABOR_ASHTON_HOMESTEAD.archiveName} ↗
+                  </a>
+                  <button
+                    type="button"
+                    className={styles.enlargeBtn}
+                    onClick={() =>
+                      dispatch({
+                        type: 'OPEN_MODAL',
+                        source: UTAH_LABOR_ASHTON_HOMESTEAD,
+                      })
+                    }>
+                    Enlarge
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.figure>
+        <motion.div
+          className={styles.museumUtahLeft}
+          variants={exhibitMotionItem(reduceMotion)}>
           {bodyBlock}
-          <UtahYoungProfileCard profile={UTAH_LABOR_YOUNG_PROFILE} />
+          <KeyFigureProfileCard profile={UTAH_LABOR_YOUNG_PROFILE} />
+        </motion.div>
+        <motion.div
+          className={styles.museumUtahRight}
+          variants={exhibitMotionItem(reduceMotion)}>
+          {screen.perspectives ? (
+            <PerspectivesSidebar content={screen.perspectives} />
+          ) : null}
           <div className={styles.museumUtahDevilsGateSlot}>
             <UtahStereographPanel
               source={UTAH_LABOR_STEREO_DEVILS_GATE}
@@ -535,48 +658,149 @@ function ExhibitShell({
               }
             />
           </div>
-        </div>
-        <div className={styles.museumUtahRight}>
-          {screen.perspectives ? (
-            <PerspectivesSidebar content={screen.perspectives} />
-          ) : null}
-          <UtahStereographPanel
-            source={UTAH_LABOR_STEREO_ECHO_CAMP}
-            onEnlarge={() =>
-              dispatch({
-                type: 'OPEN_MODAL',
-                source: UTAH_LABOR_STEREO_ECHO_CAMP,
-              })
-            }
-          />
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
+    </div>
+  )
+
+  const theRaceLayout = (
+    <div className={styles.museumCanvas}>
+      <div className={styles.museumTitleBand}>{titleBlock}</div>
+      <motion.div
+        className={`${styles.museumSplitPrimary} ${styles.museumRaceShell}`}
+        variants={exhibitStaggerShell(reduceMotion)}
+        initial="hidden"
+        animate="visible">
+        <motion.div
+          className={`${styles.museumNarrative} ${styles.museumRaceLeft}`}
+          variants={exhibitMotionItem(reduceMotion)}>
+          {bodyBlock}
+          <div className={styles.museumPersonAnchor}>
+            <KeyFigureProfileCard
+              profile={THE_RACE_HUNTINGTON_PROFILE}
+              fieldLogHint="Washington lobbying and Promontory"
+            />
+          </div>
+        </motion.div>
+        <motion.div
+          className={`${styles.museumPrimaryCell} ${styles.museumRacePrimary}`}
+          variants={exhibitMotionItem(reduceMotion)}>
+          {sourceBlock}
+        </motion.div>
+      </motion.div>
     </div>
   )
 
   const eventLayout = (
     <div className={styles.museumCanvas}>
       <div className={styles.museumTitleBand}>{titleBlock}</div>
-      <div className={styles.museumHeroStack}>
-        <div className={styles.museumHeroTextBand}>{bodyBlock}</div>
-        <div className={styles.museumHeroFigure}>{sourceBlock}</div>
-      </div>
+      <motion.div
+        className={styles.museumHeroStack}
+        variants={exhibitStaggerShell(reduceMotion)}
+        initial="hidden"
+        animate="visible">
+        <motion.div
+          className={styles.museumHeroTextBand}
+          variants={exhibitMotionItem(reduceMotion)}>
+          {bodyBlock}
+        </motion.div>
+        <motion.div
+          className={styles.museumHeroFigure}
+          variants={exhibitMotionItem(reduceMotion)}>
+          {sourceBlock}
+        </motion.div>
+      </motion.div>
     </div>
   )
+
+  const consequencesLegacySection = screen.bodySections?.[0]
+  const consequencesPlainsSection = screen.bodySections?.[1]
 
   const consequencesLayout = (
     <div className={styles.museumCanvas}>
       <div className={styles.museumTitleBand}>{titleBlock}</div>
-      <div className={styles.museumHeroStack}>
-        <div
-          className={`${styles.museumHeroTextBand} ${styles.museumHeroNarrow}`}>
-          {bodyBlock}
-        </div>
-        <div
-          className={`${styles.museumHeroFigure} ${styles.museumHeroFigureConsequences}`}>
-          {sourceBlock}
-        </div>
-      </div>
+      <motion.div
+        className={styles.museumConsequencesShell}
+        variants={exhibitStaggerShell(reduceMotion)}
+        initial="hidden"
+        animate="visible">
+        <motion.div
+          className={styles.museumConsequencesCopyGrid}
+          variants={exhibitMotionItem(reduceMotion)}>
+          <section
+            className={styles.museumConsequencesCol}
+            aria-label="Complicated legacy">
+            {consequencesLegacySection ? (
+              <>
+                <h2 className={styles.museumConsequencesHeading}>
+                  {consequencesLegacySection.title}
+                </h2>
+                <div className={styles.museumConsequencesBody}>
+                  <KioskBodyParagraphs
+                    paragraphs={consequencesLegacySection.paragraphs}
+                  />
+                </div>
+              </>
+            ) : null}
+          </section>
+          <section
+            className={`${styles.museumConsequencesCol} ${styles.museumConsequencesPlainsCol}`}
+            aria-label="Impact on the Plains Nations">
+            {consequencesPlainsSection ? (
+              <>
+                <h2 className={styles.museumConsequencesHeading}>
+                  {consequencesPlainsSection.title}
+                </h2>
+                <div className={styles.museumConsequencesBody}>
+                  <KioskBodyParagraphs
+                    paragraphs={consequencesPlainsSection.paragraphs}
+                  />
+                </div>
+              </>
+            ) : null}
+          </section>
+        </motion.div>
+        {screen.secondarySource ? (
+          <motion.figure
+            className={styles.museumConsequencesHeroFigure}
+            aria-label={screen.secondarySource.shortLabel}
+            variants={exhibitMotionItem(reduceMotion)}>
+            <p className={styles.museumConsequencesHeroTitle}>
+              {screen.secondarySource.shortLabel}
+            </p>
+            <button
+              type="button"
+              className={styles.museumConsequencesHeroBtn}
+              onClick={() =>
+                dispatch({
+                  type: 'OPEN_MODAL',
+                  source: screen.secondarySource!,
+                })
+              }
+              aria-label={`Enlarge: ${screen.secondarySource.imageAlt}`}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={screen.secondarySource.imageUrl}
+                alt={screen.secondarySource.imageAlt}
+                className={styles.museumConsequencesHeroImg}
+                loading="lazy"
+              />
+            </button>
+            {screen.secondarySource.archiveUrl &&
+            screen.secondarySource.archiveName ? (
+              <figcaption className={styles.museumConsequencesHeroCaption}>
+                <a
+                  href={screen.secondarySource.archiveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.inlineArchiveLink}>
+                  Open at {screen.secondarySource.archiveName} ↗
+                </a>
+              </figcaption>
+            ) : null}
+          </motion.figure>
+        ) : null}
+      </motion.div>
     </div>
   )
 
@@ -589,50 +813,38 @@ function ExhibitShell({
         initial="hidden"
         animate="visible">
         <motion.div
-          className={styles.museumLaborTop}
-          variants={laborStaggerRow(reduceMotion)}>
+          className={styles.museumLaborBentoCopy}
+          variants={laborMotionItem(reduceMotion)}>
+          {bodyBlock}
+        </motion.div>
+        {screen.engineeringSpotlight ? (
           <motion.div
-            className={styles.museumLaborTopLeft}
-            variants={laborStaggerRow(reduceMotion)}>
-            <motion.div
-              className={styles.museumLaborCopy}
-              variants={laborMotionItem(reduceMotion)}>
-              {bodyBlock}
-            </motion.div>
-            {screen.engineeringSpotlight ? (
-              <motion.div
-                className={styles.museumLaborFigureAnchor}
-                variants={laborMotionItem(reduceMotion)}>
-                <EngineeringLeaderSpotlight
-                  leaderId={screen.engineeringSpotlight}
-                  presentation="laborHorizontal"
-                  reduceMotion={reduceMotion}
-                />
-              </motion.div>
-            ) : null}
-          </motion.div>
-          <motion.div
-            className={styles.museumLaborPrimary}
+            className={styles.museumLaborBentoFigure}
             variants={laborMotionItem(reduceMotion)}>
-            {laborPrimaryComposition}
+            <EngineeringLeaderSpotlight
+              leaderId={screen.engineeringSpotlight}
+              presentation="laborHorizontal"
+              reduceMotion={reduceMotion}
+            />
           </motion.div>
+        ) : null}
+        <motion.div
+          className={styles.museumLaborPrimary}
+          variants={laborMotionItem(reduceMotion)}>
+          {laborPrimaryComposition}
         </motion.div>
         <motion.div
-          className={styles.museumLaborBottom}
-          variants={laborStaggerRow(reduceMotion)}>
-          <motion.div
-            className={styles.museumLaborGallery}
-            variants={laborMotionItem(reduceMotion)}>
-            {galleryBlock}
-          </motion.div>
-          {screen.perspectives ? (
-            <motion.div
-              className={styles.museumLaborPerspectives}
-              variants={laborMotionItem(reduceMotion)}>
-              <PerspectivesSidebar content={screen.perspectives} />
-            </motion.div>
-          ) : null}
+          className={styles.museumLaborGallery}
+          variants={laborMotionItem(reduceMotion)}>
+          {galleryBlock}
         </motion.div>
+        {screen.perspectives ? (
+          <motion.div
+            className={styles.museumLaborPerspectives}
+            variants={laborMotionItem(reduceMotion)}>
+            <PerspectivesSidebar content={screen.perspectives} />
+          </motion.div>
+        ) : null}
       </motion.div>
     </div>
   )
@@ -641,8 +853,10 @@ function ExhibitShell({
   switch (screen.slug) {
     case 'vision':
     case 'decision':
-    case 'the-race':
       exhibitContent = visionDecisionLayout
+      break
+    case 'the-race':
+      exhibitContent = theRaceLayout
       break
     case 'labor':
       exhibitContent = laborLayout
@@ -732,7 +946,7 @@ function ExhibitShell({
         open={state.modalOpen}
         source={
           state.modalOpen
-            ? (state.modalSourceOverride ?? screen.primarySource)
+            ? (state.modalSourceOverride ?? screen.primarySource ?? null)
             : null
         }
         onClose={() => dispatch({ type: 'CLOSE_MODAL' })}

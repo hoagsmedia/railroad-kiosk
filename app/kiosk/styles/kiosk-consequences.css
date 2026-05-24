@@ -1,0 +1,165 @@
+/* The Consequences — title band + two-column copy, hero centered above nav */
+
+.exhibitPage[data-layout='consequences'] .museumCanvas {
+  flex: 1;
+  min-height: 0;
+  gap: calc(var(--museum-gap) * 0.72);
+}
+
+.exhibitPage[data-layout='consequences'] .museumConsequencesShell {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-top: 0.2rem;
+  padding-bottom: 0.15rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.exhibitPage[data-layout='consequences'] .museumConsequencesCopyGrid {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: calc(var(--museum-gap) * 0.9);
+  align-items: start;
+}
+
+.exhibitPage[data-layout='consequences'] .museumConsequencesCol {
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 0.15rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--kiosk-gold-a35) transparent;
+}
+
+.exhibitPage[data-layout='consequences'] .museumConsequencesPlainsCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  overflow: hidden;
+}
+
+.exhibitPage[data-layout='consequences'] .museumConsequencesHeading {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(0.92rem, 1.55vw, 1.08rem);
+  font-weight: 650;
+  line-height: 1.28;
+  color: #fdf6ec;
+  margin: 0 0 0.45rem;
+}
+
+.exhibitPage[data-layout='consequences'] .museumConsequencesPlainsCol .museumConsequencesHeading {
+  margin-bottom: 0.25rem;
+}
+
+.exhibitPage[data-layout='consequences'] .museumConsequencesBody {
+  font-size: clamp(0.84rem, 1.28vw, 0.94rem);
+  line-height: 1.52;
+  color: #e8dfd4;
+  max-width: none;
+}
+
+.exhibitPage[data-layout='consequences'] .museumConsequencesBody p {
+  margin: 0;
+}
+
+.exhibitPage[data-layout='consequences'] .museumConsequencesPlainsCol .museumConsequencesBody {
+  flex: 0 0 auto;
+  font-size: clamp(0.8rem, 1.18vw, 0.88rem);
+  line-height: 1.48;
+  margin-bottom: 0;
+}
+
+.exhibitPage[data-layout='consequences'] .museumConsequencesHeroFigure {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: min(35%, 20rem);
+  max-width: 20rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.45rem;
+  text-align: center;
+  padding-block: clamp(0.5rem, 1.8vh, 1.1rem);
+  box-sizing: border-box;
+}
+
+.exhibitPage[data-layout='consequences'] .museumConsequencesHeroTitle {
+  flex: 0 0 auto;
+  margin: 0;
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(0.82rem, 1.35vw, 0.96rem);
+  font-weight: 600;
+  line-height: 1.35;
+  color: #e8dfd4;
+  text-align: center;
+}
+
+.exhibitPage[data-layout='consequences'] .museumConsequencesHeroBtn {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.exhibitPage[data-layout='consequences'] .museumConsequencesHeroImg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  max-height: min(34dvh, 320px);
+  object-fit: contain;
+  object-position: center center;
+  filter: sepia(0.22) contrast(1.06);
+}
+
+.exhibitPage[data-layout='consequences'] .museumConsequencesHeroCaption {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: clamp(0.74rem, 1.1vw, 0.82rem);
+  line-height: 1.45;
+  color: #d8cfc4;
+}
+
+.exhibitPage[data-layout='consequences'] .museumConsequencesHeroCaption .inlineArchiveLink {
+  font-size: 0.76rem;
+}
+
+@media (max-width: 960px) {
+  .exhibitPage[data-layout='consequences'] .museumConsequencesShell {
+    overflow-y: auto;
+  }
+
+  .exhibitPage[data-layout='consequences'] .museumConsequencesCopyGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .exhibitPage[data-layout='consequences'] .museumConsequencesPlainsCol {
+    overflow: visible;
+  }
+
+  .exhibitPage[data-layout='consequences'] .museumConsequencesHeroFigure {
+    width: min(52%, 18rem);
+    flex: 0 1 auto;
+    padding-block: 0.65rem;
+  }
+
+  .exhibitPage[data-layout='consequences'] .museumConsequencesHeroImg {
+    max-height: min(28.16dvh, 269px);
+  }
+}

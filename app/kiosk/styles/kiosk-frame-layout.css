@@ -37,8 +37,16 @@
   flex-direction: column;
 }
 
-.kioskFrame .architectPhoto {
-  object-fit: contain;
+.kioskFrame .exhibitPage[data-layout='vision'] {
+  overflow: visible;
+}
+
+.kioskFrame .exhibitPageInner[data-layout='vision'] {
+  overflow: visible;
+}
+
+.exhibitPage[data-layout='vision'] .museumCanvas {
+  overflow: visible;
 }
 
 /*
@@ -48,6 +56,14 @@
 .kioskFrame .museumPrimaryCell .inlineSourceImg,
 .kioskFrame .exhibitDocSplitFigure .inlineSourceImg {
   max-height: min(320px, 30dvh, 34cqh);
+}
+
+.kioskFrame
+  .exhibitPage[data-layout='vision']
+  .museumPrimaryCell
+  .inlineSourceImg {
+  max-height: 100%;
+  object-fit: contain;
 }
 
 .kioskFrame .museumLaborPrimary .inlineSourceImg,
@@ -69,7 +85,7 @@
 }
 
 .kioskFrame .museumEngineeringBand .inlineSourceImg {
-  max-height: min(360px, 28dvh, 34cqh);
+  max-height: min(255px, 22dvh, 27cqh);
 }
 
 .kioskFrame .exhibitPage[data-layout='event'] .inlineSourceImg {
@@ -87,3 +103,10 @@
   max-height: min(230px, 32cqh);
 }
 
+.kioskFrame
+  .exhibitPage[data-layout='decision']
+  .museumPersonAnchor
+  .personFigurePhotoCol
+  .architectPhotoFrame {
+  max-height: min(276px, 38.4cqh);
+}
