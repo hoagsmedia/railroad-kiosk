@@ -49,50 +49,54 @@ export function PrimarySourceComposition({
 
   return (
     <section className={sectionClass} aria-label="Primary source evidence">
-      <div className={styles.inlineSourceHeader}>
-        <span className={styles.primaryLabel}>Primary source</span>
-        <h2 className={styles.inlineSourceTitle}>
-          {source.shortLabel}{' '}
-          <span
-            style={{
-              fontWeight: 500,
-              opacity: 0.85,
-              fontSize: '0.92em',
-            }}>
-            ({source.year})
-          </span>
-        </h2>
-      </div>
       <div className={styles.inlineSourceComposition}>
         <div className={styles.inlineSourceVisualAnchor}>
-          {imageStack ?? defaultStack}
-          <div className={styles.inlineSourceLayerContent}>
-            <p className={styles.inlineSourceOverlayHint}>
-              For more detail, enlarge the scan.
-            </p>
-            <div className={styles.inlineSourceActions}>
-              {furtherReading ? (
+          <div className={styles.inlineSourceHeader}>
+            <span className={styles.primaryLabel}>Primary source</span>
+            <h2 className={styles.inlineSourceTitle}>
+              {source.shortLabel}
+              {source.year ? (
+                <>
+                  {' '}
+                  <span
+                    style={{
+                      fontWeight: 500,
+                      opacity: 0.85,
+                      fontSize: '0.92em',
+                    }}>
+                    ({source.year})
+                  </span>
+                </>
+              ) : null}
+            </h2>
+          </div>
+          <div className={styles.inlineSourceImageStack}>
+            {imageStack ?? defaultStack}
+            <div className={styles.inlineSourceLayerContent}>
+              <div className={styles.inlineSourceActions}>
+                {furtherReading ? (
+                  <a
+                    href={furtherReading.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.inlineArchiveLink}>
+                    {furtherReading.label} ↗
+                  </a>
+                ) : null}
                 <a
-                  href={furtherReading.url}
+                  href={source.archiveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.inlineArchiveLink}>
-                  {furtherReading.label} ↗
+                  Open at {source.archiveName} ↗
                 </a>
-              ) : null}
-              <a
-                href={source.archiveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.inlineArchiveLink}>
-                Open at {source.archiveName} ↗
-              </a>
-              <button
-                type="button"
-                className={styles.enlargeBtn}
-                onClick={onEnlarge}>
-                Enlarge
-              </button>
+                <button
+                  type="button"
+                  className={styles.enlargeBtn}
+                  onClick={onEnlarge}>
+                  Enlarge
+                </button>
+              </div>
             </div>
           </div>
         </div>

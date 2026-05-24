@@ -1,16 +1,35 @@
 'use client'
 
-import { AnimatePresence, motion } from 'framer-motion'
-import { useCallback, useEffect, useId, useRef, useState } from 'react'
-import { createPortal } from 'react-dom'
+import { motion } from 'framer-motion'
+import { useCallback, useState } from 'react'
 import styles from '@/app/kiosk/kiosk.module.css'
-import { useKioskPortalRoot } from '@/lib/use-kiosk-portal-root'
+import { FigureFieldLogModal } from '@/app/components/iron-road/FigureFieldLogModal'
 import {
   engineeringLeaderById,
   HART_BLOOMER_SOURCE,
   type EngineeringLeader,
   type EngineeringLeaderId,
 } from '@/lib/engineering-leaders'
+
+function leaderFieldLogProfile(
+  leader: EngineeringLeader
+): {
+  name: string
+  epithet: string
+  challenge: string
+  fieldLogSource?: EngineeringLeader['fieldLogSource']
+  fieldLogOmitPrimarySource?: boolean
+  fieldLogCoda?: string
+} {
+  return {
+    name: leader.name,
+    epithet: leader.epithet,
+    challenge: leader.challenge,
+    fieldLogSource: leader.fieldLogSource,
+    fieldLogOmitPrimarySource: leader.fieldLogOmitPrimarySource,
+    fieldLogCoda: leader.fieldLogCoda,
+  }
+}
 
 type Props = {
   leaderId: EngineeringLeaderId
@@ -22,149 +41,6 @@ type Props = {
   presentation?: 'default' | 'laborHorizontal'
   /** When false, Labor card uses light motion (parent may still stagger entrance). */
   reduceMotion?: boolean | null
-}
-
-function EngineeringFieldLogModal({
-  leader,
-  open,
-  onClose,
-}: {
-  leader: EngineeringLeader | null
-  open: boolean
-  onClose: () => void
-}) {
-  const titleId = useId()
-  const panelRef = useRef<HTMLDivElement>(null)
-  const portalRoot = useKioskPortalRoot()
-  const primarySrc = leader?.fieldLogOmitPrimarySource
-    ? null
-    : (leader?.fieldLogSource ?? HART_BLOOMER_SOURCE)
-
-  useEffect(() => {
-    if (!open) return
-    const prev = document.activeElement as HTMLElement | null
-    panelRef.current?.focus()
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
-    }
-    document.addEventListener('keydown', onKey)
-    return () => {
-      document.removeEventListener('keydown', onKey)
-      prev?.focus?.()
-    }
-  }, [open, onClose])
-
-  if (!portalRoot) return null
-
-  return createPortal(
-    <AnimatePresence>
-      {open && leader && (
-        <motion.div
-          className={`${styles.modalBackdrop} ${styles.engineeringFieldLogBackdrop}`}
-          role="presentation"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          onMouseDown={e => {
-            if (e.target === e.currentTarget) onClose()
-          }}>
-          <motion.div
-            ref={panelRef}
-            className={styles.engineeringFieldLogPanel}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby={titleId}
-            tabIndex={-1}
-            initial={{ opacity: 0, y: 20, rotateX: 8 }}
-            animate={{ opacity: 1, y: 0, rotateX: 0 }}
-            exit={{ opacity: 0, y: 12, rotateX: 4 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}>
-            <button
-              type="button"
-              className={styles.closeBtn}
-              onClick={onClose}
-              aria-label="Close field log">
-              ×
-            </button>
-            <p className={styles.engineeringFieldLogKicker}>Field log</p>
-            <h2 id={titleId} className={styles.engineeringFieldLogTitle}>
-              {leader.name}{' '}
-              <span className={styles.engineeringFieldLogEpithet}>
-                · {leader.epithet}
-              </span>
-            </h2>
-            <section
-              className={styles.engineeringFieldLogSection}
-              aria-label="Challenge">
-              <h3 className={styles.engineeringFieldLogH3}>The challenge</h3>
-              {leader.challenge.split(/\n\n+/).map((chunk, i) => (
-                <p key={i} className={styles.engineeringFieldLogBody}>
-                  {chunk.trim()}
-                </p>
-              ))}
-            </section>
-            {primarySrc ? (
-              <section
-                className={styles.engineeringFieldLogSection}
-                aria-label="Primary source">
-                <h3 className={styles.engineeringFieldLogH3}>
-                  {primarySrc.sectionHeading ??
-                    (leader.fieldLogSource
-                      ? 'Primary source (survey)'
-                      : 'Primary source (shared stereo)')}
-                </h3>
-                <p className={styles.engineeringFieldLogMeta}>
-                  {primarySrc.shortLabel}
-                  {primarySrc.year ? ` (${primarySrc.year})` : ''}
-                </p>
-                {primarySrc.horizontalScroll ? (
-                  <p
-                    className={styles.engineeringFieldLogScrollHint}
-                    aria-hidden>
-                    Scroll sideways to follow the map
-                  </p>
-                ) : null}
-                <div
-                  className={
-                    primarySrc.horizontalScroll
-                      ? `${styles.engineeringFieldLogScan} ${styles.engineeringFieldLogScanWide}`
-                      : styles.engineeringFieldLogScan
-                  }>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={primarySrc.imageUrl} alt={primarySrc.imageAlt} />
-                </div>
-                {primarySrc.transcript.split(/\n\n+/).map((chunk, i) => (
-                  <p key={i} className={styles.engineeringFieldLogSnippet}>
-                    {chunk.trim()}
-                  </p>
-                ))}
-                {primarySrc.archiveUrl && primarySrc.archiveName ? (
-                  <a
-                    href={primarySrc.archiveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.inlineArchiveLink}>
-                    Open at {primarySrc.archiveName} ↗
-                  </a>
-                ) : null}
-              </section>
-            ) : null}
-            {leader.fieldLogCoda ? (
-              <section
-                className={styles.engineeringFieldLogSection}
-                aria-label="Why this matters">
-                <p className={styles.engineeringFieldLogBody}>
-                  {leader.fieldLogCoda}
-                </p>
-              </section>
-            ) : null}
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>,
-    portalRoot
-  )
 }
 
 function ArchitectCard({
@@ -297,10 +173,11 @@ export function EngineeringLeaderSpotlight({
           onOpen={setFieldLog}
           reduceMotion={reduceMotionProp}
         />
-        <EngineeringFieldLogModal
-          leader={fieldLog}
+        <FigureFieldLogModal
+          profile={fieldLog ? leaderFieldLogProfile(fieldLog) : null}
           open={fieldLog != null}
           onClose={closeLog}
+          fallbackPrimarySource={HART_BLOOMER_SOURCE}
         />
       </>
     )
@@ -319,10 +196,11 @@ export function EngineeringLeaderSpotlight({
           <ArchitectCard leader={leader} onOpen={setFieldLog} />
         </div>
       </section>
-      <EngineeringFieldLogModal
-        leader={fieldLog}
+      <FigureFieldLogModal
+        profile={fieldLog ? leaderFieldLogProfile(fieldLog) : null}
         open={fieldLog != null}
         onClose={closeLog}
+        fallbackPrimarySource={HART_BLOOMER_SOURCE}
       />
     </>
   )

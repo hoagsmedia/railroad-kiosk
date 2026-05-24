@@ -54,10 +54,6 @@
   margin-inline: auto;
 }
 
-.museumHeroFigure .inlineSourceLayerContent {
-  transform: translate(-50%, 10px);
-}
-
 .museumHeroFigureConsequences .inlineSourceHeader {
   text-align: center;
 }
@@ -70,82 +66,68 @@
 .museumLaborShell {
   flex: 1;
   min-height: 0;
-  display: flex;
-  flex-direction: column;
-  gap: calc(var(--museum-gap) * 1.15);
-  padding-top: 0.3rem;
-  padding-bottom: 0.85rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr) minmax(260px, 300px);
+  grid-template-rows: auto auto auto;
+  grid-template-areas:
+    'copy       primary .'
+    'figure     primary .'
+    'gallery    gallery  perspectives';
+  gap: calc(var(--museum-gap) * 0.72);
+  padding-top: 0.15rem;
+  padding-bottom: 0.55rem;
   box-sizing: border-box;
   overflow: hidden;
+  align-items: start;
 }
 
-.museumLaborShell > * {
-  min-height: 0;
-}
-
-.museumLaborTop {
-  position: relative;
-  z-index: 1;
-  flex: 0 0 44%;
-  min-height: 0;
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-  gap: var(--museum-gap);
-  align-items: stretch;
-  overflow: hidden;
-}
-
-.museumLaborBottom {
-  position: relative;
-  z-index: 2;
-  flex: 1 1 0;
-  min-height: 0;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 300px);
-  gap: var(--museum-gap);
-  align-items: stretch;
-  overflow: hidden;
-}
-
-.museumLaborTopLeft {
+.museumLaborBentoCell {
   min-width: 0;
   min-height: 0;
-  display: flex;
-  flex-direction: column;
-  gap: calc(var(--museum-gap) * 0.55);
-  overflow: hidden;
+  box-sizing: border-box;
+  border-radius: 6px;
+  border: 1px solid var(--kiosk-gold-a22);
+  background: linear-gradient(
+    168deg,
+    rgba(28, 22, 18, 0.48) 0%,
+    rgba(14, 11, 9, 0.32) 100%
+  );
 }
 
-.museumLaborCopy {
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow: hidden;
+.museumLaborBentoCopy {
+  grid-area: copy;
+  padding: 0.15rem 0.35rem 0.2rem 0;
+  overflow: visible;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 
-.museumLaborFigureAnchor {
-  flex: 0 0 auto;
-  min-height: 0;
-  width: 100%;
-  max-width: var(--kiosk-key-figure-max-w);
-}
-
-.museumLaborTopLeft .museumLaborFigureCardBody {
-  padding: 0.7rem 0.85rem;
-  gap: 0.55rem;
-}
-
-.museumLaborTopLeft .museumLaborFigureFieldLogBtn {
-  padding: 0.45rem 0.75rem;
-  font-size: 0.7rem;
-}
-
-.museumLaborCopy .screenBody {
+.museumLaborBentoCopy .screenBody {
   max-width: none;
   line-height: 1.38;
 }
 
-.museumLaborCopy .screenBody p + p {
+.museumLaborBentoCopy .screenBody p + p {
   margin-top: 0.35rem;
+}
+
+.museumLaborBentoFigure {
+  grid-area: figure;
+  min-width: 0;
+  width: 100%;
+  max-width: var(--kiosk-key-figure-max-w);
+}
+
+.museumLaborBentoFigure .museumLaborFigureCardBody {
+  padding: 0.7rem 0.85rem;
+  gap: 0.55rem;
+}
+
+.museumLaborBentoFigure .museumLaborFigureFieldLogBtn {
+  padding: 0.45rem 0.75rem;
+  font-size: 0.7rem;
 }
 
 .museumLaborFigureCard {
@@ -259,7 +241,7 @@
     0 8px 28px rgba(0, 0, 0, 0.38);
 }
 
-.museumLaborTopLeft .museumLaborFigureCardPhoto {
+.museumLaborBentoFigure .museumLaborFigureCardPhoto {
   width: 6.1rem;
   height: 7.1rem;
 }
@@ -319,20 +301,21 @@
 }
 
 .museumLaborPrimary {
+  grid-area: primary;
+  position: relative;
+  left: 80px;
+  align-self: stretch;
   min-width: 0;
   min-height: 0;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   overflow: hidden;
-  padding: 0.55rem 0.5rem 0.25rem;
-  border-radius: 5px;
-  background: linear-gradient(
-    168deg,
-    rgba(28, 22, 18, 0.55) 0%,
-    rgba(14, 11, 9, 0.35) 100%
-  );
-  border: 1px solid var(--kiosk-gold-a18);
+  padding: 0.15rem 0.35rem 0.2rem;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .museumLaborPrimary .inlineSourceSection,
@@ -381,12 +364,6 @@
 .museumLaborPrimary .inlineSourceLayerContent {
   max-height: min(42%, 9rem);
   min-height: 3.25rem;
-  left: 50%;
-  right: auto;
-  bottom: 6px;
-  width: min(calc(100% - 12px), var(--kiosk-primary-overlay-max-w));
-  max-width: var(--kiosk-primary-overlay-max-w);
-  transform: translate(-50%, 4px);
 }
 
 .museumLaborPrimary
@@ -401,22 +378,28 @@
 }
 
 .museumLaborGallery {
+  grid-area: gallery;
   min-width: 0;
   width: 100%;
   min-height: 0;
+  align-self: stretch;
+  height: auto;
+  margin-top: 0.85rem;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
 }
 
 /* Film gallery chrome on <section.exhibitGallery> so title + strip share one frame */
 .museumLaborGallery .exhibitGallery {
   margin: 0;
   max-width: none;
-  flex: 1 1 auto;
+  flex: 0 0 auto;
+  height: fit-content;
   min-height: 0;
   display: flex;
   flex-direction: column;
-  padding: 0.35rem 0.85rem 0.45rem;
+  padding: 0.22rem 0.85rem 0.28rem;
   overflow: hidden;
   border-radius: 6px;
   border: 1px solid var(--kiosk-gold-a34);
@@ -438,7 +421,7 @@
   display: flex;
   flex-direction: column;
   min-height: 0;
-  flex: 1 1 auto;
+  flex: 0 0 auto;
   margin-top: 0;
   border-radius: 0;
   border: none;
@@ -450,13 +433,13 @@
 .museumLaborGallery .exhibitLaborGalleryPanel .exhibitGalleryTitle {
   flex-shrink: 0;
   font-family: var(--font-playfair), Georgia, serif;
-  font-size: clamp(0.86rem, 1.35vw, 0.98rem);
+  font-size: clamp(0.8rem, 1.25vw, 0.92rem);
   font-weight: 600;
   letter-spacing: 0.07em;
   text-transform: uppercase;
   color: #ebe3d8;
   margin: 0;
-  padding: 0.48rem 0 0.4rem;
+  padding: 0.32rem 0 0.26rem;
   text-align: left;
   background: transparent;
   /* Same inset as strip below — one card, not a stacked header */
@@ -465,9 +448,9 @@
 
 /* Photo row: shares horizontal padding with title; no decorative sprockets */
 .museumLaborGallery .exhibitLaborFilmStrip {
-  flex: 1 1 auto;
-  min-height: min(13.5rem, 28cqh);
-  padding: 0.52rem 0 0.5rem;
+  flex: 0 0 auto;
+  min-height: 0;
+  padding: 0.32rem 0 0.3rem;
   border: none;
   border-radius: 0;
   background: transparent;
@@ -476,14 +459,14 @@
 }
 
 .museumLaborGallery .exhibitGalleryGrid {
-  flex: 1 1 auto;
+  flex: 0 0 auto;
   min-height: 0;
-  height: 100%;
+  height: auto;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   column-gap: 0.65rem;
-  row-gap: 0.4rem;
-  align-content: stretch;
+  row-gap: 0.28rem;
+  align-content: start;
   justify-content: start;
   justify-items: stretch;
   align-items: stretch;
@@ -512,18 +495,18 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  flex: 1 1 auto;
+  flex: 0 0 auto;
   min-height: 0;
   width: 100%;
   max-width: 100%;
-  gap: 0.32rem;
+  gap: 0.2rem;
   margin: 0;
 }
 
 .museumLaborGallery .exhibitLaborGalleryMatBtn {
   display: flex;
   flex-direction: column;
-  flex: 1 1 auto;
+  flex: 0 0 auto;
   min-height: 0;
   padding: 0;
   margin: 0;
@@ -545,11 +528,11 @@
 
 .museumLaborGallery .exhibitLaborGalleryImgMat {
   position: relative;
-  flex: 1 1 auto;
+  flex: 0 0 auto;
   width: 100%;
   max-width: 100%;
-  min-height: 7.25rem;
-  aspect-ratio: 4 / 3;
+  max-height: 9.5rem;
+  aspect-ratio: 16 / 9;
   line-height: 0;
   border-radius: 2px;
   background: rgba(6, 5, 4, 0.35);
@@ -624,24 +607,37 @@
   box-sizing: border-box;
   margin: 0;
   text-align: left;
-  font-size: 0.72rem;
-  line-height: 1.38;
+  font-size: 0.64rem;
+  line-height: 1.28;
   overflow-wrap: anywhere;
 }
 
 .museumLaborPerspectives {
+  grid-area: perspectives;
   align-self: stretch;
   min-height: 0;
   min-width: 0;
-  overflow: hidden;
-}
-
-.museumLaborPerspectives .perspectives {
-  height: 100%;
-  min-height: 0;
+  margin-top: 0.85rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+}
+
+.museumLaborPerspectives .perspectives {
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  border: 1px solid rgba(139, 41, 66, 0.45);
+  padding: 0.72rem 0.82rem;
+}
+
+.museumLaborPerspectives .perspectivesTitle {
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
 }
 
 .museumLaborPerspectives .perspectivesBody {
@@ -649,8 +645,8 @@
   min-height: 0;
   overflow: hidden;
   display: block;
-  font-size: 0.92rem;
-  line-height: 1.58;
+  font-size: clamp(0.88rem, 1.35vw, 0.98rem);
+  line-height: 1.5;
 }
 
 .exhibitPage[data-layout='vision'] .museumNarrative,
@@ -891,12 +887,9 @@
 }
 
 .exhibitLaborPrimaryComposition .inlineSourceLayerContent {
-  width: min(100%, var(--kiosk-primary-overlay-max-w));
-  max-width: var(--kiosk-primary-overlay-max-w);
   box-sizing: border-box;
   max-height: min(62%, 9.5rem);
   min-height: 3.85rem;
-  transform: translate(-50%, 4px);
 }
 
 .exhibitLaborPrimaryComposition
@@ -1420,15 +1413,9 @@
 }
 
 .exhibitGeographyMapBand .inlineSourceLayerContent {
-  left: 50%;
-  right: auto;
-  bottom: 4px;
-  width: min(calc(100% - 8px), var(--kiosk-primary-overlay-max-w));
-  max-width: var(--kiosk-primary-overlay-max-w);
   max-height: 46%;
   min-height: 4.25rem;
   padding: 0.4rem 0.5rem 0.45rem;
-  transform: translate(-50%, 0);
 }
 
 .exhibitGeographyMapBand .inlineSourceLayerContent .inlineSourceTranscript {
@@ -1475,13 +1462,3 @@
   max-height: min(42%, 9.5rem);
 }
 
-/* Consequences — narrow telegraph column */
-.exhibitPage[data-layout='consequences'] .exhibitMain {
-  max-width: 42rem;
-  margin-inline: auto;
-  width: 100%;
-}
-
-.exhibitPage[data-layout='consequences'] .exhibitHeadingWrap {
-  text-align: center;
-}

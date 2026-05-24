@@ -126,7 +126,7 @@ function HistoricalFigureModal({
                             className={
                               styles.historicalFigureModalGalleryCaption
                             }>
-                            {item.caption}
+                            {formatKioskBodySegment(item.caption)}
                           </figcaption>
                         ) : null}
                       </figure>

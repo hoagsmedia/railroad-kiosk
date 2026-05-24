@@ -1,4 +1,5 @@
 import type { TimelineAnchor } from '@/lib/kiosk-timeline'
+import type { EngineeringFieldLogSource } from '@/lib/engineering-leaders'
 
 /** Public file under `public/assets/primary-sources/` (URL-encoded for safe paths). */
 export function assetPrimary(filename: string): string {
@@ -76,7 +77,7 @@ export function primarySourceForExhibitGalleryItem(
     archiveUrl:
       item.archiveUrl ??
       'https://www.loc.gov/pictures/search/?q=transcontinental+railroad+Chinese',
-    archiveName: item.archiveName ?? 'Library of Congress (search)',
+    archiveName: item.archiveName ?? 'Library of Congress',
   }
 }
 
@@ -111,7 +112,9 @@ export type KioskScreen = {
   body: string[]
   bodySections?: BodySection[]
   conceptThread?: string
-  primarySource: PrimarySource
+  primarySource?: PrimarySource
+  /** Optional second artifact (e.g. Consequences Plains Nations column). */
+  secondarySource?: PrimarySource
   perspectives?: Perspectives
   gallery?: ExhibitGalleryItem[]
   galleryTitle?: string
@@ -121,16 +124,21 @@ export type KioskScreen = {
   historicalFigure?: HistoricalFigureSpotlight
 }
 
-/** Utah screen: Brigham Young strip (Labor-style layout, informational only). */
-export type UtahLaborFigureProfile = {
+/** Key figure with field log modal (Utah Young, Race Huntington, etc.). */
+export type KioskKeyFigureProfile = {
   name: string
   epithet: string
   roleLine: string
-  era: string
-  leadershipLine: string
+  era?: string
+  fieldLogChallenge: string
+  fieldLogSource?: EngineeringFieldLogSource
+  fieldLogOmitPrimarySource?: boolean
   imageUrl: string
   imageAlt: string
 }
+
+/** @deprecated Use `KioskKeyFigureProfile`. */
+export type UtahLaborFigureProfile = KioskKeyFigureProfile
 
 export const UTAH_LABOR_STEREO_DEVILS_GATE: PrimarySource = {
   shortLabel: 'Devil’s Gate bridge, Weber Canyon',
@@ -141,12 +149,12 @@ export const UTAH_LABOR_STEREO_DEVILS_GATE: PrimarySource = {
   imageAlt:
     'Stereograph: Union Pacific train on a timber trestle at Devil’s Gate, Weber Canyon',
   transcript:
-    'Russell framed the **Union Pacific** as spectacle: a **timber trestle** over the water, excursion cars, and the canyon walls Utah crews were grading toward **Promontory**.',
+    'Russell photographed the **Union Pacific** for promotion: a **timber trestle**, excursion cars, and the canyon walls Utah crews graded toward **Promontory**.',
   kioskTranscript:
     '**UP** stereograph: trestle and excursion train in **Weber Canyon**.',
   archiveUrl:
     'https://www.loc.gov/pictures/search/?q=Devil%27s+Gate+Weber+Russell',
-  archiveName: 'Library of Congress (search)',
+  archiveName: 'Library of Congress',
 }
 
 export const UTAH_LABOR_STEREO_ECHO_CAMP: PrimarySource = {
@@ -168,14 +176,64 @@ export const UTAH_LABOR_STEREO_ECHO_CAMP: PrimarySource = {
 
 export const UTAH_LABOR_YOUNG_PROFILE: UtahLaborFigureProfile = {
   name: 'Brigham Young',
-  epithet: 'Territorial planner',
-  roleLine:
-    'Signed 1868 Union Pacific contract; delegated bishop-led grading crews',
+  epithet: 'Territorial Planner',
+  roleLine: 'Signed 1868 Rail Contracts',
   era: 'c. 1868 · Echo & Weber Canyons',
-  leadershipLine:
-    'He pressed company officers by telegraph for tools and a Salt Lake connection. When shipments fell short, he sometimes paid from his own funds while Utah crews and the **Central Pacific** pushed toward Promontory.',
+  fieldLogChallenge:
+    '**Young** treated the railroad as a matter of survival for Utah Territory. He dealt directly with **Union Pacific**’s **Thomas Durant** and **Central Pacific** leaders to protect wages for local workers.\n\nWhen **Union Pacific** ran short of cash and failed to deliver tools or pay, **Young** pressed officers by telegraph and used Church funds to cover gaps. The contracts kept thousands of Utah men employed while both lines pushed across the territory.',
+  fieldLogSource: {
+    shortLabel: 'Latter-day Saint grading camp, Echo Canyon',
+    year: 'ca. 1868',
+    sectionHeading: 'Primary source',
+    imageUrl: assetPrimary('mormon-village.jpg'),
+    imageAlt:
+      'Andrew J. Russell stereograph of a Latter-day Saint grading camp in Echo Canyon',
+    transcript:
+      'Andrew J. Russell’s stereograph of a Latter-day Saint grading camp in Echo Canyon, ca. **1868**.',
+    archiveUrl:
+      'https://exhibits.usu.edu/exhibits/show/transcontinentalrailroad/anticipationandanxiety/latterdaysaints',
+    archiveName: 'Utah State University Digital Exhibits',
+  },
   imageUrl: assetPrimary('brigham-young.jpg'),
   imageAlt: 'Portrait of Brigham Young',
+}
+
+export const UTAH_LABOR_ASHTON_HOMESTEAD: PrimarySource = {
+  shortLabel: 'Ashton homestead, Kaysville',
+  fullTitle: 'The Ashton family homestead in Kaysville, Utah',
+  year: '',
+  imageUrl: assetPrimary('ashton-family-kaysville-1869.jpg'),
+  imageAlt:
+    'The Ashton family posed in front of their log homestead in Kaysville, Utah',
+  transcript:
+    'The Ashton family homestead in Kaysville as the Union Pacific grading crews advanced, 1869.',
+  archiveUrl:
+    'https://commons.wikimedia.org/wiki/File:Mormon_Family_(Russell%27s_Polygamy_in_Low_Life).jpg',
+  archiveName: 'Wikimedia Commons',
+}
+
+export const THE_RACE_HUNTINGTON_PROFILE: KioskKeyFigureProfile = {
+  name: 'Collis P. Huntington',
+  epithet: 'Political Negotiator',
+  roleLine: 'CP Vice President',
+  era: 'c. 1869 · Washington, D.C.',
+  fieldLogChallenge:
+    'Operating out of Washington, D.C., Huntington handled the telegraph communications and political lobbying for the Central Pacific. While crews blasted through the mountains, Huntington engaged in a high-stakes paper war against Union Pacific\'s Thomas Durant. His aggressive negotiations in the capital are what ultimately forced the federal government to step in and legally declare Promontory Summit as the official terminus point.',
+  fieldLogSource: {
+    shortLabel: 'Collis P. Huntington at his office desk',
+    year: 'ca. mid-1890s',
+    sectionHeading: 'Primary source',
+    imageUrl: assetPrimary('collis-p-huntington-desk.png'),
+    imageAlt:
+      'Archival photograph of Collis P. Huntington writing correspondence at his office desk',
+    transcript:
+      'Collis P. Huntington at work in his corporate office, ca. mid-1890s.',
+    archiveUrl:
+      'https://mds.marshall.edu/cgi/viewcontent.cgi?article=1143&context=sc_finding_aids',
+    archiveName: 'Marshall University Digital Scholar',
+  },
+  imageUrl: assetPrimary('collis-p-huntington.jpg'),
+  imageAlt: 'Portrait of Collis P. Huntington, Central Pacific vice president',
 }
 
 /**
@@ -194,7 +252,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
     body: [
       '**Theodore Judah** was chief engineer of the **Sacramento Valley Railroad** when he surveyed a route across the **Sierra** and began seeking investors for a transcontinental line.',
       'In the **1850s**, Congress funded **Pacific Railroad Surveys** from the **Mississippi** to the **Pacific**. Equipped with **Smithsonian** instructions and elite **Parkinson & Frodsham** chronometers, parties fixed longitude and mapped rival routes across the **West**.',
-      '**Judah** built on that baseline with localized fieldwork, using transits, barometers, and leveling chains to prove the **Dutch Flat Route** could climb the **Sierra** at a manageable grade. His **maps**, court testimony, and lobbying gave backers something concrete: a northern crossing that could be built if someone paid for it.',
+      '**Judah** built on that baseline with field surveys, using transits, barometers, and leveling chains to show the **Dutch Flat Route** could climb the **Sierra** at a manageable grade. His **maps**, court testimony, and lobbying gave backers a mapped northern crossing they could fund.',
     ],
     gallery: [
       {
@@ -220,7 +278,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
       imageAlt:
         'Parkinson and Frodsham marine chronometer in its wooden case, viewed at an angle',
       transcript:
-        '**Parkinson & Frodsham** marine chronometers were built to keep exact time through temperature swings, first for **British** navigation at sea and then for mapping trackless country on land. Survey teams paired them with celestial readings to fix longitude during the **Pacific Railroad Surveys** (**1853–1855**), producing the baseline maps **Theodore Judah** later used to target the **Sierra Nevada**. On the ground, Judah applied the same mathematical rigor with transits and leveling chains to prove the **Dutch Flat Route** at roughly **105 feet per mile**.',
+        '**Parkinson & Frodsham** chronometers kept ship time through temperature changes, then served land surveys. Teams paired them with celestial readings to fix longitude during the **Pacific Railroad Surveys** (**1853–1855**), the baseline maps **Judah** later used in the **Sierra Nevada**. Judah applied the same methods with transits and chains to argue for the **Dutch Flat Route** at roughly **105 feet per mile**.',
       archiveUrl:
         'https://timeandnavigation.si.edu/multimedia-asset/marine-chronometer-by-parkinson-frodsham-no-2349',
       archiveName: 'Smithsonian Time and Navigation',
@@ -243,8 +301,8 @@ export const KIOSK_SCREENS: KioskScreen[] = [
     perspectives: {
       title: 'For context',
       body: [
-        'The **Pacific Railroad Surveys** (**1853–1855**) documented multiple geographically viable transcontinental routes in a detailed **twelve-volume** report, anchored by **Parkinson & Frodsham** chronometers that fixed longitude across the **West**. Political **gridlock** over the route’s location followed.',
-        'Critics mocked **Theodore Judah** as “Crazy Judah,” but his **Sierra Nevada** surveys, built on federal baseline maps and executed with the same precision, bypassed that stalemate and convinced investors the **Dutch Flat Route** could work.',
+        'The **Pacific Railroad Surveys** (**1853–1855**) mapped multiple transcontinental routes in a **twelve-volume** report, using **Parkinson & Frodsham** chronometers to fix longitude across the **West**. Congress then stalled over where to build.',
+        'Critics mocked **Theodore Judah** as “Crazy Judah,” but his **Sierra Nevada** surveys, built on federal baseline maps, persuaded investors the **Dutch Flat Route** could work.',
       ],
     },
   },
@@ -319,8 +377,8 @@ export const KIOSK_SCREENS: KioskScreen[] = [
     perspectives: {
       title: 'For context',
       body: [
-        'Wartime urgency sharpened the case. **California** had joined the **Union** in **1850**, and leaders in **Washington** worried about keeping the **Pacific** coast connected if fighting dragged on. A railroad promised faster mail, troops, and freight than **Overland** trails could move.',
-        'The **1862** statute bundled more than rails: **Government bonds** paid in stages, alternating **land-grant** sections along the right-of-way, and a **telegraph** line to the **Pacific**. Companies could borrow against the promise of future traffic and settlers.',
+        'With the **Civil War** underway, **California**’s place in the **Union** mattered. Leaders in **Washington** wanted the **Pacific** coast tied to the rest of the country if fighting continued. A railroad could move mail, troops, and freight faster than **Overland** trails.',
+        'The **1862** law included more than track: **Government bonds** paid in stages, alternating **land-grant** sections along the right-of-way, and a **telegraph** line to the **Pacific**. Companies could borrow against expected traffic and settlement.',
       ],
     },
   },
@@ -357,7 +415,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
         ),
         imageAlt:
           'Historical photograph of railroad construction in the Sierra Nevada mountains',
-        caption: 'Powder, cold, and hard rock behind the celebration images.',
+        caption: 'Building the Secret Town wooden trestle, ca. 1867.',
         modalTitle: 'Sierra Nevada railroad construction',
         modalYear: 'c. 1865 to 1869',
         modalTranscript:
@@ -370,7 +428,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
         imageUrl: assetPrimary('cp-tunnel-8-east-portal-stereograph.png'),
         imageAlt:
           'Alfred A. Hart stereograph of a Chinese worker at the east portal heading of Central Pacific Tunnel No. 8 in the Sierra Nevada',
-        caption: 'Tunnel heading: east portal, No. 8, in the Sierra.',
+        caption: 'Workers at Tunnel No. 8 east portal, Sierra Nevada, ca. 1867.',
         modalTitle:
           'Heading of east portal, Tunnel No. 8 (Central Pacific stereograph)',
         modalYear: 'c. 1866 to 1868',
@@ -425,7 +483,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
       imageAlt:
         'Stereograph by Alfred A. Hart: deep railroad cut through rock at Bloomer Cut on the Central Pacific line',
       transcript:
-        'Hart’s stereo cards marketed the **Central Pacific** as an engineering achievement. **Bloomer Cut** shows powder, drills, and workers deep in granite. Dodge’s **Field Log** gives the **UP** side of the same problem.',
+        'Hart’s stereo cards sold the **Central Pacific** as an engineering feat. **Bloomer Cut** shows powder, drills, and workers in a deep, hand-blasted trench of cemented gravel. Dodge’s **Field Log** gives the **UP** side of the same problem.',
       archiveUrl: 'https://www.loc.gov/pictures/item/2005682864/',
       archiveName: 'Library of Congress Prints & Photographs',
     },
@@ -440,13 +498,13 @@ export const KIOSK_SCREENS: KioskScreen[] = [
     conceptThread:
       'Utah labor linked local organization, outside railroad money, and the race toward Promontory.',
     body: [
-      'In **1868**, **Brigham Young**’s **Union Pacific** contract put Utah workers on grades in **Echo** and **Weber** Canyons after drought reduced farm work. **Bishops** organized work sections, much as they had organized irrigation labor.',
-      'The **UP** often failed to deliver promised **tools**. **Young** pressed company officers by telegraph and sometimes covered shortages himself. With **Central Pacific** crews nearby, many Latter-day Saints earned wages on **either** line toward **Promontory**.',
+      'In **1868**, grasshoppers and drought ruined Utah crops and left many families short of food. **Brigham Young** signed large grading contracts with **Union Pacific** and **Central Pacific**, bringing cash into local wards while the lines raced toward **Promontory**.',
+      '**Young** did not use outside labor brokers. He organized work through local wards and stakes, with **bishops** acting as foremen. Crews applied the same cooperative methods they used on irrigation canals to grade **Echo** and **Weber** Canyons.',
     ],
     perspectives: {
       title: 'For context',
       body: [
-        'Utah State’s digital exhibit connects the **1868** contract to canyon construction and the race to join the rails, using contracts, telegrams, and company correspondence.',
+        '**Utah State University**’s digital archive follows how **1868** contracts changed payment and work on the ground. Church ledgers, telegrams, and local diaries show crews from rival towns competing for speed. Communal organization let them take on difficult rock work without outside labor brokers.',
       ],
     },
     primarySource: {
@@ -456,9 +514,9 @@ export const KIOSK_SCREENS: KioskScreen[] = [
         'Weber Canyon trestle; Echo Canyon camp; Brigham Young and the 1868 Union Pacific agreement',
       year: 'c. 1868 to 1869',
       transcript:
-        'Use **Enlarge** on each stereograph for fuller captions. **Young**’s **1868** contract put Utah workers on **Echo** and **Weber** grades. Camp views and the Weber trestle show where **bishop-led** labor met **UP** steel.',
+        '**Young**’s **1868** contracts put Utah workers on **Echo** and **Weber** grades. Stereograph views of camps and the Weber trestle show where **bishop-led** labor met **UP** steel.',
       kioskTranscript:
-        '**Profile** shows **Young**’s contracting role. **Enlarge** each stereograph for **Weber** and **Echo**.',
+        '**Young**’s **1868** contracts on **Echo** and **Weber** grades.',
       archiveUrl:
         'https://exhibits.usu.edu/exhibits/show/transcontinentalrailroad/anticipationandanxiety/latterdaysaints',
       archiveName: 'USU Digital Exhibits',
@@ -476,13 +534,24 @@ export const KIOSK_SCREENS: KioskScreen[] = [
     slug: 'the-race',
     heading: 'The Race',
     conceptThread:
-      'Federal **subsidies** rewarded mileage, so speed became part of the race.',
-    body: [
-      '**Land** and **bonds** rewarded track laid, not delay. The **UP** pushed across the plains while **CP** crews worked through the **Sierra**, and company leaders argued over the meeting point.',
-      'In **April 1869**, the companies settled on **Promontory Summit**. A few days earlier, **Charles Crocker**’s crews laid **ten miles of rail in one day**. It was partly public theater, but it also required careful coordination.',
+      'Federal subsidies paid by the mile turned the push toward Promontory into a costly parallel grading race across Utah.',
+    body: [],
+    bodySections: [
+      {
+        title: 'The Communication Crisis: Grading Past Each Other',
+        paragraphs: [
+          'Union Pacific and Central Pacific rushed toward each other but refused to coordinate. Subsidies paid per mile, so grading crews in Utah often built parallel lines side by side for over 200 miles, close enough to watch rival crews blast rock. The overlap wasted millions and sharpened a corporate standoff in the desert.',
+        ],
+      },
+      {
+        title: 'The Settlement at Promontory Summit',
+        paragraphs: [
+          'Congress stepped in during April 1869 and forced company leaders to set a meeting point. They chose Promontory Summit, Utah. On April 28, Charles Crocker\'s Central Pacific crews laid ten miles of rail in one day, a staged record meant to maximize their final mileage payout before the lines connected.',
+        ],
+      },
     ],
     primarySource: {
-      shortLabel: 'Chinese workers and the iron road (1869)',
+      shortLabel: 'Chinese workers and the iron road',
       fullTitle:
         'Photograph of Chinese railroad workers with handcar on the line',
       year: '1869',
@@ -490,11 +559,10 @@ export const KIOSK_SCREENS: KioskScreen[] = [
       imageAlt:
         'Historical photograph of Chinese railroad workers with a handcar on the track',
       transcript:
-        'Images like this appeared in newspapers and albums near the end of construction. **Handcars**, **rails**, and crews still mattered while **Promontory** and the **ten-mile** record drew attention.',
-      kioskTranscript: '**Handcar** crews late push toward Promontory.',
+        'Images like this appeared in newspapers and albums near the end of construction. Handcars, rails, and crews still mattered while Promontory and the ten-mile record drew public attention.',
       archiveUrl:
         'https://www.loc.gov/pictures/search/?q=Chinese+railroad+workers+transcontinental',
-      archiveName: 'Library of Congress (search)',
+      archiveName: 'Library of Congress',
     },
     backgroundImageUrl: assetPrimary('map_xl.jpg'),
   },
@@ -511,13 +579,13 @@ export const KIOSK_SCREENS: KioskScreen[] = [
       {
         title: 'What happened',
         paragraphs: [
-          'On **May 10, 1869**, locomotives met at **Promontory Summit**, Utah Territory. Officials staged the last spike for the cameras, and Andrew J. Russell framed the scene for a national audience.',
+          'On **May 10, 1869**, locomotives met at **Promontory Summit**, Utah Territory, where Andrew J. Russell framed the scene for a national audience.',
         ],
       },
       {
         title: 'Why it mattered',
         paragraphs: [
-          'The image promoted **national reunion through steel**, but it was staged. The **Golden Spike** compressed years of **powder**, **payroll**, and **politics** into one public moment.',
+          'The image sold **national reunion through steel**, but it was staged. The **Golden Spike** folded years of **powder**, **payroll**, and **politics** into one public moment.',
         ],
       },
     ],
@@ -528,7 +596,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
       imageUrl: assetPrimary('iconic_meeting.jpg'),
       imageAlt: 'Photograph of the Last Spike ceremony at Promontory Summit',
       transcript:
-        'Russell’s photograph presents **unity through infrastructure**. Look at who is centered, who is missing, and what the frame asks viewers to remember.',
+        'Russell staged **East** meeting **West** for the camera. Note who appears in frame, who is absent, and what the image asks viewers to accept.',
       archiveUrl: 'https://www.loc.gov/pictures/item/2005677835/',
       archiveName: 'Library of Congress Prints & Photographs',
     },
@@ -541,26 +609,34 @@ export const KIOSK_SCREENS: KioskScreen[] = [
     slug: 'consequences',
     heading: 'The Consequences',
     conceptThread:
-      '**Aftermath** continued after the ceremony. Markets, land, labor, and memory kept changing.',
-    body: [
-      'Completed track moved western **timber**, **ore**, **cattle**, and **grain** on faster schedules and tied markets more tightly together. Much of the gain went to **bondholders**, railroad companies, and **shippers**.',
-      'Telegraph wires let news move faster than steam. The word **Done** became a simple message for a very complicated change in **land**, **labor**, and **law**.',
-      'For many **Plains** nations, the line came with **Army posts**, **reservations**, and pressure on **bison** herds that sustained whole economies. The railroad’s history includes growth, broken treaties, and lasting disruption.',
+      '**Completion** tied the continent together, but it did not settle who gained wealth, who lost land, or who bore the cost.',
+    body: [],
+    bodySections: [
+      {
+        title: 'A Complicated Legacy',
+        paragraphs: [
+          'The physical completion of the track completely revolutionized global markets. Unbroken rail lines moved western timber, ore, cattle, and grain across the continent on lightning-fast schedules, tying regional economies tightly together. However, much of the massive financial gain went directly to corporate shippers, railroad companies, and wealthy corporate bondholders.',
+        ],
+      },
+      {
+        title: 'Impact on the Plains Nations',
+        paragraphs: [
+          'For Native American communities, this infrastructure brought rapid, devastating shifts. The line cut directly through ancestral territories, bringing a surge of U.S. Army outposts, forced relocation onto reservations, and severe, destructive pressure on the great bison herds that sustained whole indigenous economies. The history of the iron road is a deeply layered chain of growth, broken treaties, and lasting social change.',
+        ],
+      },
     ],
-    primarySource: {
-      shortLabel: 'The “Done” telegram (May 10, 1869)',
+    secondarySource: {
+      shortLabel: 'Shoshone observer above the tracks, 1869.',
       fullTitle:
-        'Western Union telegraph transmission: “Done.” (Promontory Summit)',
+        'Alfred A. Hart, Shoshone observer above the tracks, Nevada, 1869',
       year: '1869',
-      imageUrl: assetPrimary('done-telegram-facsimile.svg'),
+      imageUrl: assetPrimary('hart-indian-viewing-rail-palisades-1869.png'),
       imageAlt:
-        'Facsimile Western Union style telegraph form with the word DONE in large type',
+        'Shoshone observer above the Central Pacific tracks, Nevada, 1869',
       transcript:
-        'Accounts often remember a short wire: **Done**. This facsimile isolates the word; the Park Service link gives the ceremony context.',
-      archiveUrl:
-        'https://www.nps.gov/gosp/learn/historyculture/the-last-spike.htm',
-      archiveName:
-        'National Park Service (Golden Spike National Historical Park)',
+        'Alfred A. Hart photograph of a Shoshone observer viewing the Central Pacific line in Nevada, 1869.',
+      archiveUrl: 'https://www.loc.gov/item/2005683020/',
+      archiveName: 'Library of Congress',
     },
     backgroundImageUrl: assetPrimary('Pacific Railway Act.jpg'),
   },

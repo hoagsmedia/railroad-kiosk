@@ -1,16 +1,87 @@
 /* ── Utah & the line: narrative column (incl. Devil's Gate) | perspectives + Echo ── */
 
 .museumUtahShell {
+  position: relative;
   flex: 1;
   min-height: 0;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(248px, 0.42fr);
   gap: var(--museum-gap);
   align-items: start;
+  overflow: visible;
 }
 
-/* Col 1: narrative + Young card + Devil's Gate (centered) */
+/* Center homestead vignette — absolute so columns stay unchanged */
+.museumUtahCenterFigure {
+  position: absolute;
+  right: calc(42% - 0.25rem);
+  top: calc(50% - 40px);
+  left: auto;
+  z-index: 0;
+  width: min(24.2rem, 41.8vw);
+  margin: 0;
+  transform: none;
+  transform-origin: top right;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  align-items: center;
+  text-align: center;
+}
+
+.museumUtahCenterFigure .inlineSourceComposition {
+  margin: 0;
+  padding: 0;
+}
+
+.museumUtahCenterFigure .inlineSourceVisualAnchor {
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.museumUtahCenterFigure .inlineSourceFrameOuter,
+.museumUtahCenterFigure .inlineSourceFrame,
+.museumUtahCenterFigure .inlineSourceMat,
+.museumUtahCenterFigure .inlineSourceImgWrap {
+  width: fit-content;
+  max-width: 100%;
+}
+
+.museumUtahCenterFigure .inlineSourceMat {
+  padding: 0.45rem;
+}
+
+.museumUtahCenterFigure .inlineSourceImg {
+  display: block;
+  width: auto;
+  max-width: min(24.2rem, 41.8vw);
+  height: auto;
+  max-height: min(30.8dvh, 242px);
+  object-fit: contain;
+  filter: sepia(0.15) contrast(1.04);
+}
+
+.museumUtahCenterFigure .inlineSourceLayerContent {
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: none;
+  transform: none;
+  bottom: 0;
+  border-radius: 0 0 2px 2px;
+  pointer-events: auto;
+}
+
+.museumUtahCenterFigure .inlineSourceLayerContent .inlineSourceActions {
+  justify-content: space-between;
+}
+
+/* Col 1: narrative + Young key figure */
 .museumUtahLeft {
+  position: relative;
+  z-index: 1;
   grid-column: 1;
   grid-row: 1;
   min-width: 0;
@@ -23,41 +94,93 @@
   max-width: none;
 }
 
-.museumUtahLeft .museumLaborFigureCard {
+.museumUtahLeft .architectsSection {
   flex-shrink: 0;
+  margin: 0.1rem 0 0.15rem;
+}
+
+.museumUtahLeft .architectGridSingle {
   max-width: var(--kiosk-key-figure-max-w);
 }
 
-/* Devil's Gate: under narrative column, horizontally centered */
+/* Devil's Gate stereograph: nudge toward canvas center, larger mat */
 .museumUtahDevilsGateSlot {
+  position: relative;
+  left: -5.25rem;
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: min(100%, 28rem);
+  max-width: min(42rem, 128%);
   margin-top: 0.15rem;
   padding-top: 0.4rem;
   border-top: 1px solid rgba(255, 255, 255, 0.07);
+  box-sizing: border-box;
 }
 
 .museumUtahDevilsGateSlot .museumUtahStereoPanel {
   flex: 0 1 auto;
   width: 100%;
-  max-width: min(100%, 36rem);
+  max-width: none;
   align-items: center;
   text-align: center;
 }
 
-.museumUtahDevilsGateSlot .museumUtahStereoActions {
-  justify-content: center;
+.museumUtahDevilsGateSlot .inlineSourceComposition {
+  width: 100%;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
-/* Col 2: perspectives + Echo stereograph */
+.museumUtahDevilsGateSlot .inlineSourceVisualAnchor {
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.museumUtahDevilsGateSlot .inlineSourceFrameOuter,
+.museumUtahDevilsGateSlot .inlineSourceFrame,
+.museumUtahDevilsGateSlot .inlineSourceMat,
+.museumUtahDevilsGateSlot .inlineSourceImgWrap {
+  width: fit-content;
+  max-width: 100%;
+}
+
+.museumUtahDevilsGateSlot .inlineSourceImg {
+  display: block;
+  width: auto;
+  max-width: min(100%, 28rem);
+  height: clamp(148px, 24dvh, 260px);
+  max-height: clamp(148px, 24dvh, 260px);
+  object-fit: cover;
+  object-position: center;
+  filter: sepia(0.2) contrast(1.06);
+}
+
+.museumUtahDevilsGateSlot .inlineSourceLayerContent {
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: none;
+  transform: none;
+  bottom: 0;
+  border-radius: 0 0 2px 2px;
+}
+
+.museumUtahDevilsGateSlot .inlineSourceLayerContent .inlineSourceActions {
+  justify-content: space-between;
+}
+
+/* Col 2: perspectives + Devil's Gate stereograph */
 .museumUtahRight {
+  position: relative;
+  z-index: 1;
   grid-column: 2;
   grid-row: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
+  overflow: visible;
 }
 
 .museumUtahRight .perspectives {
@@ -102,87 +225,12 @@
   font-size: 0.92em;
 }
 
-/* Gold bezel + mat — full width */
-.utahLaborPaperOuter {
-  width: 100%;
-  padding: 2px;
-  border-radius: 3px;
-  background: var(--kiosk-bezel-gradient);
-  box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.35),
-    0 8px 24px rgba(0, 0, 0, 0.4);
-  box-sizing: border-box;
-}
-
-.utahLaborPaperMat {
-  width: 100%;
-  padding: 3px 4px;
-  border-radius: 2px;
-  background: radial-gradient(ellipse at 30% 12%, #2e2822 0%, #14110e 100%);
-  box-sizing: border-box;
-}
-
-.utahLaborPaperImgShell {
-  width: 100%;
-  line-height: 0;
-  background: #070605;
-  border: 1px solid var(--kiosk-gold-a22);
-  overflow: hidden;
-  border-radius: 1px;
-}
-
-.museumUtahStereoImg {
-  display: block;
-  width: 100%;
-  height: clamp(100px, 16dvh, 160px);
-  object-fit: cover;
-  object-position: center;
-  filter: sepia(0.2) contrast(1.06);
-}
-
-.museumUtahStereoCaption {
-  margin: 0;
-  font-size: 0.66rem;
-  line-height: 1.32;
-  color: rgba(224, 214, 204, 0.85);
-}
-
-.museumUtahStereoActions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.3rem 0.65rem;
-}
-
-/* ─ Brigham Young profile card ─ */
-.museumUtahYoungCardInner {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1rem;
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0.65rem 0.85rem;
-  text-align: left;
-  border-radius: 5px;
-  border: 1px solid var(--kiosk-gold-a22);
-  background: var(--kiosk-figure-card-surface);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.04),
-    0 6px 20px rgba(0, 0, 0, 0.28);
-}
-
-.museumUtahYoungLeadership {
-  margin: 0;
-  font-size: 0.7rem;
-  line-height: 1.38;
-  color: rgba(208, 198, 186, 0.9);
-  font-weight: 400;
-}
-
-/* ─ Responsive: stack columns; Devil's Gate stays in left column flow ─ */
+/* ─ Responsive: stack columns ─ */
 @media (max-width: 900px) {
+  .museumUtahCenterFigure {
+    display: none;
+  }
+
   .museumUtahShell {
     grid-template-columns: 1fr;
   }
@@ -191,5 +239,12 @@
   .museumUtahRight {
     grid-column: 1;
     grid-row: auto;
+  }
+
+  .museumUtahDevilsGateSlot {
+    left: 0;
+    width: 100%;
+    max-width: min(100%, 36rem);
+    margin-inline: auto;
   }
 }

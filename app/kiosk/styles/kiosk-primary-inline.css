@@ -15,11 +15,30 @@
 
 .inlineSourceVisualAnchor {
   position: relative;
-  display: block;
+  display: grid;
+  grid-template-columns: minmax(0, max-content);
   width: fit-content;
   max-width: 100%;
   overflow: visible;
   z-index: 0;
+}
+
+.inlineSourceHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+  grid-column: 1;
+  width: 0;
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.inlineSourceImageStack {
+  position: relative;
+  grid-column: 1;
+  width: fit-content;
+  max-width: 100%;
 }
 
 .exhibitDocSplitFigure .inlineSourceVisualAnchor,
@@ -33,11 +52,11 @@
 .inlineSourceLayerContent {
   position: absolute;
   z-index: 3;
-  left: 50%;
-  right: auto;
-  bottom: 8px;
-  width: min(calc(100% - 16px), var(--kiosk-primary-overlay-max-w));
-  max-width: var(--kiosk-primary-overlay-max-w);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: none;
   max-height: min(52%, 11.5rem);
   min-height: 3.25rem;
   padding: 0.55rem 0.65rem 0.55rem;
@@ -47,7 +66,7 @@
   gap: 0.35rem;
   overflow: visible;
   pointer-events: auto;
-  border-radius: 3px;
+  border-radius: 0 0 2px 2px;
   background: linear-gradient(
     to top,
     rgba(4, 3, 2, 0.97) 0%,
@@ -61,7 +80,7 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
   border: 1px solid var(--kiosk-gold-a22);
   border-top-color: var(--kiosk-gold-a08);
-  transform: translate(-50%, 6px);
+  transform: none;
 }
 
 .inlineSourceLayerContent .inlineSourceOverlayHint {
@@ -109,7 +128,7 @@
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   gap: 0.45rem 0.75rem;
   flex-shrink: 0;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
   position: relative;
   z-index: 4;
@@ -132,13 +151,6 @@
   padding: 0.35rem 0.65rem;
   font-size: 0.7rem;
   background: rgba(0, 0, 0, 0.35);
-}
-
-.inlineSourceHeader {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  margin-bottom: 0.5rem;
 }
 
 .inlineSourceTitle {

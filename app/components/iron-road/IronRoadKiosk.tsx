@@ -13,13 +13,18 @@ import styles from '@/app/kiosk/kiosk.module.css'
 import {
   KIOSK_SCREENS,
   primarySourceForExhibitGalleryItem,
+  THE_RACE_HUNTINGTON_PROFILE,
+  UTAH_LABOR_ASHTON_HOMESTEAD,
   UTAH_LABOR_STEREO_DEVILS_GATE,
-  UTAH_LABOR_STEREO_ECHO_CAMP,
   UTAH_LABOR_YOUNG_PROFILE,
   type ExhibitGalleryItem,
   type KioskScreen,
   type PrimarySource,
 } from '@/lib/kiosk-content'
+import {
+  formatKioskBodySegment,
+  KioskBodyParagraphs,
+} from '@/lib/format-kiosk-body'
 import { ConceptThreadLine } from './ConceptThreadLine'
 import { EngineeringBlueprintSidebar } from './EngineeringBlueprintSidebar'
 import { EngineeringLeaderSpotlight } from './EngineeringLeaderSpotlight'
@@ -31,7 +36,7 @@ import { PerspectivesSidebar } from './PerspectivesSidebar'
 import { ScreenBody } from './ScreenBody'
 import { TravelerProgressBar } from './TravelerProgressBar'
 import { UtahStereographPanel } from './UtahStereographPanel'
-import { UtahYoungProfileCard } from './UtahYoungProfileCard'
+import { KeyFigureProfileCard } from './KeyFigureProfileCard'
 
 type State = {
   showIntro: boolean
@@ -274,7 +279,7 @@ function ExhibitShell({
 
   const bodyBlock = <ScreenBody screen={screen} />
 
-  const laborPaperStack = (
+  const laborPaperStack = screen.primarySource ? (
     <motion.div
       className={styles.exhibitLaborPaperStage}
       style={{ transformOrigin: '100% 0%' }}
@@ -306,17 +311,17 @@ function ExhibitShell({
         </div>
       </div>
     </motion.div>
-  )
+  ) : null
 
-  const sourceBlock = (
+  const sourceBlock = screen.primarySource ? (
     <PrimarySourceComposition
       source={screen.primarySource}
       onEnlarge={() => dispatch({ type: 'OPEN_MODAL' })}
       furtherReading={screen.furtherReading}
     />
-  )
+  ) : null
 
-  const laborPrimaryComposition = (
+  const laborPrimaryComposition = screen.primarySource ? (
     <PrimarySourceComposition
       source={screen.primarySource}
       onEnlarge={() => dispatch({ type: 'OPEN_MODAL' })}
@@ -324,7 +329,7 @@ function ExhibitShell({
       imageStack={laborPaperStack}
       furtherReading={screen.furtherReading}
     />
-  )
+  ) : null
 
   const galleryTitleText = screen.galleryTitle ?? 'On the line'
 
@@ -362,18 +367,15 @@ function ExhibitShell({
                 </button>
                 {item.caption ? (
                   <figcaption className={styles.exhibitGalleryCaption}>
-                    {item.caption}
+                    {formatKioskBodySegment(item.caption)}
                   </figcaption>
                 ) : null}
-                {item.archiveUrl ? (
-                  <a
-                    href={item.archiveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`${styles.enlargeBtn} ${styles.museumPrepGalleryEnlargeLink}`}>
-                    Enlarge
-                  </a>
-                ) : null}
+                <button
+                  type="button"
+                  className={`${styles.enlargeBtn} ${styles.museumPrepGalleryEnlargeLink}`}
+                  onClick={() => openExhibitGalleryEnlarge(item)}>
+                  Enlarge
+                </button>
               </figure>
             </li>
           ))}
@@ -432,7 +434,7 @@ function ExhibitShell({
                   </button>
                   {item.caption ? (
                     <figcaption className={styles.exhibitGalleryCaption}>
-                      {item.caption}
+                      {formatKioskBodySegment(item.caption)}
                     </figcaption>
                   ) : null}
                 </figure>
@@ -464,7 +466,7 @@ function ExhibitShell({
           type="button"
           className={`${styles.navBtn} ${styles.navBtnPrimary}`}
           onClick={() => dispatch({ type: 'RESTART' })}>
-          Start over
+          START OVER
         </button>
       )}
     </nav>
@@ -560,9 +562,64 @@ function ExhibitShell({
     <div className={styles.museumCanvas}>
       <div className={styles.museumTitleBand}>{titleBlock}</div>
       <div className={styles.museumUtahShell}>
+        <figure
+          className={styles.museumUtahCenterFigure}
+          aria-label={UTAH_LABOR_ASHTON_HOMESTEAD.shortLabel}>
+          <div className={styles.museumUtahStereoHeader}>
+            <h3 className={styles.museumUtahStereoTitle}>
+              {UTAH_LABOR_ASHTON_HOMESTEAD.shortLabel}
+            </h3>
+          </div>
+          <div className={styles.inlineSourceComposition}>
+            <div className={styles.inlineSourceVisualAnchor}>
+              <div className={styles.inlineSourceFrameOuter}>
+                <div className={styles.inlineSourceFrame}>
+                  <div className={styles.inlineSourceMat}>
+                    <div className={styles.inlineSourceImgWrap}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={UTAH_LABOR_ASHTON_HOMESTEAD.imageUrl}
+                        alt={UTAH_LABOR_ASHTON_HOMESTEAD.imageAlt}
+                        className={styles.inlineSourceImg}
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className={styles.inlineSourceLayerContent}>
+                <div className={styles.inlineSourceActions}>
+                  <a
+                    href={UTAH_LABOR_ASHTON_HOMESTEAD.archiveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.inlineArchiveLink}>
+                    Open at {UTAH_LABOR_ASHTON_HOMESTEAD.archiveName} ↗
+                  </a>
+                  <button
+                    type="button"
+                    className={styles.enlargeBtn}
+                    onClick={() =>
+                      dispatch({
+                        type: 'OPEN_MODAL',
+                        source: UTAH_LABOR_ASHTON_HOMESTEAD,
+                      })
+                    }>
+                    Enlarge
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </figure>
         <div className={styles.museumUtahLeft}>
           {bodyBlock}
-          <UtahYoungProfileCard profile={UTAH_LABOR_YOUNG_PROFILE} />
+          <KeyFigureProfileCard profile={UTAH_LABOR_YOUNG_PROFILE} />
+        </div>
+        <div className={styles.museumUtahRight}>
+          {screen.perspectives ? (
+            <PerspectivesSidebar content={screen.perspectives} />
+          ) : null}
           <div className={styles.museumUtahDevilsGateSlot}>
             <UtahStereographPanel
               source={UTAH_LABOR_STEREO_DEVILS_GATE}
@@ -575,19 +632,26 @@ function ExhibitShell({
             />
           </div>
         </div>
-        <div className={styles.museumUtahRight}>
-          {screen.perspectives ? (
-            <PerspectivesSidebar content={screen.perspectives} />
-          ) : null}
-          <UtahStereographPanel
-            source={UTAH_LABOR_STEREO_ECHO_CAMP}
-            onEnlarge={() =>
-              dispatch({
-                type: 'OPEN_MODAL',
-                source: UTAH_LABOR_STEREO_ECHO_CAMP,
-              })
-            }
-          />
+      </div>
+    </div>
+  )
+
+  const theRaceLayout = (
+    <div className={styles.museumCanvas}>
+      <div className={styles.museumTitleBand}>{titleBlock}</div>
+      <div className={`${styles.museumSplitPrimary} ${styles.museumRaceShell}`}>
+        <div className={`${styles.museumNarrative} ${styles.museumRaceLeft}`}>
+          {bodyBlock}
+          <div className={styles.museumPersonAnchor}>
+            <KeyFigureProfileCard
+              profile={THE_RACE_HUNTINGTON_PROFILE}
+              fieldLogHint="Washington lobbying and Promontory"
+            />
+          </div>
+        </div>
+        <div
+          className={`${styles.museumPrimaryCell} ${styles.museumRacePrimary}`}>
+          {sourceBlock}
         </div>
       </div>
     </div>
@@ -603,18 +667,84 @@ function ExhibitShell({
     </div>
   )
 
+  const consequencesLegacySection = screen.bodySections?.[0]
+  const consequencesPlainsSection = screen.bodySections?.[1]
+
   const consequencesLayout = (
     <div className={styles.museumCanvas}>
       <div className={styles.museumTitleBand}>{titleBlock}</div>
-      <div className={styles.museumHeroStack}>
-        <div
-          className={`${styles.museumHeroTextBand} ${styles.museumHeroNarrow}`}>
-          {bodyBlock}
-        </div>
-        <div
-          className={`${styles.museumHeroFigure} ${styles.museumHeroFigureConsequences}`}>
-          {sourceBlock}
-        </div>
+      <div className={styles.museumConsequencesShell}>
+        <section
+          className={styles.museumConsequencesCol}
+          aria-label="Complicated legacy">
+          {consequencesLegacySection ? (
+            <>
+              <h2 className={styles.museumConsequencesHeading}>
+                {consequencesLegacySection.title}
+              </h2>
+              <div className={styles.museumConsequencesBody}>
+                <KioskBodyParagraphs
+                  paragraphs={consequencesLegacySection.paragraphs}
+                />
+              </div>
+            </>
+          ) : null}
+        </section>
+        <section
+          className={`${styles.museumConsequencesCol} ${styles.museumConsequencesPlainsCol}`}
+          aria-label="Impact on the Plains Nations">
+          {consequencesPlainsSection ? (
+            <>
+              <h2 className={styles.museumConsequencesHeading}>
+                {consequencesPlainsSection.title}
+              </h2>
+              <div className={styles.museumConsequencesBody}>
+                <KioskBodyParagraphs
+                  paragraphs={consequencesPlainsSection.paragraphs}
+                />
+              </div>
+            </>
+          ) : null}
+        </section>
+        {screen.secondarySource ? (
+          <figure
+            className={styles.museumConsequencesHeroFigure}
+            aria-label={screen.secondarySource.shortLabel}>
+            <p className={styles.museumConsequencesHeroTitle}>
+              {screen.secondarySource.shortLabel}
+            </p>
+            <button
+              type="button"
+              className={styles.museumConsequencesHeroBtn}
+              onClick={() =>
+                dispatch({
+                  type: 'OPEN_MODAL',
+                  source: screen.secondarySource!,
+                })
+              }
+              aria-label={`Enlarge: ${screen.secondarySource.imageAlt}`}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={screen.secondarySource.imageUrl}
+                alt={screen.secondarySource.imageAlt}
+                className={styles.museumConsequencesHeroImg}
+                loading="lazy"
+              />
+            </button>
+            {screen.secondarySource.archiveUrl &&
+            screen.secondarySource.archiveName ? (
+              <figcaption className={styles.museumConsequencesHeroCaption}>
+                <a
+                  href={screen.secondarySource.archiveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.inlineArchiveLink}>
+                  Open at {screen.secondarySource.archiveName} ↗
+                </a>
+              </figcaption>
+            ) : null}
+          </figure>
+        ) : null}
       </div>
     </div>
   )
@@ -628,50 +758,38 @@ function ExhibitShell({
         initial="hidden"
         animate="visible">
         <motion.div
-          className={styles.museumLaborTop}
-          variants={laborStaggerRow(reduceMotion)}>
+          className={styles.museumLaborBentoCopy}
+          variants={laborMotionItem(reduceMotion)}>
+          {bodyBlock}
+        </motion.div>
+        {screen.engineeringSpotlight ? (
           <motion.div
-            className={styles.museumLaborTopLeft}
-            variants={laborStaggerRow(reduceMotion)}>
-            <motion.div
-              className={styles.museumLaborCopy}
-              variants={laborMotionItem(reduceMotion)}>
-              {bodyBlock}
-            </motion.div>
-            {screen.engineeringSpotlight ? (
-              <motion.div
-                className={styles.museumLaborFigureAnchor}
-                variants={laborMotionItem(reduceMotion)}>
-                <EngineeringLeaderSpotlight
-                  leaderId={screen.engineeringSpotlight}
-                  presentation="laborHorizontal"
-                  reduceMotion={reduceMotion}
-                />
-              </motion.div>
-            ) : null}
-          </motion.div>
-          <motion.div
-            className={styles.museumLaborPrimary}
+            className={styles.museumLaborBentoFigure}
             variants={laborMotionItem(reduceMotion)}>
-            {laborPrimaryComposition}
+            <EngineeringLeaderSpotlight
+              leaderId={screen.engineeringSpotlight}
+              presentation="laborHorizontal"
+              reduceMotion={reduceMotion}
+            />
           </motion.div>
+        ) : null}
+        <motion.div
+          className={styles.museumLaborPrimary}
+          variants={laborMotionItem(reduceMotion)}>
+          {laborPrimaryComposition}
         </motion.div>
         <motion.div
-          className={styles.museumLaborBottom}
-          variants={laborStaggerRow(reduceMotion)}>
-          <motion.div
-            className={styles.museumLaborGallery}
-            variants={laborMotionItem(reduceMotion)}>
-            {galleryBlock}
-          </motion.div>
-          {screen.perspectives ? (
-            <motion.div
-              className={styles.museumLaborPerspectives}
-              variants={laborMotionItem(reduceMotion)}>
-              <PerspectivesSidebar content={screen.perspectives} />
-            </motion.div>
-          ) : null}
+          className={styles.museumLaborGallery}
+          variants={laborMotionItem(reduceMotion)}>
+          {galleryBlock}
         </motion.div>
+        {screen.perspectives ? (
+          <motion.div
+            className={styles.museumLaborPerspectives}
+            variants={laborMotionItem(reduceMotion)}>
+            <PerspectivesSidebar content={screen.perspectives} />
+          </motion.div>
+        ) : null}
       </motion.div>
     </div>
   )
@@ -680,8 +798,10 @@ function ExhibitShell({
   switch (screen.slug) {
     case 'vision':
     case 'decision':
-    case 'the-race':
       exhibitContent = visionDecisionLayout
+      break
+    case 'the-race':
+      exhibitContent = theRaceLayout
       break
     case 'labor':
       exhibitContent = laborLayout
@@ -771,7 +891,7 @@ function ExhibitShell({
         open={state.modalOpen}
         source={
           state.modalOpen
-            ? (state.modalSourceOverride ?? screen.primarySource)
+            ? (state.modalSourceOverride ?? screen.primarySource ?? null)
             : null
         }
         onClose={() => dispatch({ type: 'CLOSE_MODAL' })}

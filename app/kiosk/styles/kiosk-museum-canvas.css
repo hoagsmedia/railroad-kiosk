@@ -269,10 +269,6 @@
   margin-inline: auto;
 }
 
-.museumPrimaryCell .inlineSourceLayerContent {
-  transform: translate(-50%, 8px);
-}
-
 .museumVisionPrimaryCell {
   /* Vision right column: primary source + for-context panel */
 }
@@ -519,6 +515,55 @@
   padding-top: 0;
 }
 
+.exhibitPage[data-layout='engineering'] .museumEngineeringBand .inlineSourceVisualAnchor {
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.exhibitPage[data-layout='engineering']
+  .museumEngineeringBand
+  .inlineSourceLayerContent {
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: none;
+  transform: none;
+  bottom: 0;
+  max-height: min(46%, 11rem);
+  min-height: 5.7rem;
+  padding: 0.55rem 0.65rem 0.58rem;
+  border-radius: 0 0 3px 3px;
+  box-sizing: border-box;
+}
+
+.exhibitPage[data-layout='engineering']
+  .museumEngineeringBand
+  .inlineSourceLayerContent
+  .inlineSourceActions {
+  justify-content: space-between;
+}
+
+.exhibitPage[data-layout='engineering']
+  .museumEngineeringBand
+  .inlineSourceLayerContent
+  .inlineSourceOverlayHint {
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+.exhibitPage[data-layout='engineering']
+  .museumEngineeringBand
+  .inlineSourceLayerContent
+  .inlineArchiveLink,
+.exhibitPage[data-layout='engineering']
+  .museumEngineeringBand
+  .inlineSourceLayerContent
+  .enlargeBtn {
+  font-size: 0.66rem;
+  padding: 0.28rem 0.5rem;
+}
+
 .museumBlueprintRow {
   flex: 1 1 42%;
   min-height: 0;
@@ -594,10 +639,6 @@
 
 .museumGeoMap .inlineSourceFrameOuter {
   margin-inline: auto;
-}
-
-.museumGeoMap .inlineSourceLayerContent {
-  transform: translate(-50%, 6px);
 }
 
 .museumGeoMap .inlineSourceLayerContent .inlineSourceTranscript {

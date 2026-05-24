@@ -85,7 +85,7 @@
 }
 
 .kioskFrame .museumEngineeringBand .inlineSourceImg {
-  max-height: min(360px, 28dvh, 34cqh);
+  max-height: min(255px, 22dvh, 27cqh);
 }
 
 .kioskFrame .exhibitPage[data-layout='event'] .inlineSourceImg {

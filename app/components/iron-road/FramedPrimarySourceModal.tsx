@@ -85,10 +85,15 @@ export function FramedPrimarySourceModal({ open, source, onClose }: Props) {
             </button>
             <p className={styles.modalMeta}>Archival scan</p>
             <h2 id={titleId} className={styles.modalTitle}>
-              {source.fullTitle}{' '}
-              <span style={{ fontWeight: 400, opacity: 0.85 }}>
-                ({source.year})
-              </span>
+              {source.fullTitle}
+              {source.year ? (
+                <>
+                  {' '}
+                  <span style={{ fontWeight: 400, opacity: 0.85 }}>
+                    ({source.year})
+                  </span>
+                </>
+              ) : null}
             </h2>
             <div className={styles.modalScanColumn}>
               <div className={styles.modalScanCarousel}>
