@@ -307,10 +307,6 @@
   margin-inline: auto;
 }
 
-.museumVisionPrimaryCell {
-  /* Vision right column: primary source + for-context panel */
-}
-
 .museumVisionRightStack {
   display: flex;
   flex-direction: column;
@@ -321,7 +317,9 @@
   overflow: hidden;
 }
 
-.exhibitPage[data-layout='vision'] .museumVisionRightStack .museumVisionSourceCluster {
+.exhibitPage[data-layout='vision']
+  .museumVisionRightStack
+  .museumVisionSourceCluster {
   flex: 0 0 auto;
   min-height: 0;
   display: flex;
@@ -342,7 +340,9 @@
 }
 
 .exhibitPage[data-layout='vision'] .museumVisionPerspectivesSlot .perspectives,
-.exhibitPage[data-layout='decision'] .museumVisionPerspectivesSlot .perspectives {
+.exhibitPage[data-layout='decision']
+  .museumVisionPerspectivesSlot
+  .perspectives {
   padding: 0.62rem 0.82rem;
 }
 
@@ -356,8 +356,12 @@
   margin-bottom: 0.28rem;
 }
 
-.exhibitPage[data-layout='vision'] .museumVisionPerspectivesSlot .perspectivesBody,
-.exhibitPage[data-layout='decision'] .museumVisionPerspectivesSlot .perspectivesBody {
+.exhibitPage[data-layout='vision']
+  .museumVisionPerspectivesSlot
+  .perspectivesBody,
+.exhibitPage[data-layout='decision']
+  .museumVisionPerspectivesSlot
+  .perspectivesBody {
   font-size: 0.72rem;
   line-height: 1.42;
 }
@@ -380,6 +384,7 @@
   --vision-mat-height: min(19rem, 34cqh);
   position: relative;
   width: var(--vision-mat-width);
+  min-width: min(100%, 18rem);
   margin-inline: auto;
   align-self: center;
   flex-shrink: 0;
@@ -431,6 +436,9 @@
 .exhibitPage[data-layout='vision']
   .museumVisionSourceCluster
   .inlineSourceHeader {
+  /* Safari: width:0 + min-width:100% inside max-content grid collapses the column */
+  width: 100%;
+  min-width: 0;
   margin-bottom: 0.3rem;
 }
 
@@ -452,7 +460,18 @@
 .exhibitPage[data-layout='vision']
   .museumVisionSourceCluster
   .inlineSourceVisualAnchor {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   width: 100%;
+  max-width: 100%;
+}
+
+.exhibitPage[data-layout='vision']
+  .museumVisionSourceCluster
+  .inlineSourceImageStack {
+  width: 100%;
+  max-width: 100%;
 }
 
 .exhibitPage[data-layout='vision']
@@ -553,7 +572,9 @@
   padding-top: 0;
 }
 
-.exhibitPage[data-layout='engineering'] .museumEngineeringBand .inlineSourceVisualAnchor {
+.exhibitPage[data-layout='engineering']
+  .museumEngineeringBand
+  .inlineSourceVisualAnchor {
   width: fit-content;
   max-width: 100%;
   margin-inline: auto;

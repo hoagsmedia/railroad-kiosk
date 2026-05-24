@@ -318,6 +318,19 @@ function ExhibitShell({
     />
   ) : null
 
+  const consequencesSecondaryBlock = screen.secondarySource ? (
+    <PrimarySourceComposition
+      source={screen.secondarySource}
+      onEnlarge={() =>
+        dispatch({
+          type: 'OPEN_MODAL',
+          source: screen.secondarySource!,
+        })
+      }
+      className={`${styles.inlineSourceSectionCompact} ${styles.museumConsequencesSecondary}`}
+    />
+  ) : null
+
   const laborPrimaryComposition = screen.primarySource ? (
     <PrimarySourceComposition
       source={screen.primarySource}
@@ -760,45 +773,12 @@ function ExhibitShell({
             ) : null}
           </section>
         </motion.div>
-        {screen.secondarySource ? (
-          <motion.figure
-            className={styles.museumConsequencesHeroFigure}
-            aria-label={screen.secondarySource.shortLabel}
+        {consequencesSecondaryBlock ? (
+          <motion.div
+            className={`${styles.museumConsequencesHeroFigure} ${styles.museumHeroFigureConsequences}`}
             variants={exhibitMotionItem(reduceMotion)}>
-            <p className={styles.museumConsequencesHeroTitle}>
-              {screen.secondarySource.shortLabel}
-            </p>
-            <button
-              type="button"
-              className={styles.museumConsequencesHeroBtn}
-              onClick={() =>
-                dispatch({
-                  type: 'OPEN_MODAL',
-                  source: screen.secondarySource!,
-                })
-              }
-              aria-label={`Enlarge: ${screen.secondarySource.imageAlt}`}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={screen.secondarySource.imageUrl}
-                alt={screen.secondarySource.imageAlt}
-                className={styles.museumConsequencesHeroImg}
-                loading="lazy"
-              />
-            </button>
-            {screen.secondarySource.archiveUrl &&
-            screen.secondarySource.archiveName ? (
-              <figcaption className={styles.museumConsequencesHeroCaption}>
-                <a
-                  href={screen.secondarySource.archiveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.inlineArchiveLink}>
-                  Open at {screen.secondarySource.archiveName} ↗
-                </a>
-              </figcaption>
-            ) : null}
-          </motion.figure>
+            {consequencesSecondaryBlock}
+          </motion.div>
         ) : null}
       </motion.div>
     </div>
@@ -881,7 +861,7 @@ function ExhibitShell({
     <div
       className={`${styles.kioskRoot} flex h-full min-h-0 flex-col overflow-hidden`}
       data-screen={screen.id}>
-      <header className="relative z-[2] shrink-0 border-b border-white/10 bg-black/50 px-4 py-2 backdrop-blur-sm">
+      <header className="relative z-2 shrink-0 border-b border-white/10 bg-black/50 px-4 py-2 backdrop-blur-sm">
         <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-[#a8947c]">
           History 130 · Digital kiosk
         </p>
@@ -905,7 +885,7 @@ function ExhibitShell({
       ) : null}
       <div className={styles.bgReadabilityVeil} aria-hidden />
 
-      <div className={`${styles.screenPanel} relative z-[1]`}>
+      <div className={`${styles.screenPanel} relative z-1`}>
         <div className={styles.screenPanelScroll}>
           <AnimatePresence mode="wait">
             <motion.div
@@ -929,7 +909,7 @@ function ExhibitShell({
         <div className={styles.navDock}>{navBlock}</div>
       </div>
 
-      <div className="relative z-[2] mt-auto shrink-0">
+      <div className="relative z-2 mt-auto shrink-0">
         <TravelerProgressBar
           screens={KIOSK_SCREENS}
           currentIndex={currentIndex}

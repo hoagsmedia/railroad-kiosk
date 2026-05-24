@@ -38,13 +38,13 @@ export type EngineeringLeader = {
 /** Default field-log primary source (Dodge): Dale Creek Trestle photograph. */
 export const HART_BLOOMER_SOURCE: EngineeringFieldLogSource = {
   shortLabel: 'Andrew J. Russell, Dale Creek Trestle',
-  year: 'ca. 1868',
+  year: '1868',
   sectionHeading: 'Primary source',
   imageUrl: assetPrimary('dale-creek-bridge-russell.jpg'),
   imageAlt:
     'Andrew J. Russell photograph of the original wooden Dale Creek Trestle spanning a rocky valley on the Union Pacific line',
   transcript:
-    'Andrew J. Russell’s photograph of the original wooden **Dale Creek Trestle**, ca. **1868**.',
+    'Andrew J. Russell’s photograph of the original wooden **Dale Creek Trestle**, **1868**.',
   archiveUrl:
     'https://www.nga.gov/artworks/226483-plate-8-dale-creek-bridge-above',
   archiveName: 'National Gallery of Art',
@@ -62,7 +62,7 @@ export const ENGINEERING_LEADERS: EngineeringLeader[] = [
     id: 'judah',
     name: 'Theodore Judah',
     epithet: 'The Dreamer',
-    timelineEra: 'c. 1860 to 1863',
+    timelineEra: '1860 to 1863',
     roleBadge: 'Chief Engineer, Central Pacific',
     imageUrl: assetPrimary('CPRR_Chief_Engineer_Theodore_D._Judah.jpg'),
     imageAlt:
@@ -87,7 +87,7 @@ export const ENGINEERING_LEADERS: EngineeringLeader[] = [
     id: 'crocker',
     name: 'Charles Crocker',
     epithet: 'The Organizer',
-    timelineEra: 'c. 1863 to 1869',
+    timelineEra: '1863 to 1869',
     roleBadge: 'Construction chief, Central Pacific',
     imageUrl: assetPrimary('charles-crocker.jpg'),
     imageAlt:
@@ -110,7 +110,7 @@ export const ENGINEERING_LEADERS: EngineeringLeader[] = [
     id: 'dodge',
     name: 'Grenville M. Dodge',
     epithet: 'The General',
-    timelineEra: 'c. 1866 to 1869',
+    timelineEra: '1866 to 1869',
     roleBadge: 'Chief Engineer, Union Pacific',
     imageUrl: assetPrimary('grenville-dodge-acw-winter-2023-scaled.webp'),
     imageAlt: 'Portrait of Grenville M. Dodge in military-style dress',

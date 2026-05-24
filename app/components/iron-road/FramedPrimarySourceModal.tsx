@@ -2,12 +2,14 @@
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import styles from '@/app/kiosk/kiosk.module.css'
 import {
   getPrimarySourceModalViews,
   type PrimarySource,
 } from '@/lib/kiosk-content'
 import { formatKioskBodySegment } from '@/lib/format-kiosk-body'
+import { useKioskPortalRoot } from '@/lib/use-kiosk-portal-root'
 
 type Props = {
   open: boolean
@@ -18,6 +20,7 @@ type Props = {
 export function FramedPrimarySourceModal({ open, source, onClose }: Props) {
   const titleId = useId()
   const panelRef = useRef<HTMLDivElement>(null)
+  const portalRoot = useKioskPortalRoot()
   const views = source ? getPrimarySourceModalViews(source) : []
   const [viewIndex, setViewIndex] = useState(0)
   const hasMultipleViews = views.length > 1
@@ -52,11 +55,13 @@ export function FramedPrimarySourceModal({ open, source, onClose }: Props) {
     }
   }, [open, onClose, hasMultipleViews, goPrev, goNext])
 
-  return (
+  if (!portalRoot) return null
+
+  return createPortal(
     <AnimatePresence>
       {open && source && activeView && (
         <motion.div
-          className={styles.modalBackdrop}
+          className={`${styles.modalBackdrop} ${styles.modalBackdropRaised}`}
           role="presentation"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -149,6 +154,7 @@ export function FramedPrimarySourceModal({ open, source, onClose }: Props) {
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    portalRoot
   )
 }
