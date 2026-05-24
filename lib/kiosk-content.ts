@@ -626,10 +626,10 @@ export const KIOSK_SCREENS: KioskScreen[] = [
       },
     ],
     secondarySource: {
-      shortLabel: 'Shoshone observer above the tracks, 1869.',
+      shortLabel: 'Shoshone observer above the tracks',
       fullTitle:
         'Alfred A. Hart, Shoshone observer above the tracks, Nevada, 1869',
-      year: '1869',
+      year: '',
       imageUrl: assetPrimary('hart-indian-viewing-rail-palisades-1869.png'),
       imageAlt:
         'Shoshone observer above the Central Pacific tracks, Nevada, 1869',
