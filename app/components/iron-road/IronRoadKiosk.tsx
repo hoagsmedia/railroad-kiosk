@@ -343,39 +343,45 @@ function ExhibitShell({
           {screen.gallery.map((item, i) => (
             <li key={i} className={styles.exhibitGalleryItem}>
               <figure className={styles.exhibitGalleryFigure}>
-                <button
-                  type="button"
-                  className={styles.exhibitPrepGalleryMatBtn}
-                  onClick={() => openExhibitGalleryEnlarge(item)}
-                  aria-label={`Enlarge artifact: ${item.imageAlt}`}>
-                  <div className={styles.exhibitPrepGalleryImgMat}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={item.imageUrl}
-                      alt=""
-                      className={styles.exhibitGalleryImg}
-                      loading="lazy"
-                    />
-                    <span
-                      className={styles.exhibitPrepGalleryHoverOverlay}
-                      aria-hidden>
-                      <span className={styles.exhibitPrepGalleryHoverLabel}>
-                        Click to enlarge
-                      </span>
-                    </span>
+                <div className={styles.inlineSourceComposition}>
+                  <div className={styles.inlineSourceVisualAnchor}>
+                    <div className={styles.exhibitPrepGalleryMatBtn}>
+                      <div className={styles.exhibitPrepGalleryImgMat}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={item.imageUrl}
+                          alt={item.imageAlt}
+                          className={styles.exhibitGalleryImg}
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                    <div className={styles.inlineSourceLayerContent}>
+                      <div className={styles.inlineSourceActions}>
+                        {item.archiveUrl && item.archiveName ? (
+                          <a
+                            href={item.archiveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.inlineArchiveLink}>
+                            Open at {item.archiveName} ↗
+                          </a>
+                        ) : null}
+                        <button
+                          type="button"
+                          className={styles.enlargeBtn}
+                          onClick={() => openExhibitGalleryEnlarge(item)}>
+                          Enlarge
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </button>
+                </div>
                 {item.caption ? (
                   <figcaption className={styles.exhibitGalleryCaption}>
                     {formatKioskBodySegment(item.caption)}
                   </figcaption>
                 ) : null}
-                <button
-                  type="button"
-                  className={`${styles.enlargeBtn} ${styles.museumPrepGalleryEnlargeLink}`}
-                  onClick={() => openExhibitGalleryEnlarge(item)}>
-                  Enlarge
-                </button>
               </figure>
             </li>
           ))}

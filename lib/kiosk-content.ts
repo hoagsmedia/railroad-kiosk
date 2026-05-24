@@ -180,7 +180,7 @@ export const UTAH_LABOR_YOUNG_PROFILE: UtahLaborFigureProfile = {
   roleLine: 'Signed 1868 Rail Contracts',
   era: 'c. 1868 · Echo & Weber Canyons',
   fieldLogChallenge:
-    '**Young** treated the railroad as a matter of survival for Utah Territory. He dealt directly with **Union Pacific**’s **Thomas Durant** and **Central Pacific** leaders to protect wages for local workers.\n\nWhen **Union Pacific** ran short of cash and failed to deliver tools or pay, **Young** pressed officers by telegraph and used Church funds to cover gaps. The contracts kept thousands of Utah men employed while both lines pushed across the territory.',
+    '**Young** treated the railroad as a matter of survival for Utah Territory. He dealt directly with **Union Pacific**’s **Thomas Durant** and **Central Pacific** leaders to protect wages for local workers.\n\nWhen **Union Pacific** ran short of cash and failed to deliver tools or pay, **Young** pressed officers by telegraph and used Church funds to cover gaps until thousands of Utah men stayed employed on the grade.',
   fieldLogSource: {
     shortLabel: 'Latter-day Saint grading camp, Echo Canyon',
     year: 'ca. 1868',
@@ -218,7 +218,7 @@ export const THE_RACE_HUNTINGTON_PROFILE: KioskKeyFigureProfile = {
   roleLine: 'CP Vice President',
   era: 'c. 1869 · Washington, D.C.',
   fieldLogChallenge:
-    'Operating out of Washington, D.C., Huntington handled the telegraph communications and political lobbying for the Central Pacific. While crews blasted through the mountains, Huntington engaged in a high-stakes paper war against Union Pacific\'s Thomas Durant. His aggressive negotiations in the capital are what ultimately forced the federal government to step in and legally declare Promontory Summit as the official terminus point.',
+    'From Washington, D.C., **Huntington** handled telegraph traffic and political lobbying for the **Central Pacific**. While crews blasted through the mountains, he fought a paper war against **Union Pacific**’s **Thomas Durant** until federal officials fixed **Promontory Summit** as the official terminus.',
   fieldLogSource: {
     shortLabel: 'Collis P. Huntington at his office desk',
     year: 'ca. mid-1890s',
@@ -278,7 +278,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
       imageAlt:
         'Parkinson and Frodsham marine chronometer in its wooden case, viewed at an angle',
       transcript:
-        '**Parkinson & Frodsham** chronometers kept ship time through temperature changes, then served land surveys. Teams paired them with celestial readings to fix longitude during the **Pacific Railroad Surveys** (**1853–1855**), the baseline maps **Judah** later used in the **Sierra Nevada**. Judah applied the same methods with transits and chains to argue for the **Dutch Flat Route** at roughly **105 feet per mile**.',
+        '**Parkinson & Frodsham** chronometers kept ship time through temperature changes, then served land surveys. Teams paired them with celestial readings to fix longitude, the same precision **Judah** later applied to **Sierra** grades.',
       archiveUrl:
         'https://timeandnavigation.si.edu/multimedia-asset/marine-chronometer-by-parkinson-frodsham-no-2349',
       archiveName: 'Smithsonian Time and Navigation',
@@ -301,8 +301,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
     perspectives: {
       title: 'For context',
       body: [
-        'The **Pacific Railroad Surveys** (**1853–1855**) mapped multiple transcontinental routes in a **twelve-volume** report, using **Parkinson & Frodsham** chronometers to fix longitude across the **West**. Congress then stalled over where to build.',
-        'Critics mocked **Theodore Judah** as “Crazy Judah,” but his **Sierra Nevada** surveys, built on federal baseline maps, persuaded investors the **Dutch Flat Route** could work.',
+        'Congress received the **twelve-volume** report but stalled over which route to fund. “Crazy Judah” stuck as a nickname for **Theodore Judah** until his mapped **Sierra** crossing won backing.',
       ],
     },
   },
@@ -377,7 +376,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
     perspectives: {
       title: 'For context',
       body: [
-        'With the **Civil War** underway, **California**’s place in the **Union** mattered. Leaders in **Washington** wanted the **Pacific** coast tied to the rest of the country if fighting continued. A railroad could move mail, troops, and freight faster than **Overland** trails.',
+        '**California**’s place in the **Union** mattered to leaders in **Washington**. A railroad could move mail, troops, and freight faster than **Overland** trails.',
         'The **1862** law included more than track: **Government bonds** paid in stages, alternating **land-grant** sections along the right-of-way, and a **telegraph** line to the **Pacific**. Companies could borrow against expected traffic and settlement.',
       ],
     },
@@ -453,7 +452,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
       imageAlt:
         'Handwritten Central Pacific payroll from January 1864, company headquarters, with pay entries and Chinese signatures',
       transcript:
-        'This January 1864 **Central Pacific** payroll came from company office work in **Sacramento** or **San Francisco**, not from a camp ledger. **Chinese marks** appear beside Euro-American names. The columns help historians compare wages and trace **who built the western end**.',
+        'This January **1864** headquarters payroll lists **Chinese marks** beside Euro-American names, evidence historians use to compare wages on the western end.',
       kioskTranscript:
         'Office payroll for one January: **names**, **days**, and **Chinese marks** beside English names.',
       archiveUrl: 'https://searchworks.stanford.edu/view/cn005wb2925',
@@ -472,7 +471,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
     engineeringSpotlight: 'dodge',
     body: [
       'From **1866**, **Grenville M. Dodge** led **Union Pacific** engineering work: surveys, bridges, water stops, and arguments over where the line should run.',
-      'On the **Sierra** side, **Central Pacific** crews used **nitroglycerin**, **black powder**, and large **timber trestles**. The tech panel summarizes that work.',
+      'On the **Sierra** side, **Central Pacific** crews used **nitroglycerin**, **black powder**, and large **timber trestles** while **Union Pacific** engineers pushed bridges and water stops across the plains.',
       'Survey books and plates turned legal language into lines on paper: rivers, **land-grant** widths, and station points. On the ground, those lines shaped access and land claims.',
     ],
     primarySource: {
@@ -504,7 +503,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
     perspectives: {
       title: 'For context',
       body: [
-        '**Utah State University**’s digital archive follows how **1868** contracts changed payment and work on the ground. Church ledgers, telegrams, and local diaries show crews from rival towns competing for speed. Communal organization let them take on difficult rock work without outside labor brokers.',
+        '**Utah State University**’s digital archive follows how **1868** contracts changed payment and work on the ground. Church ledgers, telegrams, and local diaries show crews from rival towns competing for speed on **Echo** and **Weber** grades.',
       ],
     },
     primarySource: {
@@ -514,9 +513,9 @@ export const KIOSK_SCREENS: KioskScreen[] = [
         'Weber Canyon trestle; Echo Canyon camp; Brigham Young and the 1868 Union Pacific agreement',
       year: 'c. 1868 to 1869',
       transcript:
-        '**Young**’s **1868** contracts put Utah workers on **Echo** and **Weber** grades. Stereograph views of camps and the Weber trestle show where **bishop-led** labor met **UP** steel.',
+        'Stereograph views of contract camps and the **Weber** trestle show where **bishop-led** labor met **UP** steel.',
       kioskTranscript:
-        '**Young**’s **1868** contracts on **Echo** and **Weber** grades.',
+        'Contract camps and the **Weber** trestle on the grading line.',
       archiveUrl:
         'https://exhibits.usu.edu/exhibits/show/transcontinentalrailroad/anticipationandanxiety/latterdaysaints',
       archiveName: 'USU Digital Exhibits',
@@ -540,13 +539,13 @@ export const KIOSK_SCREENS: KioskScreen[] = [
       {
         title: 'The Communication Crisis: Grading Past Each Other',
         paragraphs: [
-          'Union Pacific and Central Pacific rushed toward each other but refused to coordinate. Subsidies paid per mile, so grading crews in Utah often built parallel lines side by side for over 200 miles, close enough to watch rival crews blast rock. The overlap wasted millions and sharpened a corporate standoff in the desert.',
+          '**Union Pacific** and **Central Pacific** rushed toward each other but refused to coordinate. Grading crews in Utah often built parallel lines side by side for over 200 miles, close enough to watch rival crews blast rock. The overlap wasted millions and sharpened a corporate standoff in the desert.',
         ],
       },
       {
         title: 'The Settlement at Promontory Summit',
         paragraphs: [
-          'Congress stepped in during April 1869 and forced company leaders to set a meeting point. They chose Promontory Summit, Utah. On April 28, Charles Crocker\'s Central Pacific crews laid ten miles of rail in one day, a staged record meant to maximize their final mileage payout before the lines connected.',
+          'Congress stepped in during April **1869** and forced company leaders to set a meeting point at **Promontory Summit**, Utah. On **April 28**, **Charles Crocker**’s **Central Pacific** crews laid ten miles of rail in one day, a staged record meant to maximize their final mileage payout before the lines connected.',
         ],
       },
     ],
@@ -559,7 +558,7 @@ export const KIOSK_SCREENS: KioskScreen[] = [
       imageAlt:
         'Historical photograph of Chinese railroad workers with a handcar on the track',
       transcript:
-        'Images like this appeared in newspapers and albums near the end of construction. Handcars, rails, and crews still mattered while Promontory and the ten-mile record drew public attention.',
+        'Newspaper and album illustrations like this appeared as construction neared its end. Handcars, rails, and crews still mattered after the publicity events passed.',
       archiveUrl:
         'https://www.loc.gov/pictures/search/?q=Chinese+railroad+workers+transcontinental',
       archiveName: 'Library of Congress',
@@ -615,13 +614,13 @@ export const KIOSK_SCREENS: KioskScreen[] = [
       {
         title: 'A Complicated Legacy',
         paragraphs: [
-          'The physical completion of the track completely revolutionized global markets. Unbroken rail lines moved western timber, ore, cattle, and grain across the continent on lightning-fast schedules, tying regional economies tightly together. However, much of the massive financial gain went directly to corporate shippers, railroad companies, and wealthy corporate bondholders.',
+          'Finished track revolutionized global markets. Unbroken rail lines moved western timber, ore, cattle, and grain across the continent on fast schedules, tying regional economies together. Much of the financial gain, however, went to shippers, railroad companies, and bondholders.',
         ],
       },
       {
         title: 'Impact on the Plains Nations',
         paragraphs: [
-          'For Native American communities, this infrastructure brought rapid, devastating shifts. The line cut directly through ancestral territories, bringing a surge of U.S. Army outposts, forced relocation onto reservations, and severe, destructive pressure on the great bison herds that sustained whole indigenous economies. The history of the iron road is a deeply layered chain of growth, broken treaties, and lasting social change.',
+          'For Native American communities, the railroad brought rapid, devastating shifts. It cut through ancestral territories, bringing **U.S. Army** outposts, forced relocation onto reservations, and severe pressure on the bison herds that sustained whole indigenous economies. The result was a layered chain of growth, broken treaties, and lasting social change.',
         ],
       },
     ],

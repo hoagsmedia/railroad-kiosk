@@ -68,6 +68,8 @@
 .exhibitPage[data-layout='vision']
   .museumPrepGalleryInNarrative
   .exhibitPrepGalleryMatBtn {
+  display: block;
+  width: 100%;
   border-radius: 4px;
   padding: 3px;
   background: var(--kiosk-frame-foil);
@@ -106,11 +108,47 @@
 
 .exhibitPage[data-layout='vision']
   .museumPrepGalleryInNarrative
-  .museumPrepGalleryEnlargeLink {
-  align-self: center;
-  margin-top: 0.15rem;
-  text-decoration: none;
-  text-align: center;
+  .inlineSourceComposition {
+  width: 100%;
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.exhibitPage[data-layout='vision']
+  .museumPrepGalleryInNarrative
+  .inlineSourceVisualAnchor {
+  width: 100%;
+}
+
+.exhibitPage[data-layout='vision']
+  .museumPrepGalleryInNarrative
+  .inlineSourceLayerContent {
+  min-height: 2.35rem;
+  max-height: 42%;
+  padding: 0.38rem 0.48rem 0.42rem;
+}
+
+.exhibitPage[data-layout='vision']
+  .museumPrepGalleryInNarrative
+  .inlineSourceLayerContent
+  .inlineSourceActions {
+  padding-top: 0.28rem;
+  gap: 0.35rem 0.55rem;
+}
+
+.exhibitPage[data-layout='vision']
+  .museumPrepGalleryInNarrative
+  .inlineSourceLayerContent
+  .inlineArchiveLink {
+  font-size: 0.66rem;
+}
+
+.exhibitPage[data-layout='vision']
+  .museumPrepGalleryInNarrative
+  .inlineSourceLayerContent
+  .enlargeBtn {
+  font-size: 0.62rem;
+  padding: 0.28rem 0.52rem;
 }
 
 .exhibitPage[data-layout='vision']

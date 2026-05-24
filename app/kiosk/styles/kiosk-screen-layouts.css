@@ -686,14 +686,13 @@
   margin: 0;
   border: none;
   background: transparent;
-  cursor: pointer;
   font: inherit;
   text-align: left;
   color: inherit;
   border-radius: 2px;
 }
 
-.museumPrepGallery .exhibitPrepGalleryMatBtn:focus-visible {
+.museumPrepGallery .exhibitPrepGalleryMatBtn:focus-within {
   outline: 2px solid var(--kiosk-gold);
   outline-offset: 2px;
 }
